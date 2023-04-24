@@ -16,3 +16,5 @@ A WIP, personal blog for games, movies. tv, music, etc.
   - [Tailwind](https://tailwindcss.com/)
   - [HeadlessUI](https://headlessui.com/)
 * Hosting - [Vercel](https://vercel.com/)
+* Guides
+  - [Adding a Domain in Vercel](https://vercel.com/docs/concepts/projects/domains/add-a-domain)
