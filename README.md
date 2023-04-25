@@ -9,6 +9,7 @@ WIP. A personal blog for games, movies. tv, music, etc.
 * Hosting - [namecheap](https://www.namecheap.com/hosting/shared/)
 * Guides
   - [Hosting Strapi and MySQL](https://strapi.io/blog/deploying-strapi-my-sql-on-a-traditional-hosting-provider)
+  - [Replacing the Default Rich Text Editor](https://market.strapi.io/plugins/@sklinet-strapi-plugin-tinymce)
 
 ### Frontend
 * Framework - [React](https://react.dev/)
