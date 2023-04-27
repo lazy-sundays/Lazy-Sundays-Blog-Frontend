@@ -19,6 +19,8 @@ WIP. A personal blog for games, movies. tv, music, etc.
 * Hosting - [Vercel](https://vercel.com/)
 * Guides
   - [Adding a Domain in Vercel](https://vercel.com/docs/concepts/projects/domains/add-a-domain)
+  - [Reader View Compatability](https://videoinu.com/blog/firefox-reader-view-heuristics/?utm_source=pocket_reader)
+  - [namecheap domain on vercel](https://jorgearuv.dev/setting-up-namecheap-domain-in-vercel)
  
 ### Tools
 * [Figma](https://www.figma.com/@lazysundays)
