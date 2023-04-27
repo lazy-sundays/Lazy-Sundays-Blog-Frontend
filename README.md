@@ -19,3 +19,6 @@ WIP. A personal blog for games, movies. tv, music, etc.
 * Hosting - [Vercel](https://vercel.com/)
 * Guides
   - [Adding a Domain in Vercel](https://vercel.com/docs/concepts/projects/domains/add-a-domain)
+ 
+### Tools
+* [Figma](https://www.figma.com/@lazysundays)
