@@ -1,8 +1,59 @@
-# 🚀 Getting started with Strapi
+# Running the Backend
 
-Strapi comes with a full featured [Command Line Interface](https://docs.strapi.io/developer-docs/latest/developer-resources/cli/CLI.html) (CLI) which lets you scaffold and manage your project in seconds.
+### `Setting Up MySQL`
 
-### `develop`
+Follow this [guide](https://dev.mysql.com/doc/refman/8.0/en/windows-installation.html) to install a local mysql instance.
+
+During installtion, ensure to create a local user with full permissions.
+
+After installtion, create a databse, making sure to keep it empty.
+
+---
+
+### `Setting Up Environment`
+
+See this [guide](https://docs.strapi.io/dev-docs/migration/v4/migration-guide-4.0.6-to-4.1.8#setting-secrets-for-non-development-environments) for further details.
+
+To ensure strapi functions correctly, you will need to set up the environment for it to run.
+To do so, create a file in the root directory of the strapi project called `.env` with the following options.
+
+```
+HOST=0.0.0.0
+PORT=1337
+APP_KEYS={secret-1},{secret-2},{secret-3},{secret-4}
+API_TOKEN_SALT={secret-5}
+ADMIN_JWT_SECRET={secret-6}
+TRANSFER_TOKEN_SALT={secret-7}
+
+# Database
+DATABASE_CLIENT=mysql
+DATABASE_HOST={database-ip}
+DATABASE_PORT={database-port}
+DATABASE_NAME={database-name}
+DATABASE_USERNAME={database-user-username}
+DATABASE_PASSWORD={database-user-false}
+DATABASE_SSL=false
+JWT_SECRET={secret-8}
+```
+
+To generate `secret-1` through `secret-8` run the following command in a unix terminal:
+
+&emsp;`openssl rand -base64 32 `
+
+Next, enter all the inforation for the database that was created / gathered in the `Setting Up MySQL` step.
+
+---
+
+### `Staring Strapi`
+
+After setting up the database and evironment, run the following command to install the necessary node modules:
+
+&emsp;`npm install`
+
+Afterwards, run strapi by running one of the following commands:
+
+
+#### `develop`
 
 Start your Strapi application with autoReload enabled. [Learn more](https://docs.strapi.io/developer-docs/latest/developer-resources/cli/CLI.html#strapi-develop)
 
@@ -12,7 +63,7 @@ npm run develop
 yarn develop
 ```
 
-### `start`
+#### `start`
 
 Start your Strapi application with autoReload disabled. [Learn more](https://docs.strapi.io/developer-docs/latest/developer-resources/cli/CLI.html#strapi-start)
 
@@ -22,7 +73,7 @@ npm run start
 yarn start
 ```
 
-### `build`
+#### `build`
 
 Build your admin panel. [Learn more](https://docs.strapi.io/developer-docs/latest/developer-resources/cli/CLI.html#strapi-build)
 
@@ -32,26 +83,3 @@ npm run build
 yarn build
 ```
 
-## ⚙️ Deployment
-
-Strapi gives you many possible deployment options for your project. Find the one that suits you on the [deployment section of the documentation](https://docs.strapi.io/developer-docs/latest/setup-deployment-guides/deployment.html).
-
-## 📚 Learn more
-
-- [Resource center](https://strapi.io/resource-center) - Strapi resource center.
-- [Strapi documentation](https://docs.strapi.io) - Official Strapi documentation.
-- [Strapi tutorials](https://strapi.io/tutorials) - List of tutorials made by the core team and the community.
-- [Strapi blog](https://docs.strapi.io) - Official Strapi blog containing articles made by the Strapi team and the community.
-- [Changelog](https://strapi.io/changelog) - Find out about the Strapi product updates, new features and general improvements.
-
-Feel free to check out the [Strapi GitHub repository](https://github.com/strapi/strapi). Your feedback and contributions are welcome!
-
-## ✨ Community
-
-- [Discord](https://discord.strapi.io) - Come chat with the Strapi community including the core team.
-- [Forum](https://forum.strapi.io/) - Place to discuss, ask questions and find answers, show your Strapi project and get feedback or just talk with other Community members.
-- [Awesome Strapi](https://github.com/strapi/awesome-strapi) - A curated list of awesome things related to Strapi.
-
----
-
-<sub>🤫 Psst! [Strapi is hiring](https://strapi.io/careers).</sub>
