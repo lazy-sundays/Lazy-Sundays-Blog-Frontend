@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "link_trees",
+  "info": {
+    "singularName": "link-tree",
+    "pluralName": "link-trees",
+    "displayName": "LinkTree",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "siteName": {
+      "type": "string",
+      "required": true
+    },
+    "link": {
+      "type": "string",
+      "required": true
+    },
+    "author": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::author.author",
+      "inversedBy": "linkTrees"
+    }
+  }
+}
