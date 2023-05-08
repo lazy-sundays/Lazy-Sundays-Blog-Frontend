@@ -24,7 +24,7 @@
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::author.author",
-      "inversedBy": "linkTrees"
+      "inversedBy": "linkTree"
     }
   }
 }
