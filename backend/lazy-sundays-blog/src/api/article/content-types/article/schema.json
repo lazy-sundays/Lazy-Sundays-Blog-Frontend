@@ -39,9 +39,9 @@
       "required": true,
       "customField": "plugin::ckeditor.CKEditor"
     },
-    "author": {
+    "authors": {
       "type": "relation",
-      "relation": "manyToOne",
+      "relation": "manyToMany",
       "target": "api::author.author",
       "inversedBy": "articles"
     },
