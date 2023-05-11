@@ -28,7 +28,7 @@
     "tagline": {
       "type": "text",
       "required": false,
-      "maxLength": 250
+      "maxLength": 150
     },
     "body": {
       "type": "customField",
