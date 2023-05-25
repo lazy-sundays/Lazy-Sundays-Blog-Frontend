@@ -20,7 +20,7 @@ export default function Navbar() {
                 <div className="flex justify-around justify-items-center sm:pr-10 lg:pr-30">
                     {links.map((link) => {
                         return (
-                            <a href={link.href} className="sm:ml-8 px-0.5 hover:bg-1-primary hover:text-white">{link.name}</a>
+                            <a href={link.href} className="sm:ml-8 px-1 md:text-lg hover:underline hover:decoration-1-primary hover:decoration-4">{link.name}</a>
                         );
                     })}
                     <div className="sm:ml-4">
