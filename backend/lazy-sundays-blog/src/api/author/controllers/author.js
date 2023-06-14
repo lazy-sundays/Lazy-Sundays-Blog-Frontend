@@ -13,7 +13,7 @@ module.exports = createCoreController('api::author.author', {
             where: { authors: {id:ctx.params.id}},
             populate: { authors: true },
         });
-        return count;
+        return {"count": count};
 
     }
 });
