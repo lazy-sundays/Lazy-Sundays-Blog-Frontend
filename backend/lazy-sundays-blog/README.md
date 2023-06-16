@@ -31,7 +31,7 @@ DATABASE_HOST={database-ip}
 DATABASE_PORT={database-port}
 DATABASE_NAME={database-name}
 DATABASE_USERNAME={database-user-username}
-DATABASE_PASSWORD={database-user-false}
+DATABASE_PASSWORD={database-user-password}
 DATABASE_SSL=false
 JWT_SECRET={secret-8}
 ```
