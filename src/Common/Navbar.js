@@ -15,7 +15,7 @@ export default function Navbar() {
     ];
 
     return (
-        <nav className="sticky min-h-fit px-4 sm:px-6 md:px-14 lg:px-20">
+        <nav className="sticky min-h-fit px-4 sm:px-14 lg:px-20">
             <div className="flex flex-wrap sm:flex-nowrap items-center py-3">
                 <a href="/" className="mr-auto h-14 sm:h-20 flex items-center">
                     <img src={logo} alt="lazy sundays logo" className="max-h-full" />
@@ -27,7 +27,7 @@ export default function Navbar() {
                         );
                     })}
                 </div>
-                <div className="mr-4 sm:mr-0 sm:ml-4">
+                <div className="mr-4 sm:mr-0">
                         <ThemeSwitch />
                 </div>
 
@@ -43,7 +43,7 @@ export default function Navbar() {
                         leaveFrom="transform opacity-100 scale-100"
                         leaveTo="transform opacity-0 scale-95"
                     >
-                        <Menu.Items className={"flex w-full justify-around mt-2 py-2 bg-stone-100 dark:bg-slate-900"}>
+                        <Menu.Items className={"sm:hidden flex w-full justify-around mt-2 py-2 bg-stone-100 dark:bg-slate-900"}>
                             {links.map((link) => (
                                 <Menu.Item key={link.href} as={Fragment}>
                                     {({ active }) => (

@@ -36,7 +36,7 @@ export default function ThemeSwitch() {
                 title="Toggle Dark Mode" 
                 onClick={toggleDarkMode} 
                 className={checked ? "hover:brightness-75" : "hover:brightness-200"}>
-                <FontAwesomeIcon icon={checked ? faMoon : faSun} className="w-5 h-5 align-middle" />
+                <FontAwesomeIcon icon={checked ? faMoon : faSun} className="w-5 h-5 align-middle sm:align-[-0.23em]" />
             </button>
             {greeting && <span className={`absolute animate-blink whitespace-nowrap opacity-0 -translate-x-1/2 translate-y-7`}>Good {checked ? "Night" : "Morning"}!</span>}
         </>
