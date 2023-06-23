@@ -1,7 +1,7 @@
-import React, { useState, Fragment } from "react";
+import React, { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons'
 
 import logo from "../media/logo.svg";
 import ThemeSwitch from "./ThemeSwitch";
@@ -33,28 +33,33 @@ export default function Navbar() {
 
                 {/* Mobile menu, show/hide based on menu state. */}
                 <Menu>
-                    <Menu.Button><FontAwesomeIcon className="sm:hidden mr-4 w-5 h-5 align-middle" icon={faBars} /></Menu.Button>
-                    <hr />
-                    <Transition as={Fragment}
-                        enter="transition ease-out duration-100"
-                        enterFrom="transform opacity-0 scale-95"
-                        enterTo="transform opacity-100 scale-100"
-                        leave="transition ease-in duration-75"
-                        leaveFrom="transform opacity-100 scale-100"
-                        leaveTo="transform opacity-0 scale-95"
-                    >
-                        <Menu.Items className={"sm:hidden flex w-full justify-around mt-2 py-2 bg-stone-100 dark:bg-slate-900"}>
-                            {links.map((link) => (
-                                <Menu.Item key={link.href} as={Fragment}>
-                                    {({ active }) => (
-                                        <a href={link.href} className={"sm:ml-8 px-1 md:text-lg hover:underline hover:decoration-1-primary hover:decoration-4"}>
+                    {({ open }) => (
+                        <>
+                            <Menu.Button><FontAwesomeIcon className={"sm:hidden mr-4 w-5 h-5 align-middle"} icon={open ? faXmark : faBars}/></Menu.Button>
+                            <hr />
+                            <Transition as={Fragment}
+                                enter="transition ease-out duration-100"
+                                enterFrom="transform opacity-0 scale-95"
+                                enterTo="transform opacity-100 scale-100"
+                                leave="transition ease-in duration-75"
+                                leaveFrom="transform opacity-100 scale-100"
+                                leaveTo="transform opacity-0 scale-95"
+                            >
+                                <Menu.Items className={"sm:hidden flex w-full justify-around mt-2 py-2 bg-stone-100 dark:bg-slate-900"}>
+                                    {links.map((link) => (
+                                        <Menu.Item 
+                                            as="a"
+                                            key={link.href} 
+                                            href={link.href}
+                                            className={"sm:ml-8 px-1 md:text-lg hover:underline hover:decoration-1-primary hover:decoration-4"}
+                                        >
                                             {link.name}
-                                        </a>  
-                                    )}
-                                </Menu.Item>
-                            ))}
-                        </Menu.Items>
-                    </Transition>
+                                        </Menu.Item>
+                                    ))}
+                                </Menu.Items>
+                            </Transition>
+                        </>
+                    )}  
                 </Menu>
             </div>
         </nav>
