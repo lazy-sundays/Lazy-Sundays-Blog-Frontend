@@ -1,7 +1,7 @@
 import React, { useState, Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 import logo from "../media/logo.svg";
 import ThemeSwitch from "./ThemeSwitch";
