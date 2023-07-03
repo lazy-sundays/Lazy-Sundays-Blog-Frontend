@@ -1,10 +1,9 @@
 import React from "react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 
 import clive_img from "../media/temp/clive.jpg";
 import jill_img from "../media/temp/jill.jpg";
 import joshua_img from "../media/temp/joshua.jpg";
+import ContributorPlaque from "./ContributorPlaque";
 
 export default function AboutUs() {
     const example_date = new Date().toLocaleDateString("en-US", {
@@ -95,40 +94,7 @@ Minim delicata adipiscing sit id, ea elitr impetus delenit mea, graecis fuisset 
                 <ul className="flex flex-wrap gap-6 mx-2 sm:mx-8">
                     {authorsPlaceholderResponse.data.map((author) => {
                         return (
-                            <li className="flex group relative w-full p-2 lg:basis-[calc(50%-1.5rem)] bg-white dark:bg-slate-800 border border-slate-700/80 rounded-md">
-                                {/* TODO: turn into seperate component */}
-                                <div className="group-hover:z-10">
-                                    <img src={author.attributes.avatar.url}
-                                        className={" max-w-[96px] max-h-[96px] mr-4 rounded-full border-2 border-stone-500/75"}
-                                    />
-                                </div>
-                                <div className="w-1/2 flex flex-col justify-center">
-                                    <h3 className="w-full text-xl font-semibold group-hover:animate-fancy-shadow-1">
-                                        {author.attributes.name}
-                                    </h3>
-                                    <span className="text-lg">
-                                        Contributor since {author.attributes.createdAt}
-                                    </span>
-                                </div>
-                                <div className="flex w-auto h-auto grow justify-center items-center">
-                                    <FontAwesomeIcon icon={faAngleRight} />
-                                </div>
-                                <div id="rectangle" 
-                                    className="-z-10 absolute w-full h-full p-2 bg-1-primary rounded-md -translate-x-2 -translate-y-2
-                                        transition ease-in delay-100 group-hover:transition group-hover:ease-out group-hover:delay-200
-                                        group-hover:-translate-x-1 group-hover:-translate-y-1"
-                                />
-                                <div id="rectangle" 
-                                    className="-z-20 absolute w-full h-full p-2 bg-1-secondary rounded-md -translate-x-2 -translate-y-2
-                                        transition ease-in-out delay-150
-                                        group-hover:-translate-x-0.5 group-hover:-translate-y-0.5"
-                                />
-                                <div id="rectangle" 
-                                    className="-z-30 absolute w-full h-full p-2 bg-1-tertiary rounded-md -translate-x-2 -translate-y-2
-                                        transition ease-in delay-200 group-hover:transition group-hover:ease-out group-hover:delay-100
-                                        group-hover:translate-x-0 group-hover:translate-y-0"
-                                />
-                            </li>
+                            <ContributorPlaque as={"li"} author={author}/>
                         );
                     })}
                 </ul>
