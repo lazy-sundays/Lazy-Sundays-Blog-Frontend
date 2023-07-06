@@ -4,17 +4,10 @@ import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from "react-router-dom";
 
 export default function ContributorPlaque({ as: Component, author }) {
-    // TODO: handle onClick to navigate to author page
-    // const navigate = useNavigate();
-
-    // const handleClick = () => {
-    //     navigate(`/authors/${author.id}`);
-    // };
 
     return (
         <Component className="flex group relative w-full p-2 lg:basis-[calc(50%-1.5rem)] bg-white dark:bg-slate-800 border border-slate-700/80 rounded-md
-            transition ease-in delay-100 hover:ease-out group-hover:delay-200 hover:-translate-x-1 hover:-translate-y-1" 
-           // onClick={handleClick}
+            transition ease-in delay-100 hover:ease-out group-hover:delay-200 hover:-translate-x-1 hover:-translate-y-1"
         >
             <div className="group-hover:z-10">
                 <img src={author.attributes.avatar.url}
@@ -45,6 +38,9 @@ export default function ContributorPlaque({ as: Component, author }) {
                     transition ease-in delay-200 group-hover:transition group-hover:ease-out group-hover:delay-100
                     group-hover:-translate-x-1 group-hover:-translate-y-1"
             />
+            <a href={`/authors/${author.id}`}>
+                <span className="absolute inset-0"/>
+            </a>
         </Component>
     );
 }
