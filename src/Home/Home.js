@@ -1,4 +1,5 @@
-import React from "react";
+import React, { Component } from "react";
+import ArticlePlaque from "../Article/ArticlePlaque";
 
 export default function Home() {
     const example_date = new Date().toLocaleDateString("en-US", {
@@ -8,7 +9,7 @@ export default function Home() {
     });
     const featuredArticlePlaceholderResponse = {
         "data": {
-                "id": 1,
+                "id": 16,
                 "attributes": {
                     "title": "This Leather Glove Looks So Good",
                     "hero": {
@@ -17,15 +18,19 @@ export default function Home() {
                             "alternativeText": "A hand wearing a leather glove rested in a fist on a wooden table",
                         },
                     },
-                    "tagline": "This leather glove from Final Fantasy XVI looks incredible. Here's a breakdown of why that is.",
+                    "tagline": "This leather glove from Final Fantasy XVI looks incredible -- here's a breakdown.",
                     "authors": {
-                        "avatar": {
-                            "data": {
-                                "url": "https://cdnen.samurai-gamers.com/wp-content/uploads/2023/06/14093419/Final-Fantasy-XVI-FF16-Clive-Rosfield-Young-150x150.jpg",
-                                "alternativeText": "string",
+                        "data": [
+                            {
+                                "avatar": {
+                                    "data": {
+                                        "url": "https://cdnen.samurai-gamers.com/wp-content/uploads/2023/06/14093419/Final-Fantasy-XVI-FF16-Clive-Rosfield-Young-150x150.jpg",
+                                        "alternativeText": "string",
+                                    },
+                                },
+                                "name": "Clive Rosfield",
                             },
-                        },
-                        "name": "Clive Rosfield",
+                        ],
                     },
                     "createdAt": example_date,
                     "tags": {
@@ -53,35 +58,15 @@ export default function Home() {
                 <h1 className="text-2xl md:text-3xl font-bold uppercase mb-5">
                     Featured Article
                 </h1>
-                <article className="mx-2 sm:mx-8 max-w-3xl">
-                    <h2>
-                        {featuredArticlePlaceholderResponse.data.attributes.title}
-                    </h2>
-                    <img 
-                        src={featuredArticlePlaceholderResponse.data.attributes.hero.data.url} 
-                        alt={featuredArticlePlaceholderResponse.data.attributes.hero.data.alternativeText}
-                        className="max-w-sm"
-                    />
-                    <p>
-                        {featuredArticlePlaceholderResponse.data.attributes.tagline}
-                    </p>
-                    <div className="flex flex-wrap max-w-sm">
-                        <span className="w-1/2">
-                            By: {featuredArticlePlaceholderResponse.data.attributes.authors.name}
-                        </span>
-                        <span className="w-1/2">
-                            {featuredArticlePlaceholderResponse.data.attributes.readTime} mins. to read
-                        </span>
-                        <span className="w-1/2">
-                            {featuredArticlePlaceholderResponse.data.attributes.createdAt}
-                        </span>
-                    </div>
-                    <button className="bg-2-primary text-slate-900">
-                        <a href={`/articles/${featuredArticlePlaceholderResponse.data.id}`}>
-                            Continue Reading
-                        </a>
-                    </button>
-                </article>
+                <ArticlePlaque 
+                    id={featuredArticlePlaceholderResponse.data.id}
+                    title={featuredArticlePlaceholderResponse.data.attributes.title}
+                    hero={featuredArticlePlaceholderResponse.data.attributes.hero}
+                    tagline={featuredArticlePlaceholderResponse.data.attributes.tagline}
+                    authors={featuredArticlePlaceholderResponse.data.attributes.authors}
+                    createdAt={featuredArticlePlaceholderResponse.data.attributes.createdAt}
+                    readTime={featuredArticlePlaceholderResponse.data.attributes.readTime}
+                />
             </div>
             <div id="recent-articles" className="q-auto">
                 <h1 className="text-2xl md:text-3xl font-bold uppercase mb-5">
