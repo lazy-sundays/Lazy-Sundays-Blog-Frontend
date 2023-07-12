@@ -5,11 +5,11 @@ import { faBars } from '@fortawesome/free-solid-svg-icons'
 
 import logo from "../media/logo.svg";
 import ThemeSwitch from "./ThemeSwitch";
+import RandomArticle from "./RandomArticle";
 
 export default function Navbar() {
-    let rnd = 1;
     let links = [
-        {key: 0, name: "Random Article", href: `/articles/${rnd}`},
+        {key: 0, name: "Random Article", href: `/articles/`},
         {key: 1, name: "The Archives", href: "/articles"},
         {key: 2, name: "About Us", href: "/about-us"},
     ];
@@ -22,6 +22,13 @@ export default function Navbar() {
                 </a>
                 <div className="hidden sm:flex justify-around justify-items-center sm:pr-10 lg:pr-30">
                     {links.map((link) => {
+                        
+                        //render random article component separately
+                        if (link.key === 0){
+                            return(
+                                <RandomArticle hrefRootPath={link.href} displayName={link.name} className="sm:ml-8 px-1 md:text-lg hover:underline hover:decoration-1-primary hover:decoration-4"/>
+                            );
+                        }
                         return (
                             <a href={link.href} className="sm:ml-8 px-1 md:text-lg hover:underline hover:decoration-1-primary hover:decoration-4">{link.name}</a>
                         );
