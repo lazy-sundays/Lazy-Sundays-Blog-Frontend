@@ -39,24 +39,30 @@ export default function ArticlePlaque({ as: Component, id, title, hero, tagline,
                     alt={hero.data.alternativeText}
                     className="max-w-sm"
                 />
-                <h2 className="">
+                {/* TODO: add text shadow to title/tagline */}
+                {/* TODO: reposition */}
+                <h2 className="text-xl font-bold pl-6 -indent-6 text-shadow-sm">
                     {title}
                 </h2>
-                <p className="">
+                <p className="text-sm italic">
                     {tagline}
                 </p>
-                <div className="flex flex-wrap max-w-sm">
+                <div className="flex flex-wrap max-w-sm text-xs">
                     <span className="w-1/2">
-                        By: {authors.data[0].name}
+                        By: <a href={`/authors/${authors.data[0].id}`}
+                               className="hover:decoration-1-secondary hover:decoration-2 hover:underline"
+                            >
+                            {authors.data[0].name}
+                            </a>
                     </span>
-                    <span className="w-1/2">
+                    <span className="w-1/2 text-right">
                         {readTime} mins. to read
                     </span>
                     <span className="w-1/2">
                         {createdAt}
                     </span>
                 </div>
-                <button className="bg-2-primary text-slate-900">
+                <button className="bg-1-primary ">
                     <a href={`/articles/${id}`}>
                         Continue Reading
                     </a>
