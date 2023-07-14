@@ -22,6 +22,7 @@ export default function Home() {
                     "authors": {
                         "data": [
                             {
+                                "id": 16,
                                 "avatar": {
                                     "data": {
                                         "url": "https://cdnen.samurai-gamers.com/wp-content/uploads/2023/06/14093419/Final-Fantasy-XVI-FF16-Clive-Rosfield-Young-150x150.jpg",
