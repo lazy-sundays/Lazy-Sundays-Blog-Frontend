@@ -37,17 +37,17 @@ export default function ArticlePlaque({ as: Component, id, title, hero, tagline,
                 <img
                     src={hero.data.url}
                     alt={hero.data.alternativeText}
-                    className="max-w-sm"
+                    className="sm:max-w-sm"
                 />
-                {/* TODO: add text shadow to title/tagline */}
-                {/* TODO: reposition */}
-                <h2 className="text-xl font-bold pl-6 -indent-6 text-shadow-sm">
+                {/* TODO: add text shadow to title/tagline on desktop */}
+                {/* TODO: reposition on desktop */}
+                <h2 className="text-xl font-bold mt-4 sm:mt-0 sm:pl-6 sm:-indent-6 text-shadow-sm">
                     {title}
                 </h2>
                 <p className="text-sm italic">
                     {tagline}
                 </p>
-                <div className="flex flex-wrap max-w-sm text-xs">
+                <div className="flex flex-wrap mt-4 sm:mt-0 max-w-sm text-xs">
                     <span className="w-1/2">
                         By: <a href={`/authors/${authors.data[0].id}`}
                                className="hover:decoration-1-secondary hover:decoration-2 hover:underline"
@@ -62,11 +62,15 @@ export default function ArticlePlaque({ as: Component, id, title, hero, tagline,
                         {createdAt}
                     </span>
                 </div>
-                <button className="bg-1-primary ">
-                    <a href={`/articles/${id}`}>
-                        Continue Reading
-                    </a>
-                </button>
+                <a href={`/articles/${id}`} className="block">
+                    <button className="w-full sm:w-fit bg-slate-900 mt-4 p-3 rounded-md">
+                            Continue Reading
+                    </button>
+                </a>
+                {/* TODO: configure button hover effect */}
+                {/* <div id="rectangle" 
+                    className="-z-10 w-full p-6 bg-1-primary rounded-md translate-x-2 -translate-y-2"
+                /> */}
             </Component>
     );
 }
