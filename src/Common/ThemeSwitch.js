@@ -38,7 +38,7 @@ export default function ThemeSwitch() {
                 className={checked ? "hover:brightness-75" : "hover:brightness-200"}>
                 <FontAwesomeIcon icon={checked ? faMoon : faSun} className="w-5 h-5 align-middle sm:align-[-0.23em]" />
             </button>
-            {greeting && <span className={`absolute animate-blink whitespace-nowrap opacity-0 -translate-x-1/2 translate-y-7`}>Good {checked ? "Night" : "Morning"}!</span>}
+            {greeting && <span className={`absolute animate-blink whitespace-nowrap opacity-0 ${checked ? "-translate-x-12": "-translate-x-14"} translate-y-7`}>Good {checked ? "Night" : "Morning"}!</span>}
         </>
     );
 }
