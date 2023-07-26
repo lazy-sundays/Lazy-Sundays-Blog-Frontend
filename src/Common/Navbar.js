@@ -35,6 +35,7 @@ export default function Navbar() {
                 <Menu>
                     {({ open }) => (
                         <>
+                            {/* TODO: darken/lighten menu button on hover */}
                             <Menu.Button><FontAwesomeIcon className={"sm:hidden mr-4 w-5 h-5 align-middle"} icon={open ? faXmark : faBars}/></Menu.Button>
                             <hr />
                             <Transition as={Fragment}
