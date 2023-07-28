@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ArticlePlaque from "../Article/ArticlePlaque";
+import Article from "../Article/Article";
 
 export default function Home() {
     const example_date = new Date().toLocaleDateString("en-US", {
@@ -53,13 +54,19 @@ export default function Home() {
         "meta": {}
     };
 
+    const recentArticlesPlaceholderResponse = [
+        "This Leather Glove Looks So Good",
+        "Let's Save the World Using the Power of Friendship",
+        "Man Eats Food Really Fast, Gets Into Bar Fight"
+    ];
+
     return (
         <article id="pg-content" className="flex flex-wrap gap-y-10 px-4 pt-5 pb-10 sm:px-14 lg:px-20">
             <div id="featured-article" className="grow">
                 <h1 className="text-2xl md:text-3xl font-bold uppercase mb-5">
                     Featured Article
                 </h1>
-                <ArticlePlaque 
+                {/* <ArticlePlaque 
                     id={featuredArticlePlaceholderResponse.data.id}
                     title={featuredArticlePlaceholderResponse.data.attributes.title}
                     hero={featuredArticlePlaceholderResponse.data.attributes.hero}
@@ -67,12 +74,34 @@ export default function Home() {
                     authors={featuredArticlePlaceholderResponse.data.attributes.authors}
                     createdAt={featuredArticlePlaceholderResponse.data.attributes.createdAt}
                     readTime={featuredArticlePlaceholderResponse.data.attributes.readTime}
-                />
+                /> */}
+                <Article />
             </div>
-            <div id="recent-articles" className="q-auto">
+            <div id="recent-articles" className="q-auto max-w-sm">
                 <h1 className="text-2xl md:text-3xl font-bold uppercase mb-5">
                     Most Recent Articles
                 </h1>
+                <ul>
+                    {recentArticlesPlaceholderResponse.map( (name, i) => {
+                        return (
+                            <>
+                            <li className="mb-6 mx-2 sm:mx-8">
+                                <span className="text-xs text-1-primary">
+                                    {(new Date()).toLocaleDateString( "en-US",
+                                        {month: '2-digit', day: '2-digit'}
+                                    )}
+                                </span>
+                                <span className="ml-2 text-md font-semibold hover:underline hover:decoration-1-primary hover:decoration-4">
+                                    {name}
+                                </span>
+                            </li>
+                            { (i+1 < recentArticlesPlaceholderResponse.length) &&
+                                <hr className="mb-6 mx-2 dark:border-white/25 border-slate-900/25" />
+                            }
+                            </>
+                        );
+                    })}
+                </ul>
             </div>
         </article>
     );
