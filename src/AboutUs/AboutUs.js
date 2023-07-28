@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 import clive_img from "../media/temp/clive.jpg";
 import jill_img from "../media/temp/jill.jpg";
@@ -6,6 +7,9 @@ import joshua_img from "../media/temp/joshua.jpg";
 import ContributorPlaque from "./ContributorPlaque";
 
 export default function AboutUs() {
+    const [loading, setLoading] = useState(true);
+    const [blurb, setBlurb] = useState("");
+
     const example_date = new Date().toLocaleDateString("en-US", {
         day: "numeric",
         month: "long",
@@ -62,6 +66,31 @@ export default function AboutUs() {
         "meta": {}
     };
 
+    async function getAboutUsBlurb() {
+        try {
+            const response = await axios.get(
+                // TODO: move api root to environment variable
+                "https://lazy-sundays-blog-backend-production.up.railway.app/api/about-us?fields[0]=aboutUs",
+                {
+                    headers: {
+                        Authorization: 'Bearer '+process.env.REACT_APP_STRAPI_API_KEY
+                    }
+                }
+            );
+            // console.log(response.data);
+            setLoading(false);
+            setBlurb(response.data.data.attributes.aboutUs);
+            // return response.data;
+        } catch (error) {
+            // TODO: navigate to error page
+            console.log(error);
+        }
+    }
+
+    useEffect(() => {
+        getAboutUsBlurb();
+    });
+    
     return (
         <article id="pg-content" className="flex flex-wrap gap-y-10 px-4 pt-5 pb-10 sm:px-14 lg:px-20">
             <div className="grow">
@@ -69,9 +98,8 @@ export default function AboutUs() {
                     About Us
                 </h1>
                 <p className="mx-2 sm:mx-8 max-w-3xl">
-                Lorem ipsum dolor sit amet, sit no populo persequeris delicatissimi. Eum et lorem iuvaret, an utroque repudiare eum. Suscipit voluptua evertitur ne pri, te per habemus civibus. Ea mea oblique aliquid, id audiam molestie inciderint vim, commune expetenda has ex. Sed ad quodsi laoreet.
-
-Minim delicata adipiscing sit id, ea elitr impetus delenit mea, graecis fuisset eum in. Eam ne quaeque nominavi, ad eum principes imperdiet hendrerit, doctus pertinacia mea ad. Fuisset percipit eum ut, cum at quot sonet evertitur. Ne nec veri vitae qualisque, nec propriae accumsan in, est no quot lorem adipiscing. Eu mutat causae volumus vis. Cu regione civibus vim, an nec habeo virtute blandit.
+                    {/* TODO: update placeholder with better placeholder */}
+                    {loading ? <>Loading...</> : blurb}
                 </p>
             </div>
             <div className="w-auto">
