@@ -25,11 +25,11 @@ export default function Navbar() {
                         //render random article component separately
                         if (link.key === 0){
                             return(
-                                <RandomArticle hrefRootPath={link.href} displayName={link.name} className="sm:ml-8 px-1 md:text-lg hover:underline hover:decoration-1-primary hover:decoration-4"/>
+                                <RandomArticle hrefRootPath={link.href} displayName={link.name} className="sm:ml-8 px-1 md:text-lg hover:underline hover:decoration-1-primary hover:decoration-2"/>
                             );
                         }
                         return (
-                            <a href={link.href} className="sm:ml-8 px-1 md:text-lg hover:underline hover:decoration-1-primary hover:decoration-4">{link.name}</a>
+                            <a href={link.href} className="sm:ml-8 px-1 md:text-lg hover:underline hover:decoration-1-primary hover:decoration-2">{link.name}</a>
                         );
                     })}
                 </div>
@@ -58,7 +58,7 @@ export default function Navbar() {
                                             as="a"
                                             key={link.href} 
                                             href={link.href}
-                                            className={"sm:ml-8 px-1 md:text-lg hover:underline hover:decoration-1-primary hover:decoration-4"}
+                                            className={"sm:ml-8 px-1 md:text-lg hover:underline hover:decoration-1-primary hover:decoration-2"}
                                         >
                                             {link.name}
                                         </Menu.Item>

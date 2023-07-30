@@ -91,7 +91,7 @@ export default function Home() {
                                         {month: '2-digit', day: '2-digit'}
                                     )}
                                 </span>
-                                <span className="ml-2 text-md font-semibold hover:underline hover:decoration-1-primary hover:decoration-4">
+                                <span className="ml-2 text-md font-semibold hover:underline hover:decoration-1-primary hover:decoration-2">
                                     {name}
                                 </span>
                             </li>

@@ -21,7 +21,7 @@ export default function Footer() {
                         {links.map((link) => {
                             return (
                                  <li>
-                                    <a href={link.href} className="ml-4 hover:underline hover:decoration-1-primary md:ml-6">{link.name}</a>
+                                    <a href={link.href} className="ml-4 hover:underline hover:decoration-1-primary hover:decoration-2 md:ml-6">{link.name}</a>
                                 </li>
                             );
                         })}
