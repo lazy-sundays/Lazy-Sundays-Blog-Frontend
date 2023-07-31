@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-import clive_img from "../media/temp/clive.jpg";
-import jill_img from "../media/temp/jill.jpg";
-import joshua_img from "../media/temp/joshua.jpg";
 import ContributorPlaque from "./ContributorPlaque";
 
 export default function AboutUs() {
@@ -11,110 +8,78 @@ export default function AboutUs() {
     const [blurb, setBlurb] = useState("");
     const [loadingContacts, setLoadingContacts] = useState(true);
     const [contacts, setContacts] = useState([]);
-
-    const example_date = new Date().toLocaleDateString("en-US", {
-        day: "numeric",
-        month: "long",
-        year: "numeric"
-    });
-    const authorsPlaceholderResponse = {
-        "data": [
-            {
-                "id": 1,
-                "attributes": {
-                    "name": "Clive Rosfield",
-                    "avatar": {
-                        "url": clive_img, 
-                        "alternativeText": "string",
-                    },
-                    "favoriteColor": "#000000",
-                    "createdAt": example_date,
-                },
-                "meta": {
-                    "availableLocales": []
-                }
-            },
-            {
-                "id": 2,
-                "attributes": {
-                    "name": "Jill Warrick",
-                    "avatar": {
-                        "url": jill_img,
-                        "alternativeText": "string",  
-                    },
-                    "createdAt": example_date,
-                    "favoriteColor": "#D8BFF6",
-                },
-                "meta": {
-                    "availableLocales": []
-                }
-            },
-            {
-                "id": 3,
-                "attributes": {
-                    "name": "Joshua Rosfield",
-                    "avatar": {
-                        "url": joshua_img,
-                        "alternativeText": "string",
-                    },
-                    "createdAt": example_date,
-                    "favoriteColor": "#F7914D",
-                },
-                "meta": {
-                    "availableLocales": []
-                }
-            },
-        ],
-        "meta": {}
-    };
-
-    async function getAboutUsBlurb() {
-        try {
-            const response = await axios.get(
-                // TODO: move api root to environment variable
-                process.env.REACT_APP_URI_ROOT+"/about-us?fields[0]=aboutUs",
-                {
-                    headers: {
-                        Authorization: 'Bearer '+process.env.REACT_APP_STRAPI_API_KEY
-                    }
-                }
-            );
-            // console.log(response.data);
-            setLoadingBlurb(false);
-            setBlurb(response.data.data.attributes.aboutUs);
-            console.log(response.data.data.attributes.aboutUs);
-            // return response.data;
-        } catch (error) {
-            // TODO: navigate to error page
-            console.log(error);
-        }
-    }
-
-    async function getContacts() {
-        try {
-            const response = await axios.get(
-                // TODO: move api root to environment variable
-                process.env.REACT_APP_URI_ROOT+"/contact-us?fields[0]=contactInfo&populate[contactInfo][fields][0]=infoName&populate[contactInfo][fields][1]=info",
-                {
-                    headers: {
-                        Authorization: 'Bearer '+process.env.REACT_APP_STRAPI_API_KEY
-                    }
-                }
-            );
-            console.log(response.data);
-            setLoadingContacts(false);
-            setContacts(response.data.data.attributes.contactInfo.data);
-            console.log(response.data.data.attributes.contactInfo.data);
-            // return response.data;
-        } catch (error) {
-            // TODO: navigate to error page
-            console.log(error);
-        }
-    }
+    const [loadingAuthors, setLoadingAuthors] = useState(true);
+    const [authors, setAuthors] = useState([]);
 
     useEffect(() => {
+            async function getAboutUsBlurb() {
+                try {
+                    const response = await axios.get(
+                        
+                        process.env.REACT_APP_URI_ROOT+"/api/about-us?fields[0]=aboutUs",
+                        {
+                            headers: {
+                                Authorization: 'Bearer '+process.env.REACT_APP_STRAPI_API_KEY
+                            }
+                        }
+                    );
+                    // console.log(response.data);
+                    setLoadingBlurb(false);
+                    setBlurb(response.data.data.attributes.aboutUs);
+                    console.log(response.data.data.attributes.aboutUs);
+                    // return response.data;
+                } catch (error) {
+                    // TODO: navigate to error page
+                    console.log(error);
+                }
+            }
+
+            async function getContacts() {
+                try {
+                    const response = await axios.get(
+                        
+                        process.env.REACT_APP_URI_ROOT+"/api/contact-us?fields[0]=contactInfo&populate[contactInfo][fields][0]=infoName&populate[contactInfo][fields][1]=info",
+                        {
+                            headers: {
+                                Authorization: 'Bearer '+process.env.REACT_APP_STRAPI_API_KEY
+                            }
+                        }
+                    );
+                    console.log(response.data);
+                    setLoadingContacts(false);
+                    setContacts(response.data.data.attributes.contactInfo.data);
+                    console.log(response.data.data.attributes.contactInfo.data);
+                    // return response.data;
+                } catch (error) {
+                    // TODO: navigate to error page
+                    console.log(error);
+                }
+            }
+
+            async function getAuthors(pg = 1) {
+                try {
+                    const response = await axios.get(
+                        
+                        process.env.REACT_APP_URI_ROOT+"/api/authors?fields[0]=name&fields[1]=createdAt&populate[avatar][fields][0]=name&populate[avatar][fields][1]=formats&pagination[page]="+pg,
+                        {
+                            headers: {
+                                Authorization: 'Bearer '+process.env.REACT_APP_STRAPI_API_KEY
+                            }
+                        }
+                    );
+                    console.log(response.data);
+                    setLoadingAuthors(false);
+                    setAuthors((prevData) => [...prevData, ...response.data.data]);
+                    // return response.data;
+                } catch (error) {
+                    // TODO: navigate to error page
+                    console.log(error);
+                }
+            }
+
         if (loadingBlurb) getAboutUsBlurb();
         if (loadingContacts) getContacts();
+        if (loadingAuthors) getAuthors();
     }, []);
     
     return (
@@ -138,7 +103,7 @@ export default function AboutUs() {
                         contacts.map((contact) => 
                             <li className="mb-3 break-words">
                                 {contact.attributes.infoName}: 
-                                <a href={(contact.attributes.infoName == "Email" ? "mailto:" : "") + contact.attributes.info} className="mx-2 italic hover:underline hover:decoration-1-primary hover:decoration-2">
+                                <a href={(contact.attributes.infoName === "Email" ? "mailto:" : "") + contact.attributes.info} className="mx-2 italic hover:underline hover:decoration-1-primary hover:decoration-2">
                                     {contact.attributes.info}
                                 </a>
                             </li>
@@ -151,11 +116,14 @@ export default function AboutUs() {
                     List of Contributors
                 </h1>
                 <ul className="flex flex-wrap gap-6 mx-2 sm:mx-8">
-                    {authorsPlaceholderResponse.data.map((author) => {
-                        return (
-                            <ContributorPlaque as={"li"} author={author}/>
-                        );
-                    })}
+                    {loadingAuthors ? <>Loading...</> :
+                    //TODO: implement pagination/scrolling
+                        authors.map((author) => {
+                            return (
+                                <ContributorPlaque as={"li"} author={author}/>
+                            );
+                        })
+                    }
                 </ul>
             </div>
         </article>
