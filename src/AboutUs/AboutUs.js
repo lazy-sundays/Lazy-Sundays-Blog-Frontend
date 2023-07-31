@@ -1,85 +1,94 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-
 import ContributorPlaque from "./ContributorPlaque";
 
 export default function AboutUs() {
-    const [loadingBlurb, setLoadingBlurb] = useState(true);
+    const [loadingBlurb, setLoadingBlurb] = useState(false);
     const [blurb, setBlurb] = useState("");
-    const [loadingContacts, setLoadingContacts] = useState(true);
+    const [loadingContacts, setLoadingContacts] = useState(false);
     const [contacts, setContacts] = useState([]);
-    const [loadingAuthors, setLoadingAuthors] = useState(true);
+    const [loadingAuthors, setLoadingAuthors] = useState(false);
     const [authors, setAuthors] = useState([]);
+    const [authorPageNum, setAuthorPageNum] = useState(1);
+    const [moreAuthors, setMoreAuthors] = useState(true);
+
+    let authorPageTotal = 1;
+
+    async function getAboutUsBlurb() {
+        setLoadingBlurb(true);
+        try {
+            const response = await axios.get(
+                
+                process.env.REACT_APP_URI_ROOT+"/api/about-us?fields[0]=aboutUs",
+                {
+                    headers: {
+                        Authorization: 'Bearer '+process.env.REACT_APP_STRAPI_API_KEY
+                    }
+                }
+            );
+            // console.log(response.data);
+            setBlurb(response.data.data.attributes.aboutUs);
+            console.log(response.data.data.attributes.aboutUs);
+            // return response.data;
+        } catch (error) {
+            // TODO: navigate to error page
+            console.log(error);
+        }
+        setLoadingBlurb(false);
+    };
+
+    async function getContacts() {
+        setLoadingContacts(true);
+        try {
+            const response = await axios.get(
+                
+                process.env.REACT_APP_URI_ROOT+"/api/contact-us?fields[0]=contactInfo&populate[contactInfo][fields][0]=infoName&populate[contactInfo][fields][1]=info",
+                {
+                    headers: {
+                        Authorization: 'Bearer '+process.env.REACT_APP_STRAPI_API_KEY
+                    }
+                }
+            );
+            console.log(response.data);
+            setContacts(response.data.data.attributes.contactInfo.data);
+            console.log(response.data.data.attributes.contactInfo.data);
+            // return response.data;
+        } catch (error) {
+            // TODO: navigate to error page
+            console.log(error);
+        }
+        setLoadingContacts(false);
+    };
+
+    async function getAuthors() {
+        setLoadingAuthors(true);
+        try {
+            const response = await axios.get(
+                
+                process.env.REACT_APP_URI_ROOT+"/api/authors?fields[0]=name&fields[1]=createdAt&populate[avatar][fields][0]=name&populate[avatar][fields][1]=formats&pagination[page]="+authorPageNum+"&pagination[pageSize]=4",
+                {
+                    headers: {
+                        Authorization: 'Bearer '+process.env.REACT_APP_STRAPI_API_KEY
+                    }
+                }
+            );
+            console.log(response.data);
+            setAuthors((prevData) => [...prevData, ...response.data.data]);
+            setAuthorPageNum(response.data.meta.pagination.page + 1);
+            authorPageTotal=response.data.meta.pagination.pageCount;
+            setMoreAuthors(response.data.meta.pagination.page < response.data.meta.pagination.pageCount);
+            // return response.data;
+        } catch (error) {
+            // TODO: navigate to error page
+            console.log(error);
+        }
+        setLoadingAuthors(false);
+    };
 
     useEffect(() => {
-            async function getAboutUsBlurb() {
-                try {
-                    const response = await axios.get(
-                        
-                        process.env.REACT_APP_URI_ROOT+"/api/about-us?fields[0]=aboutUs",
-                        {
-                            headers: {
-                                Authorization: 'Bearer '+process.env.REACT_APP_STRAPI_API_KEY
-                            }
-                        }
-                    );
-                    // console.log(response.data);
-                    setLoadingBlurb(false);
-                    setBlurb(response.data.data.attributes.aboutUs);
-                    console.log(response.data.data.attributes.aboutUs);
-                    // return response.data;
-                } catch (error) {
-                    // TODO: navigate to error page
-                    console.log(error);
-                }
-            }
-
-            async function getContacts() {
-                try {
-                    const response = await axios.get(
-                        
-                        process.env.REACT_APP_URI_ROOT+"/api/contact-us?fields[0]=contactInfo&populate[contactInfo][fields][0]=infoName&populate[contactInfo][fields][1]=info",
-                        {
-                            headers: {
-                                Authorization: 'Bearer '+process.env.REACT_APP_STRAPI_API_KEY
-                            }
-                        }
-                    );
-                    console.log(response.data);
-                    setLoadingContacts(false);
-                    setContacts(response.data.data.attributes.contactInfo.data);
-                    console.log(response.data.data.attributes.contactInfo.data);
-                    // return response.data;
-                } catch (error) {
-                    // TODO: navigate to error page
-                    console.log(error);
-                }
-            }
-
-            async function getAuthors(pg = 1) {
-                try {
-                    const response = await axios.get(
-                        
-                        process.env.REACT_APP_URI_ROOT+"/api/authors?fields[0]=name&fields[1]=createdAt&populate[avatar][fields][0]=name&populate[avatar][fields][1]=formats&pagination[page]="+pg,
-                        {
-                            headers: {
-                                Authorization: 'Bearer '+process.env.REACT_APP_STRAPI_API_KEY
-                            }
-                        }
-                    );
-                    console.log(response.data);
-                    setLoadingAuthors(false);
-                    setAuthors((prevData) => [...prevData, ...response.data.data]);
-                    // return response.data;
-                } catch (error) {
-                    // TODO: navigate to error page
-                    console.log(error);
-                }
-            }
-
-        if (loadingBlurb) getAboutUsBlurb();
-        if (loadingContacts) getContacts();
-        if (loadingAuthors) getAuthors();
+        if ((blurb === "") && !loadingBlurb) getAboutUsBlurb();
+        if ((contacts.length === 0) && !loadingContacts) getContacts();
+        if ((authors.length === 0) &&!loadingAuthors) getAuthors();
     }, []);
     
     return (
@@ -116,15 +125,16 @@ export default function AboutUs() {
                     List of Contributors
                 </h1>
                 <ul className="flex flex-wrap gap-6 mx-2 sm:mx-8">
-                    {loadingAuthors ? <>Loading...</> :
-                    //TODO: implement pagination/scrolling
-                        authors.map((author) => {
-                            return (
-                                <ContributorPlaque as={"li"} author={author}/>
-                            );
-                        })
-                    }
+                    {authors.map((author) => {
+                        return (
+                            <ContributorPlaque as={"li"} author={author}/>
+                        );
+                    })}
+                    {loadingAuthors && <>Loading...</>}
                 </ul>
+            </div>
+            <div>
+                {(moreAuthors) ? <button onClick={() => {getAuthors()}} >More</button> : <></>}
             </div>
         </article>
     );
