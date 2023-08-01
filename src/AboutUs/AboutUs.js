@@ -3,19 +3,20 @@ import axios from "axios";
 import ContributorPlaque from "./ContributorPlaque";
 
 export default function AboutUs() {
-    const [loadingBlurb, setLoadingBlurb] = useState(false);
     const [blurb, setBlurb] = useState("");
-    const [loadingContacts, setLoadingContacts] = useState(false);
     const [contacts, setContacts] = useState([]);
     const [loadingAuthors, setLoadingAuthors] = useState(false);
     const [authors, setAuthors] = useState([]);
     const [authorPageNum, setAuthorPageNum] = useState(1);
-    const [moreAuthors, setMoreAuthors] = useState(true);
+    const [moreAuthors, setMoreAuthors] = useState(false);
+
+    function blurbIsLoading() {return (blurb === "")};
+    function contactsAreLoading() {return (contacts.length === 0)};
+    function authorsAreLoading() {return (authors.length === 0)};
 
     let authorPageTotal = 1;
 
     async function getAboutUsBlurb() {
-        setLoadingBlurb(true);
         try {
             const response = await axios.get(
                 
@@ -28,17 +29,16 @@ export default function AboutUs() {
             );
             // console.log(response.data);
             setBlurb(response.data.data.attributes.aboutUs);
-            console.log(response.data.data.attributes.aboutUs);
             // return response.data;
         } catch (error) {
             // TODO: navigate to error page
             console.log(error);
+        } finally{
+
         }
-        setLoadingBlurb(false);
     };
 
     async function getContacts() {
-        setLoadingContacts(true);
         try {
             const response = await axios.get(
                 
@@ -49,15 +49,15 @@ export default function AboutUs() {
                     }
                 }
             );
-            console.log(response.data);
+            // console.log(response.data);
             setContacts(response.data.data.attributes.contactInfo.data);
-            console.log(response.data.data.attributes.contactInfo.data);
             // return response.data;
         } catch (error) {
             // TODO: navigate to error page
             console.log(error);
+        } finally{
+
         }
-        setLoadingContacts(false);
     };
 
     async function getAuthors() {
@@ -72,7 +72,7 @@ export default function AboutUs() {
                     }
                 }
             );
-            console.log(response.data);
+            // console.log(response.data);
             setAuthors((prevData) => [...prevData, ...response.data.data]);
             setAuthorPageNum(response.data.meta.pagination.page + 1);
             authorPageTotal=response.data.meta.pagination.pageCount;
@@ -81,14 +81,15 @@ export default function AboutUs() {
         } catch (error) {
             // TODO: navigate to error page
             console.log(error);
+        } finally{
+            setLoadingAuthors(false);
         }
-        setLoadingAuthors(false);
     };
 
     useEffect(() => {
-        if ((blurb === "") && !loadingBlurb) getAboutUsBlurb();
-        if ((contacts.length === 0) && !loadingContacts) getContacts();
-        if ((authors.length === 0) &&!loadingAuthors) getAuthors();
+        if (blurbIsLoading()) getAboutUsBlurb();
+        if (contactsAreLoading()) getContacts();
+        if (authorsAreLoading() && !loadingAuthors) getAuthors();
     }, []);
     
     return (
@@ -99,7 +100,7 @@ export default function AboutUs() {
                 </h1>
                 <p className="mx-2 sm:mx-8 max-w-3xl">
                     {/* TODO: update placeholder with better placeholder */}
-                    {loadingBlurb ? <>Loading...</> : blurb}
+                    {blurbIsLoading() ? <>Loading...</> : blurb}
                 </p>
             </div>
             <div className="w-auto max-w-full md:max-w-[25%]">
@@ -108,7 +109,7 @@ export default function AboutUs() {
                 </h1>
                 <ul className="mx-2 sm:mx-8">
                     {/* TODO: update placeholder with better placeholder */}
-                    {loadingContacts ? <>Loading...</> :
+                    {contactsAreLoading() ? <>Loading...</> :
                         contacts.map((contact) => 
                             <li className="mb-3 break-words">
                                 {contact.attributes.infoName}: 
@@ -130,7 +131,7 @@ export default function AboutUs() {
                             <ContributorPlaque as={"li"} author={author}/>
                         );
                     })}
-                    {loadingAuthors && <>Loading...</>}
+                    {authorsAreLoading() && <>Loading...</>}
                 </ul>
             </div>
             <div>
