@@ -58,6 +58,7 @@ export default function Author() {
         if (numContIsLoading()) getNumContributions();
     }, []);
 
+    //TODO: relpace defualt loading elements
     return (
         <article>
             <div>{authorIsLoading() ? <>Loading...</> : <img src={process.env.REACT_APP_URI_ROOT+authorInfo.attributes.avatar.data.attributes.formats.thumbnail.url}
