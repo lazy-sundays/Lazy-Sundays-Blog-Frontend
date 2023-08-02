@@ -23,7 +23,7 @@ function App() {
   return (
       <Router>
         <Navbar />
-        <main>
+        <main className='mb-auto'>
           <Routes>
             <Route exact path='/' element={<Home />} />
             <Route path='/articles' element={<Archive />} />

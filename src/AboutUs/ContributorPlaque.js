@@ -11,7 +11,7 @@ export default function ContributorPlaque({ as: Component, author }) {
         >
             <div className="group-hover:z-10" aria-hidden>
                 <img src={process.env.REACT_APP_URI_ROOT+author.attributes.avatar.data.attributes.formats.thumbnail.url}
-                    className={" max-w-[96px] max-h-[96px] mr-4 rounded-full border-2 border-stone-500/75"}
+                    className={" max-w-24 max-h-24 mr-4 rounded-full border-2 border-stone-500/75"}
                 />
             </div>
             <div className="w-1/2 flex flex-col justify-center">
