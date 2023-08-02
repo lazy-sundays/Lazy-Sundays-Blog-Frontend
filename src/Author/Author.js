@@ -5,24 +5,30 @@ import {useParams} from "react-router-dom";
 export default function Author() {
     const [authorInfo, setAuthorInfo] = useState('');
     const [numContributions, setNumContributions] = useState('');
-    const {id} = useParams();
+    const {slug} = useParams();
 
     function authorIsLoading() {return (authorInfo === '')};
     function numContIsLoading() {return (numContributions === '')};
+    function selectThirdPerson(pronouns) {
+
+        if(pronouns.length == 0) return 'them';
+        return (pronouns[Math.floor(Math.random()*pronouns.length)]).toLowerCase().trim().split("/")[1];
+
+    };
 
     async function getAuthorInfo(){
         try {
             const response = await axios.get(
                 
-                process.env.REACT_APP_URI_ROOT+"/api/authors/"+id+"?fields[0]=name&fields[1]=favoriteColor&fields[3]=bio&fields[4]=createdAt&populate[0]=avatar&populate[1]=linkTree",
+                process.env.REACT_APP_URI_ROOT+"/api/authors?filters[slug]=" + slug +"&populate[0]=avatar&populate[1]=linkTree",
                 {
                     headers: {
                         Authorization: 'Bearer '+process.env.REACT_APP_STRAPI_API_KEY
                     }
                 }
             );
-            //console.log(response.data.data);
-            setAuthorInfo(response.data.data);
+            // console.log(response.data.data[0]);
+            setAuthorInfo((response.data.data.length === 0) ? '' : response.data.data[0]);
             // return response.data;
         } catch (error) {
             // TODO: navigate to error page
@@ -36,7 +42,7 @@ export default function Author() {
         try {
             const response = await axios.get(
                 
-                process.env.REACT_APP_URI_ROOT+"/api/authors/"+id+"/articles/count",
+                process.env.REACT_APP_URI_ROOT+"/api/authors/"+slug+"/articles/count",
                 {
                     headers: {
                         Authorization: 'Bearer '+process.env.REACT_APP_STRAPI_API_KEY
@@ -68,7 +74,7 @@ export default function Author() {
                 <div className="flex flex-wrap mr-2 sm:mr-8 max-w-3xl">
                     <div className="w-28 sm:w-36 md:w-44 h-28 sm:h-36 md:h-44 shrink-0">
                         {authorIsLoading() ? <>Loading...</> : 
-                            <img src={process.env.REACT_APP_URI_ROOT+authorInfo.attributes.avatar.data.attributes.url}
+                            <img src={authorInfo.attributes.avatar.data.attributes.url}
                                 className={"w-full h-full object-cover mr-4 rounded-full border-2 border-stone-500/75"}
                             />
                         }
@@ -94,7 +100,7 @@ export default function Author() {
             </div>
             <div className="w-auto max-w-full md:max-w-[25%]">
                 <h1 className="text-2xl md:text-3xl font-bold uppercase mb-5">
-                    Find Them At
+                    Find {authorIsLoading() ? "Them" : selectThirdPerson(authorInfo.attributes.pronouns)} At
                 </h1>
                 <ul className="flex flex-wrap mx-2 sm:mx-8">
                     {authorIsLoading() ? <>Loading...</> : 

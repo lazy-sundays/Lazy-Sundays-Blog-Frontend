@@ -25,9 +25,9 @@ function App() {
         <main className='mb-auto'>
           <Routes>
             <Route exact path='/' element={<Home />} />
-            <Route path='/articles' element={<Archive />} />
-            <Route path='/articles/:id' element={<Article />} />
-            <Route path='/authors/:id' element={<Author />} />
+            <Route path='/the-archives' element={<Archive />} />
+            <Route path='/articles/:slug' element={<Article />} />
+            <Route path='/authors/:slug' element={<Author />} />
             <Route path='/about-us' element={<AboutUs />} />
             <Route path='*' element={<Error />} />
           </Routes>

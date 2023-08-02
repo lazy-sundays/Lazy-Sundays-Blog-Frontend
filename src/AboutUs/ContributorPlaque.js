@@ -10,7 +10,7 @@ export default function ContributorPlaque({ as: Component, author }) {
             transition ease-in delay-100 hover:ease-out group-hover:delay-200 hover:-translate-x-1 hover:-translate-y-1"
         >
             <div className="group-hover:z-10" aria-hidden>
-                <img src={process.env.REACT_APP_URI_ROOT+author.attributes.avatar.data.attributes.formats.thumbnail.url}
+                <img src={author.attributes.avatar.data.attributes.formats.thumbnail.url}
                     className={" max-w-24 max-h-24 mr-4 rounded-full border-2 border-stone-500/75"}
                 />
             </div>
@@ -41,7 +41,7 @@ export default function ContributorPlaque({ as: Component, author }) {
                     transition ease-in delay-200 group-hover:transition group-hover:ease-out group-hover:delay-100
                     group-hover:-translate-x-1 group-hover:-translate-y-1"
             />
-            <a href={`/authors/${author.id}`} aria-label="go to author's bio'">
+            <a href={`/authors/${author.attributes.slug}`} aria-label="go to author's bio'">
                 <span className="absolute inset-0" aria-hidden/>
             </a>
         </Component>
