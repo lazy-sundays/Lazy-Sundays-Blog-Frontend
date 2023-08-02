@@ -29,7 +29,11 @@ module.exports = {
       },
     },
   },
+  corePlugins: {
+    aspectRatio: false,
+  },
   plugins: [
+    require('@tailwindcss/aspect-ratio'),
     plugin(function ({ matchUtilities, theme }) {
       matchUtilities(
         {
