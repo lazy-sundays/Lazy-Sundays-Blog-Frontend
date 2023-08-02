@@ -6,7 +6,7 @@ export default function Footer() {
     let rnd = 1;
     let links = [
         {key: 0, name: "Random Article", href: `/articles/${rnd}`},
-        {key: 1, name: "The Archives", href: "/articles"},
+        {key: 1, name: "The Archives", href: "/the-archives"},
         {key: 2, name: "About Us", href: "/about-us"},
     ];
 
