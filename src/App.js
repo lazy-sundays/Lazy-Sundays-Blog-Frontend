@@ -19,7 +19,6 @@ function App() {
   document.body.classList.add("dark:bg-slate-800");
   document.body.classList.add("dark:text-slate-200");
 
-
   return (
       <Router>
         <Navbar />
