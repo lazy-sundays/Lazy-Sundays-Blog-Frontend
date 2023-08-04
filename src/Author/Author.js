@@ -7,12 +7,19 @@ export default function Author() {
     const [numContributions, setNumContributions] = useState('');
     const {slug} = useParams();
 
-    function authorIsLoading() {return (authorInfo === '')};
-    function numContIsLoading() {return (numContributions === '')};
-    function selectThirdPerson(pronouns) {
+    const authorIsLoading = () => (authorInfo === '');
+    const numContIsLoading = () => (numContributions === '');
+    const selectThirdPerson = (pronouns) => {
 
-        if(pronouns.length == 0) return 'them';
+        if(pronouns == null || pronouns.length === 0) return 'them';
         return (pronouns[Math.floor(Math.random()*pronouns.length)]).toLowerCase().trim().split("/")[1];
+
+    };
+    const pronounsToString = (pronouns) => {
+
+        if(pronouns.length === 0) return "";
+        if(pronouns.length === 1) return pronouns.toString();
+        return pronouns.map((pn, i, a) => pn.toLowerCase().trim().split("/")[0]+(i === a.length-1 ? "" : "/"));
 
     };
 
@@ -20,7 +27,7 @@ export default function Author() {
         try {
             const response = await axios.get(
                 
-                process.env.REACT_APP_URI_ROOT+"/api/authors?filters[slug]=" + slug +"&populate[0]=avatar&populate[1]=linkTree",
+                process.env.REACT_APP_URI_ROOT+"/api/authors?filters[slug]="+slug+"&populate[0]=avatar&populate[1]=linkTree",
                 {
                     headers: {
                         Authorization: 'Bearer '+process.env.REACT_APP_STRAPI_API_KEY
@@ -79,10 +86,18 @@ export default function Author() {
                             />
                         }
                     </div>
-                    <div className="flex w-[calc(100%-9rem)] sm:w-[calc(100%-12rem)] flex-col gap-3 ml-4">
-                        <div className="font-bold text-lg">{authorIsLoading() ? <>Loading...</> : authorInfo.attributes.name}</div>
-                        <div>{numContIsLoading() ? <>Loading...</> : (numContributions === 0 ) ? <></> : <span>{numContributions} article {(numContributions === 1 ) ? 'contribution' : 'contributions'}</span>}</div>
-                        <div>
+                    <div className="flex w-[calc(100%-9rem)] sm:w-[calc(100%-12rem)] flex-col gap-1 ml-4">
+                        <div className="font-bold text-xl">
+                            {authorIsLoading() ? <>Loading...</> : authorInfo.attributes.name} 
+                            {authorIsLoading() ? <> Loading...</> : (
+                                authorInfo.attributes.pronouns != null && 
+                                <span className="italic text-xs text-1-primary ml-1">({pronounsToString(authorInfo.attributes.pronouns)})</span>
+                            )}
+                        </div>
+                        <div className="text-sm">
+                            {numContIsLoading() ? <>Loading...</> : (numContributions === 0 ) ? <></> : <span>{numContributions} article {(numContributions === 1 ) ? 'contribution' : 'contributions'}</span>}
+                        </div>
+                        <div className="text-sm">
                             {authorIsLoading() ? <>Loading...</> : <span>Contributor since {new Date(authorInfo.attributes.createdAt).toLocaleString("en-US", {
                                 day: "numeric",
                                 month: "long",
@@ -100,7 +115,7 @@ export default function Author() {
             </div>
             <div className="w-auto max-w-full md:max-w-[25%]">
                 <h1 className="text-2xl md:text-3xl font-bold uppercase mb-5">
-                    Find {authorIsLoading() ? "Them" : selectThirdPerson(authorInfo.attributes.pronouns)} At
+                    Find {authorIsLoading() ? "" : selectThirdPerson(authorInfo.attributes.pronouns)} At
                 </h1>
                 <ul className="flex flex-wrap mx-2 sm:mx-8">
                     {authorIsLoading() ? <>Loading...</> : 
