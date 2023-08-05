@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 
-export default function RandomArticle({className, displayName, hrefRootPath}){
+export default function RandomArticle(){
 
     async function getRandomArticle(){
         try { const response = await axios.get(
@@ -14,7 +14,7 @@ export default function RandomArticle({className, displayName, hrefRootPath}){
                 }
             );
             // console.log(response.data.slug);
-            window.location.href = hrefRootPath + response.data.slug //navigate 
+            window.location.href = "/articles/"+response.data.slug //navigate 
             // return response.data;
         } catch (error) {
             // TODO: navigate to error page
@@ -22,8 +22,16 @@ export default function RandomArticle({className, displayName, hrefRootPath}){
         } finally {
         }  
     }
+    
+    useEffect(() => {
+        getRandomArticle();
+    }, []);
 
     return (
-        <span className={className} onClick={getRandomArticle}>{displayName}</span>
+        <article className="flex h-full w-full align-middle justify-center">
+            <div>
+                Loading...
+            </div>
+        </article>
     );
 }

@@ -5,7 +5,7 @@ import RandomArticle from "./RandomArticle";
 
 export default function Footer() {
     let links = [
-        {key: 0, name: "Random Article", href: `/articles/`},
+        {key: 0, name: "Random Article", href: `/random-article`},
         {key: 1, name: "The Archives", href: "/the-archives"},
         {key: 2, name: "About Us", href: "/about-us"},
     ];
@@ -19,11 +19,6 @@ export default function Footer() {
                     </a>
                     <ul className="flex flex-wrap items-center justify-center mb-4 text-sm font-medium sm:mb-0">
                         {links.map((link) => {
-                            if (link.key === 0){
-                                return(
-                                    <RandomArticle hrefRootPath={link.href} displayName={link.name} className="ml-4 hover:underline hover:decoration-1-primary hover:decoration-2 md:ml-6"/>
-                                );
-                            }
                             return (
                                  <li>
                                     <a href={link.href} className="ml-4 hover:underline hover:decoration-1-primary hover:decoration-2 md:ml-6">{link.name}</a>
