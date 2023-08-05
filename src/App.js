@@ -22,7 +22,7 @@ function App() {
   return (
       <Router>
         <Navbar />
-        <main className='mb-auto'>
+        <main className='mb-auto min-h-[calc(100vh-18.75rem)]'>
           <Routes>
             <Route exact path='/' element={<Home />} />
             <Route path='/the-archives' element={<Archive />} />

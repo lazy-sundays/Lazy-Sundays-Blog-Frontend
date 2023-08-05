@@ -11,14 +11,15 @@ export default function Author() {
     const numContIsLoading = () => (numContributions === '');
     const selectThirdPerson = (pronouns) => {
 
-        if(pronouns == null || pronouns.length === 0) return 'them';
+        if((pronouns == null || pronouns.length === 0) || (pronouns.includes("any pronouns"))) return 'them';
         return (pronouns[Math.floor(Math.random()*pronouns.length)]).toLowerCase().trim().split("/")[1];
 
     };
     const pronounsToString = (pronouns) => {
 
         if(pronouns.length === 0) return "";
-        if(pronouns.length === 1) return pronouns.toString();
+        if((pronouns.length === 1)) return pronouns.toString();
+        if ((pronouns.includes("any pronouns"))) return "any pronouns";
         return pronouns.map((pn, i, a) => pn.toLowerCase().trim().split("/")[0]+(i === a.length-1 ? "" : "/"));
 
     };
@@ -78,57 +79,61 @@ export default function Author() {
                 <h1 className="text-2xl md:text-3xl font-bold uppercase mb-5">
                     Biography
                 </h1>
-                <div className="flex flex-wrap mr-2 sm:mr-8 max-w-3xl">
-                    <div className="w-28 sm:w-36 md:w-44 h-28 sm:h-36 md:h-44 shrink-0">
-                        {authorIsLoading() ? <>Loading...</> : 
-                            <img src={authorInfo.attributes.avatar.data.attributes.url}
-                                className={"w-full h-full object-cover mr-4 rounded-full border-2 border-stone-500/75"}
-                            />
-                        }
+                {(authorIsLoading() || numContIsLoading()) ? <>Loading...</> : 
+                    <div className="flex flex-wrap mr-0 sm:mr-8 max-w-3xl">
+                        <div className="w-28 sm:w-36 md:w-44 h-28 sm:h-36 md:h-44 shrink-0">
+                            { 
+                                <img src={authorInfo.attributes.avatar.data.attributes.url}
+                                    className={"w-full h-full object-cover mr-4 rounded-full border-2 border-stone-500/75"}
+                                />
+                            }
+                        </div>
+                        <div className="flex w-[calc(100%-8.5rem)] sm:w-[calc(100%-12rem)] flex-col gap-1 ml-4">
+                            <div className="font-bold text-xl">
+                                {authorInfo.attributes.name} 
+                                {(
+                                    authorInfo.attributes.pronouns != null && 
+                                    <span className="italic text-xs text-1-primary ml-1">({pronounsToString(authorInfo.attributes.pronouns)})</span>
+                                )}
+                            </div>
+                            <div className="text-sm">
+                                {(numContributions === 0 ) ? <></> : <span>{numContributions} article {(numContributions === 1 ) ? 'contribution' : 'contributions'}</span>}
+                            </div>
+                            <div className="text-sm">
+                                {<span>Contributor since {new Date(authorInfo.attributes.createdAt).toLocaleString("en-US", {
+                                    day: "numeric",
+                                    month: "long",
+                                    year: "numeric"
+                                })}</span>}
+                            </div>
+                            <div className="collapse sm:visible"> {/* bio desktop version */}
+                                {authorInfo.attributes.bio}
+                            </div>
+                        </div>
+                        <div className="visible sm:collapse w-full mt-4 mx-2"> {/* bio mobile version */}
+                                {authorInfo.attributes.bio}
+                        </div>
                     </div>
-                    <div className="flex w-[calc(100%-9rem)] sm:w-[calc(100%-12rem)] flex-col gap-1 ml-4">
-                        <div className="font-bold text-xl">
-                            {authorIsLoading() ? <>Loading...</> : authorInfo.attributes.name} 
-                            {authorIsLoading() ? <> Loading...</> : (
-                                authorInfo.attributes.pronouns != null && 
-                                <span className="italic text-xs text-1-primary ml-1">({pronounsToString(authorInfo.attributes.pronouns)})</span>
-                            )}
-                        </div>
-                        <div className="text-sm">
-                            {numContIsLoading() ? <>Loading...</> : (numContributions === 0 ) ? <></> : <span>{numContributions} article {(numContributions === 1 ) ? 'contribution' : 'contributions'}</span>}
-                        </div>
-                        <div className="text-sm">
-                            {authorIsLoading() ? <>Loading...</> : <span>Contributor since {new Date(authorInfo.attributes.createdAt).toLocaleString("en-US", {
-                                day: "numeric",
-                                month: "long",
-                                year: "numeric"
-                            })}</span>}
-                        </div>
-                        <div className="collapse sm:visible"> {/* bio desktop version */}
-                            {authorIsLoading() ? <>Loading...</> : authorInfo.attributes.bio}
-                        </div>
-                    </div>
-                    <div className="visible sm:collapse w-full mt-4"> {/* bio mobile version */}
-                            {authorIsLoading() ? <>Loading...</> : authorInfo.attributes.bio}
-                    </div>
-                </div>
+                }
             </div>
             <div className="w-auto max-w-full md:max-w-[25%]">
                 <h1 className="text-2xl md:text-3xl font-bold uppercase mb-5">
-                    Find {authorIsLoading() ? "" : selectThirdPerson(authorInfo.attributes.pronouns)} At
+                    Find {authorIsLoading() ? "Them" : selectThirdPerson(authorInfo.attributes.pronouns)} At
                 </h1>
-                <ul className="flex flex-wrap mx-2 sm:mx-8">
-                    {authorIsLoading() ? <>Loading...</> : 
-                        authorInfo.attributes.linkTree.data.map((linkItem) =>
-                        <li className="mb-3 break-words">
-                            {linkItem.attributes.siteName}:
-                            <a href={(linkItem.attributes.siteName === "Email" ? "mailto:" : "") + linkItem.attributes.link} className="mx-2 italic hover:underline hover:decoration-1-primary hover:decoration-2">
-                                {linkItem.attributes.link}
-                            </a>
-                        </li>
-                        )
-                    }
-                </ul>
+                {(authorIsLoading()) ? <>Loading...</> :
+                    <ul className="flex flex-wrap mx-2 sm:mx-8">
+                        {
+                            authorInfo.attributes.linkTree.data.map((linkItem) =>
+                            <li className="mb-3 break-words">
+                                {linkItem.attributes.siteName}:
+                                <a href={(linkItem.attributes.siteName === "Email" ? "mailto:" : "") + linkItem.attributes.link} className="mx-2 italic hover:underline hover:decoration-1-primary hover:decoration-2">
+                                    {linkItem.attributes.link}
+                                </a>
+                            </li>
+                            )
+                        }
+                    </ul>
+                }
             </div>
         </article>
     );

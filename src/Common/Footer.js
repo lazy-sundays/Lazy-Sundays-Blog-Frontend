@@ -11,13 +11,13 @@ export default function Footer() {
     ];
 
     return (
-        <footer className="bg-stone-100 dark:bg-slate-900 shadoww-full h-full mx-auto p-4 md:py-4 mt-4">
+        <footer className="bg-stone-100 dark:bg-slate-900 shadoww-full h-full mx-auto p-4 md:py-4 mt-auto">
             <div className="w-full max-w-screen-xl mx-auto p-4 md:py-4">
                 <div className="flex items-center justify-between">
                     <a href="/" className="flex items-center mb-4 sm:mb-0">
                         <span className="self-center text-md font-semibold whitespace-nowrap">Lazy Sundays Blog</span>
                     </a>
-                    <ul className="flex flex-wrap items-center mb-4 text-sm font-medium sm:mb-0">
+                    <ul className="flex flex-wrap items-center justify-center mb-4 text-sm font-medium sm:mb-0">
                         {links.map((link) => {
                             return (
                                  <li>
