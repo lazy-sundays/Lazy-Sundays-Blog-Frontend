@@ -2,6 +2,8 @@ import { getReasonPhrase } from "http-status-codes";
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import useTimeout from "../hooks/useTimeout";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {faFaceFrown} from '@fortawesome/free-regular-svg-icons'
 
 export default function Error() {
     const [oneMinsPassed, setOneMinsPassed] = useState(false);
@@ -27,12 +29,20 @@ export default function Error() {
         setTwentyMinsPassed(true);
     }, 1200000);
 
+    function safeGetReason(status){
+        try {
+            return getReasonPhrase(status);
+        } catch (error) {
+            return "Not a Valid HTTP Response Code";
+        }
+    }
+
     return (
         <article className="flex content-center justify-center">
             <div className="flex flex-col text-center justify-center mt-40">
-            { (status > 200 || status < 300) ?
+            { (status >= 200 && status < 300) ?
                 <p className="text-3xl">Are you sure you're supposed to be here?</p> :
-                <p className="text-3xl">Error {status}: {getReasonPhrase(status)}! </p> 
+                <p className="text-3xl">Error {status}: {safeGetReason(status)}! <FontAwesomeIcon icon={faFaceFrown}/></p> 
             }
             { oneMinsPassed &&
                 <p className="text-xl">Nothing to see here...</p>

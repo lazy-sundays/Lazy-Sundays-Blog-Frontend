@@ -26,7 +26,8 @@ function App() {
         <main className='mb-auto min-h-[calc(100vh-18.75rem)]'>
           <Routes>
             <Route exact path='/' element={<Home />} />
-            <Route path='/the-archives' element={<Archive />} />
+            {/* <Route path='/the-archives' element={<Archive />} /> */}
+            <Route path='/the-archives' element={<Navigate to='/error/501'/>} />
             <Route path='/articles/:slug' element={<Article />}/>
             <Route path='/articles' element={<Navigate to='/the-archives'/>}/>
             <Route path='/random-article' element={<RandomArticle />}/>
