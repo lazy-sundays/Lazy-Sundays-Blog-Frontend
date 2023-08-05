@@ -7,6 +7,7 @@ import AboutUs from './AboutUs/AboutUs';
 import Archive from './Archive/Archive';
 import Article from './Article/Article';
 import Author from './Author/Author';
+import RandomArticle from './Common/RandomArticle';
 
 import './App.css';
 
@@ -28,6 +29,7 @@ function App() {
             <Route path='/the-archives' element={<Archive />} />
             <Route path='/articles/:slug' element={<Article />}/>
             <Route path='/articles' element={<Navigate to='/the-archives'/>}/>
+            <Route path='/random-article' element={<RandomArticle />}/>
             <Route path='/authors/:slug' element={<Author />} />
             <Route path='/authors' element={<Navigate to='/about-us'/>}/>
             <Route path='/about-us' element={<AboutUs />} />

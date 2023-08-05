@@ -85,18 +85,21 @@ export default function Home() {
                     {recentArticlesPlaceholderResponse.map( (name, i) => {
                         return (
                             <>
-                            <li className="mb-6 mx-2 sm:mx-8">
+                            <li className={`relative group ${(i === 0 ? "pb-6" : "py-6")} px-2 sm:px-8`}>
                                 <span className="text-xs text-1-primary">
                                     {(new Date()).toLocaleDateString( "en-US",
                                         {month: '2-digit', day: '2-digit'}
                                     )}
                                 </span>
-                                <span className="ml-2 text-md font-semibold hover:underline hover:decoration-1-primary hover:decoration-2">
+                                <span className="ml-2 text-md font-semibold group-hover:underline group-hover:decoration-1-primary group-hover:decoration-2">
                                     {name}
                                 </span>
+                                <a href={`/articles/${name}`} aria-label="go to author's bio'">
+                                    <span className="absolute inset-0" aria-hidden/>
+                                </a>
                             </li>
                             { (i+1 < recentArticlesPlaceholderResponse.length) &&
-                                <hr className="mb-6 mx-2 dark:border-white/25 border-slate-900/25" />
+                                <hr className="mx-2 dark:border-white/25 border-slate-900/25" />
                             }
                             </>
                         );

@@ -11,7 +11,7 @@ export default function Author() {
     const numContIsLoading = () => (numContributions === '');
     const selectThirdPerson = (pronouns) => {
 
-        if((pronouns == null || pronouns.length === 0) || (pronouns.includes("any pronouns"))) return 'them';
+        if((pronouns == null || pronouns.length === 0) || (pronouns.includes("any pronouns"))) return "'em";
         return (pronouns[Math.floor(Math.random()*pronouns.length)]).toLowerCase().trim().split("/")[1];
 
     };
