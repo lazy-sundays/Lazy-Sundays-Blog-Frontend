@@ -33,7 +33,8 @@ function App() {
             <Route path='/authors/:slug' element={<Author />} />
             <Route path='/authors' element={<Navigate to='/about-us'/>}/>
             <Route path='/about-us' element={<AboutUs />} />
-            <Route path='*' element={<Error />} />
+            <Route path='/error/:status' element={<Error />} />
+            <Route path='*' element={<Navigate to='/error/404'/>} />
           </Routes>
         </main>
         <Footer />

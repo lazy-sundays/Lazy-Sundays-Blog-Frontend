@@ -3,8 +3,9 @@ import axios from "axios";
 import Article from "../Article/Article";
 
 export default function Home() {
-    const [loadRecentArticles, setLoadRecentArticles] = useState(true);
     const [recentArticles, setRecentArticles] = useState([]);
+
+    function recentArticlesIsLoading() {return (recentArticles.length === 0)};
 
     async function getRecentArticles() {
         try {
@@ -21,15 +22,14 @@ export default function Home() {
             setRecentArticles(response.data.data);
             // return response.data;
         } catch (error) {
-            // TODO: navigate to error page
+            window.location.href = `/error/${error.response.status}` //navigate to error page
             console.log(error);
         } finally{
-            setLoadRecentArticles(false);
         }
     };
 
     useEffect(() => {
-        if (loadRecentArticles) getRecentArticles();
+        if (recentArticlesIsLoading) getRecentArticles();
     }, []);
 
     return (
@@ -53,8 +53,8 @@ export default function Home() {
                 <h1 className="text-2xl md:text-3xl font-bold uppercase mb-5">
                     Most Recent Articles
                 </h1>
-                <ul>
-                    {!loadRecentArticles && recentArticles.map( (article, i, all) => {
+                {recentArticlesIsLoading() ? <>Loading...</> : <ul>
+                    {recentArticles.map( (article, i, all) => {
                         return (
                             <>
                             <li className={`relative group ${("py-6")} mx-2 sm:px-8 hover:bg-stone-100 hover:dark:bg-slate-700`}>
@@ -76,7 +76,7 @@ export default function Home() {
                             </>
                         );
                     })}
-                </ul>
+                </ul>}
             </div>
         </article>
     );
