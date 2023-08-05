@@ -47,7 +47,7 @@ export default function Home() {
                     createdAt={featuredArticlePlaceholderResponse.data.attributes.createdAt}
                     readTime={featuredArticlePlaceholderResponse.data.attributes.readTime}
                 /> */}
-                <Article />
+                <Article isFeatured/>
             </div>
             <div id="recent-articles" className="q-auto max-w-sm">
                 <h1 className="text-2xl md:text-3xl font-bold uppercase mb-5">
