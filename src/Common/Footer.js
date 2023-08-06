@@ -11,7 +11,7 @@ export default function Footer() {
     ];
 
     return (
-        <footer className="bg-stone-100 dark:bg-slate-900 shadoww-full h-full mx-auto p-4 md:py-4 mt-auto">
+        <footer className="bg-neutral-200 dark:bg-slate-700 shadoww-full h-full mx-auto p-4 md:py-4 mt-auto">
             <div className="w-full max-w-screen-xl mx-auto p-4 md:py-4">
                 <div className="flex items-center justify-between">
                     <a href="/" className="flex items-center mb-4 sm:mb-0">
@@ -28,8 +28,8 @@ export default function Footer() {
                     </ul>
                 </div>
                 <div className="inline-flex items-center justify-center w-full">
-                    <hr className="w-4/5 h-1 my-8 bg-gray-200 border-0 rounded dark:bg-gray-700"/>
-                    <div className="absolute px-6 -translate-x-1/2 bg-stone-100 left-1/2 dark:bg-slate-900">
+                    <hr className="w-4/5 h-1 my-8 dark:bg-white/25 bg-slate-900/25 border-0 rounded "/>
+                    <div className="absolute px-6 -translate-x-1/2 bg-neutral-200 left-1/2 dark:bg-slate-700">
                         <FontAwesomeIcon icon={faSun} className="bg-transparent"/>
                     </div>
                 </div>

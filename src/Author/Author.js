@@ -76,7 +76,7 @@ export default function Author() {
     return (
         <article id="pg-content" className="flex flex-wrap gap-y-10 px-4 pt-5 pb-10 sm:px-14 lg:px-20">
             <div className="flex flex-col grow md:max-w-[75%]">
-                <h1 className="text-2xl md:text-3xl font-bold uppercase mb-5">
+                <h1 className="text-3xl md:text-4xl font-bold uppercase mb-5">
                     Biography
                 </h1>
                 {(authorIsLoading() || numContIsLoading()) ? <>Loading...</> : 
@@ -117,7 +117,7 @@ export default function Author() {
                 }
             </div>
             <div className="w-auto max-w-full md:max-w-[25%]">
-                <h1 className="text-2xl md:text-3xl font-bold uppercase mb-5">
+                <h1 className="text-3xl md:text-4xl font-bold uppercase mb-5">
                     Find {authorIsLoading() ? "Them" : selectThirdPerson(authorInfo.attributes.pronouns)} At
                 </h1>
                 {(authorIsLoading()) ? <>Loading...</> :

@@ -33,9 +33,9 @@ export default function Home() {
     }, []);
 
     return (
-        <article id="pg-content" className="flex flex-wrap gap-y-10 px-4 pt-5 pb-10 sm:px-14 lg:px-20">
-            <div id="featured-article" className="grow">
-                <h1 className="text-2xl md:text-3xl font-bold uppercase mb-5">
+        <article id="pg-content" className="flex lg:grid lg:grid-cols-[3fr_1fr] flex-wrap gap-x-10 gap-y-10 px-4 pt-5 pb-10 sm:px-14 lg:px-20">
+            <div id="featured-article" className="">
+                <h1 className="text-3xl md:text-4xl font-bold uppercase mb-5">
                     Featured Article
                 </h1>
                 {/* <ArticlePlaque 
@@ -49,8 +49,8 @@ export default function Home() {
                 /> */}
                 <Article isFeatured/>
             </div>
-            <div id="recent-articles" className="q-auto max-w-sm">
-                <h1 className="text-2xl md:text-3xl font-bold uppercase mb-5">
+            <div id="recent-articles" className="grow">
+                <h1 className="text-3xl md:text-4xl font-bold uppercase mb-5">
                     Most Recent Articles
                 </h1>
                 {recentArticlesIsLoading() ? <>Loading...</> : <ul>
@@ -63,7 +63,7 @@ export default function Home() {
                                         {month: '2-digit', day: '2-digit'}
                                     )}
                                 </span>
-                                <span className="ml-2 text-md font-semibold group-hover:underline group-hover:decoration-1-primary group-hover:decoration-2">
+                                <span className="ml-2 text-xl font-semibold group-hover:underline group-hover:decoration-1-primary group-hover:decoration-2">
                                     {article.attributes.title}
                                 </span>
                                 <a href={`/articles/${article.attributes.slug}`} aria-label="go to author's bio'">

@@ -10,6 +10,7 @@ module.exports = {
         'blink': 'blink 1s cubic-bezier(0.34, 1.56, 0.64, 1)',
       },
       colors: {
+        "off-white": "var(--off-white)",
         "1-primary": "var(--1-primary)",
         "1-secondary": "var(--1-secondary)",
         "1-tertiary": "var(--1-tertiary)",
