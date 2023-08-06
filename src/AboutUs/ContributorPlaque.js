@@ -6,7 +6,7 @@ export default function ContributorPlaque({ as: Component, author }) {
     const createdDate = new Date(author.attributes.createdAt);
 
     return (
-        <Component className="flex group relative w-full p-2 lg:basis-[calc(50%-1.5rem)] bg-white dark:bg-slate-800 border border-slate-700/80 rounded-md
+        <Component className="flex group relative w-full p-2 lg:basis-[calc(50%-1.5rem)] bg-neutral-200 dark:bg-slate-700 border border-slate-700/80 rounded-md
             transition ease-in delay-100 hover:ease-out group-hover:delay-200 hover:-translate-x-1 hover:-translate-y-1"
         >
             <div className="group-hover:z-10" aria-hidden>

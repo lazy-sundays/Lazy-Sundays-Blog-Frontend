@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 :root {
+  /* global colors */
+  --off-white: #D8D8D8;
+
   /* theme colors */
   --1-primary: #048BA8;
   --1-secondary: #F18F01;
