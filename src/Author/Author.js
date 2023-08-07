@@ -83,7 +83,7 @@ export default function Author() {
                     <div className="flex flex-wrap mr-0 sm:mr-8 max-w-3xl">
                         <div className="w-28 sm:w-36 md:w-44 h-28 sm:h-36 md:h-44 shrink-0">
                             { 
-                                <img src={authorInfo.attributes.avatar.data.attributes.url}
+                                <img src={authorInfo.attributes.avatar}
                                     className={"w-full h-full object-cover mr-4 rounded-full border-2 border-stone-500/75"}
                                 />
                             }
