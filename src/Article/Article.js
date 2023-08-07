@@ -110,7 +110,7 @@ export default function Article({isFeatured}) {
                         Body: {articleInfo.attributes.body}
                     </div>
                     { isFeatured &&
-                        <button className="relative group w-fit p-4 sm:px-10 md:px-14 lg:px-120 m-auto rounded-md font-semibold text-lg bg-bgsecondary hover:bg-bg-secondary
+                        <button className="relative group w-fit p-4 sm:px-10 md:px-14 lg:px-120 m-auto rounded-md font-semibold text-lg bg-bgsecondary 
                             transition ease-in delay-100 hover:ease-out group-hover:delay-200 hover:-translate-x-1 hover:-translate-y-1"
                         >
                             <a href={`/articles/${articleInfo.attributes.slug}`} aria-label={`go to article: ${articleInfo.attributes.title}`}>
