@@ -11,7 +11,7 @@ export default function Home() {
         try {
             const response = await axios.get(
                 
-                process.env.REACT_APP_URI_ROOT+"/api/articles?sort[0]=publishedAt:desc&fields[0]=publishedAt&fields[1]=title&fields[2]=slug&pagination[page]=1&pagination[pageSize]=10&populate[0]=authors",
+                process.env.REACT_APP_URI_ROOT+"/api/articles?sort[0]=publishedAt:desc&fields[0]=publishedAt&fields[1]=title&fields[2]=slug&pagination[page]=1&pagination[pageSize]=10",
                 {
                     headers: {
                         Authorization: 'Bearer '+process.env.REACT_APP_STRAPI_API_KEY
