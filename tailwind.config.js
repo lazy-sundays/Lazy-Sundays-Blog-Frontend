@@ -41,7 +41,8 @@ module.exports = {
     aspectRatio: false,
   },
   plugins: [
-    require('@tailwindcss/aspect-ratio'),
+    require('@tailwindcss/aspect-ratio'), //source: https://github.com/tailwindlabs/tailwindcss-aspect-ratio
+    require("tailwind-gradient-mask-image"), //source: https://github.com/juhanakristian/tailwind-gradient-mask-image
     plugin(function ({ matchUtilities, theme }) {
       matchUtilities(
         {
