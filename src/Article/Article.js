@@ -44,7 +44,7 @@ export default function Article({isFeatured}) {
                     <div className="">
                         <div className="sm:relative">
                             <div className="aspect-w-16 aspect-h-6">
-                                <img className="w-full h-full object-center object-cover" src={articleInfo.attributes.hero.data.attributes.url}/>
+                                <img className="w-full h-full object-center object-cover" src={articleInfo.attributes.hero}/>
                             </div>
                             {/* TODO: fix the spacing */}
                             <div className="sm:absolute bottom-0 pt-4 sm:pb-4 md:pb-8 lg:pb-12 w-full sm:px-10 md:px-24 xl:px-52 text-center sm:bg-white/50 sm:dark:bg-black/50 sm:backdrop-blur-sm">

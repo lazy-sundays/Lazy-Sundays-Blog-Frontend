@@ -65,7 +65,7 @@ export default function AboutUs() {
         try {
             const response = await axios.get(
                 
-                process.env.REACT_APP_URI_ROOT+"/api/authors?fields[0]=name&fields[1]=createdAt&fields[2]=slug&populate[avatar][fields][0]=name&populate[avatar][fields][1]=formats&pagination[page]="+authorPageNum+"&pagination[pageSize]=4",
+                process.env.REACT_APP_URI_ROOT+"/api/authors?pagination[page]="+authorPageNum+"&pagination[pageSize]=4",
                 {
                     headers: {
                         Authorization: 'Bearer '+process.env.REACT_APP_STRAPI_API_KEY

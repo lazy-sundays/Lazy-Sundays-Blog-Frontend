@@ -10,7 +10,7 @@ export default function ContributorPlaque({ as: Component, author }) {
             transition ease-in delay-100 hover:ease-out group-hover:delay-200 hover:-translate-x-1 hover:-translate-y-1"
         >
             <div className="group-hover:z-10" aria-hidden>
-                <img src={author.attributes.avatar.data.attributes.formats.thumbnail.url}
+                <img src={author.attributes.avatar}
                     className={" max-w-24 max-h-24 mr-4 rounded-full border-2 border-stone-500/75"}
                 />
             </div>
