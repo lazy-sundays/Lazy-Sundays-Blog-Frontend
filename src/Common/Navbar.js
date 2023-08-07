@@ -22,7 +22,7 @@ export default function Navbar() {
                 <div className="hidden sm:flex justify-around justify-items-center sm:pr-10 lg:pr-30">
                     {links.map((link) => {
                         return (
-                            <a href={link.href} className="sm:ml-8 px-1 md:text-lg hover:underline hover:decoration-1-primary hover:decoration-2">{link.name}</a>
+                            <a href={link.href} className="sm:ml-8 px-1 md:text-lg hover:underline hover:decoration-accentprimary hover:decoration-2">{link.name}</a>
                         );
                     })}
                 </div>
@@ -45,13 +45,13 @@ export default function Navbar() {
                                 leaveFrom="transform opacity-100 scale-100"
                                 leaveTo="transform opacity-0 scale-95"
                             >
-                                <Menu.Items className={"sm:hidden flex w-full justify-around mt-2 py-2 bg-stone-100 dark:bg-slate-900"}>
+                                <Menu.Items className={"sm:hidden flex w-full justify-around mt-2 py-2 bg-bgsecondary"}>
                                     {links.map((link) => (
                                         <Menu.Item 
                                             as="a"
                                             key={link.href} 
                                             href={link.href}
-                                            className={"sm:ml-8 px-1 md:text-lg hover:underline hover:decoration-1-primary hover:decoration-2"}
+                                            className={"sm:ml-8 px-1 md:text-lg hover:underline hover:decoration-accentprimary hover:decoration-2"}
                                         >
                                             {link.name}
                                         </Menu.Item>

@@ -39,8 +39,8 @@ export default function Author() {
             setAuthorInfo((response.data.data.length === 0) ? '' : response.data.data[0]);
             // return response.data;
         } catch (error) {
-            // TODO: navigate to error page
             console.log(error);
+            window.location.href = `/error/${error.response.status}` //navigate to error page
         } finally {
         }       
     };
@@ -61,8 +61,8 @@ export default function Author() {
             setNumContributions(response.data.count);
             // return response.data;
         } catch (error) {
-            // TODO: navigate to error page
             console.log(error);
+            window.location.href = `/error/${error.response.status}` //navigate to error page
         } finally {
         }
     };
@@ -84,7 +84,7 @@ export default function Author() {
                         <div className="w-28 sm:w-36 md:w-44 h-28 sm:h-36 md:h-44 shrink-0">
                             { 
                                 <img src={authorInfo.attributes.avatar}
-                                    className={"w-full h-full object-cover mr-4 rounded-full border-2 border-stone-500/75"}
+                                    className={"w-full h-full object-cover mr-4 rounded-full border-2 border-textprimary/50"}
                                 />
                             }
                         </div>
@@ -93,7 +93,7 @@ export default function Author() {
                                 {authorInfo.attributes.name} 
                                 {(
                                     authorInfo.attributes.pronouns != null && 
-                                    <span className="italic text-xs text-1-primary ml-1">({pronounsToString(authorInfo.attributes.pronouns)})</span>
+                                    <span className="italic text-xs text-accentprimary ml-1">({pronounsToString(authorInfo.attributes.pronouns)})</span>
                                 )}
                             </div>
                             <div className="text-sm">

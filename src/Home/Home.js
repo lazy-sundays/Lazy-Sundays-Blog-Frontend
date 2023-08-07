@@ -22,8 +22,8 @@ export default function Home() {
             setRecentArticles(response.data.data);
             // return response.data;
         } catch (error) {
-            window.location.href = `/error/${error.response.status}` //navigate to error page
             console.log(error);
+            window.location.href = `/error/${error.response.status}` //navigate to error page
         } finally{
         }
     };
@@ -57,13 +57,13 @@ export default function Home() {
                     {recentArticles.map( (article, i, all) => {
                         return (
                             <>
-                            <li className={`relative group ${("py-6")} mx-2 sm:px-8 hover:bg-stone-100 hover:dark:bg-slate-700`}>
-                                <span className="text-xs text-1-primary">
+                            <li className={`relative group ${("py-6")} mx-2 sm:px-8 hover:bg-bgsecondary`}>
+                                <span className="text-xs text-accentprimary">
                                     {(new Date(article.attributes.publishedAt)).toLocaleDateString( "en-US",
                                         {month: '2-digit', day: '2-digit'}
                                     )}
                                 </span>
-                                <span className="ml-2 text-xl font-semibold group-hover:underline group-hover:decoration-1-primary group-hover:decoration-2">
+                                <span className="ml-2 text-xl font-semibold group-hover:underline group-hover:decoration-accentprimary group-hover:decoration-2">
                                     {article.attributes.title}
                                 </span>
                                 <a href={`/articles/${article.attributes.slug}`} aria-label="go to author's bio'">
@@ -71,7 +71,7 @@ export default function Home() {
                                 </a>
                             </li>
                             {(i < all.length-1) &&
-                                <hr className="mx-2 dark:border-white/25 border-slate-900/25" />
+                                <hr className="mx-2 border-textprimary/25" />
                             }
                             </>
                         );
