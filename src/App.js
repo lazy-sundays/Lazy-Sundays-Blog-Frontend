@@ -15,10 +15,8 @@ import './App.css';
 function App() {
 
   // add theme utilities to body
-  document.body.classList.add("bg-off-white")
-  document.body.classList.add("text-slate-900");
-  document.body.classList.add("dark:bg-slate-800");
-  document.body.classList.add("dark:text-off-white");
+  document.body.classList.add("bg-bgprimary");
+  document.body.classList.add("text-textprimary");
 
   return (
       <Router>
