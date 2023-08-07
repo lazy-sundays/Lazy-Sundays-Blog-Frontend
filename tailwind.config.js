@@ -17,6 +17,12 @@ module.exports = {
         "2-primary": "var(--2-primary)",
         "2-secondary": "var(--2-secondary)",
         "2-tertiary": "var(--2-tertiary)",
+        bgprimary : 'rgb(var(--bg-primary) / <alpha-value>)',
+        bgsecondary: 'rgb(var(--bg-secondary) / <alpha-value>)',
+        textprimary : 'rgb(var(--text-primary) / <alpha-value>)',
+        accentprimary: 'rgb(var(--accent-primary) / <alpha-value>)',
+        accentsecondary : 'rgb(var(--accent-secondary) / <alpha-value>)',
+        accenttertiary: 'rgb(var(--accent-tertiary) / <alpha-value>)',
       },
       keyframes: {
         blink: {
@@ -28,6 +34,7 @@ module.exports = {
           },
         },
       },
+
     },
   },
   corePlugins: {
