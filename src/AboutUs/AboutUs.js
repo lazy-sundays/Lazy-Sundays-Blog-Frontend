@@ -31,8 +31,8 @@ export default function AboutUs() {
             setBlurb(response.data.data.attributes.aboutUs);
             // return response.data;
         } catch (error) {
-            // TODO: navigate to error page
             console.log(error);
+            window.location.href = `/error/${error.response.status}` //navigate to error page
         } finally{
 
         }
@@ -53,8 +53,8 @@ export default function AboutUs() {
             setContacts(response.data.data.attributes.contactInfo.data);
             // return response.data;
         } catch (error) {
-            // TODO: navigate to error page
             console.log(error);
+            window.location.href = `/error/${error.response.status}` //navigate to error page
         } finally{
 
         }
@@ -79,8 +79,8 @@ export default function AboutUs() {
             setMoreAuthors(response.data.meta.pagination.page < response.data.meta.pagination.pageCount);
             // return response.data;
         } catch (error) {
-            // TODO: navigate to error page
             console.log(error);
+            window.location.href = `/error/${error.response.status}` //navigate to error page
         } finally{
             setLoadingAuthors(false);
         }

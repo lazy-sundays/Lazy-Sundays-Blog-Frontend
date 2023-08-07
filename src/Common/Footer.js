@@ -11,7 +11,7 @@ export default function Footer() {
     ];
 
     return (
-        <footer className="bg-neutral-200 dark:bg-slate-700 shadoww-full h-full mx-auto p-4 md:py-4 mt-auto">
+        <footer className="bg-bgsecondary w-full h-full mx-auto p-4 md:py-4 mt-auto">
             <div className="w-full max-w-screen-xl mx-auto p-4 md:py-4">
                 <div className="flex items-center justify-between">
                     <a href="/" className="flex items-center mb-4 sm:mb-0">
@@ -21,15 +21,15 @@ export default function Footer() {
                         {links.map((link) => {
                             return (
                                  <li>
-                                    <a href={link.href} className="ml-4 hover:underline hover:decoration-1-primary hover:decoration-2 md:ml-6">{link.name}</a>
+                                    <a href={link.href} className="ml-4 hover:underline hover:decoration-accentprimary hover:decoration-2 md:ml-6">{link.name}</a>
                                 </li>
                             );
                         })}
                     </ul>
                 </div>
                 <div className="inline-flex items-center justify-center w-full">
-                    <hr className="w-4/5 h-1 my-8 dark:bg-white/25 bg-slate-900/25 border-0 rounded "/>
-                    <div className="absolute px-6 -translate-x-1/2 bg-neutral-200 left-1/2 dark:bg-slate-700">
+                    <hr className="w-4/5 h-1 my-8 bg-textprimary/25 border-0 rounded "/>
+                    <div className="absolute px-6 -translate-x-1/2 bg-bgsecondary left-1/2 ">
                         <FontAwesomeIcon icon={faSun} className="bg-transparent"/>
                     </div>
                 </div>
