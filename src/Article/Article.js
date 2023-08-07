@@ -42,7 +42,7 @@ export default function Article({isFeatured}) {
             {articleIsLoading() ? <>Loading...</> :
                 <>
                     <div className="">
-                        <div className={"sm:relative"+(isFeatured ? " mb-5 sm:mb-10":"")}>
+                        <div className={"sm:relative"+(isFeatured ? " sm:mb-10":"")}>
                             <div className="aspect-w-16 aspect-h-6">
                                 <img className="w-full h-full object-center object-cover" src={articleInfo.attributes.hero}/>
                             </div>
@@ -52,7 +52,7 @@ export default function Article({isFeatured}) {
                                 <p className="italic px-5">{articleInfo.attributes.tagline}</p>
                                 {/* Featured article info */}
                                 { isFeatured && 
-                                    <div className={"flex justify-center justify-items-center gap-x-10 text-center text-sm max-w-96 mx-auto mt-5 px-5"+(isFeatured ? " pb-4":"")}>
+                                    <div className={"flex justify-center justify-items-center gap-x-10 text-center text-sm max-w-96 mx-auto mt-5 px-5"+(isFeatured ? " sm:pb-4":"")}>
                                         <span className="italic">
                                             {       
                                                 (new Date(articleInfo.attributes.publishedAt)).toLocaleDateString( "en-US",
@@ -105,12 +105,12 @@ export default function Article({isFeatured}) {
                             </div>
                         }
                     </div>
-                    { !isFeatured && <hr className="w-1/3 my-5 border-textprimary/25 m-auto" />}
+                    {!isFeatured ? <hr className="w-1/3 my-5 border-textprimary/25 m-auto" /> : <hr className="w-1/3 my-5 border-textprimary/25 m-auto sm:hidden" />}
                     <div className={"max-w-[75ch] px-5 md:px-0 mx-auto mb-10 text-justify text-lg"+(isFeatured ? " max-h-60 overflow-hidden gradient-mask-b-0" : "")}>
                         Body: {articleInfo.attributes.body}
                     </div>
                     { isFeatured &&
-                        <button className="relative group w-fit p-4 sm:px-10 md:px-14 lg:px-120 m-auto rounded-md font-semibold text-lg bg-bgsecondary 
+                        <button className="relative group w-fit p-4 sm:px-10 md:px-14 lg:px-120 m-auto rounded-md font-semibold text-lg bg-bgsecondary
                             transition ease-in delay-100 hover:ease-out group-hover:delay-200 hover:-translate-x-1 hover:-translate-y-1"
                         >
                             <a href={`/articles/${articleInfo.attributes.slug}`} aria-label={`go to article: ${articleInfo.attributes.title}`}>
