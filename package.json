@@ -15,8 +15,12 @@
     "http-status-codes": "^2.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-markdown": "^8.0.7",
     "react-router-dom": "^6.11.1",
     "react-scripts": "5.0.1",
+    "rehype-figure": "^1.0.1",
+    "rehype-raw": "^6.1.1",
+    "remark-gfm": "^3.0.1",
     "tailwind-gradient-mask-image": "^1.0.0",
     "web-vitals": "^2.1.4"
   },
@@ -46,6 +50,7 @@
   },
   "devDependencies": {
     "@tailwindcss/aspect-ratio": "^0.4.2",
+    "@tailwindcss/typography": "^0.5.9",
     "tailwindcss": "^3.3.2"
   }
 }

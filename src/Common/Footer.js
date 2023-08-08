@@ -36,7 +36,7 @@ export default function Footer() {
                 <span className="block text-xs text-center">
                     <div className="mb-2">Est. 2023.</div>
                     {/* TODO: add links to names so that they link to author page */}
-                    <div className="">Designed by Devin Toms and Jenny Leidig</div>
+                    <div className="">Designed by <a href="/authors/devin-toms" className="text-accentprimary hover:underline hover:decoration-accentprimary hover:decoration-2">Devin Toms</a> and <a href="/authors/jenny-leidig" className="text-accentprimary hover:underline hover:decoration-accentprimary hover:decoration-2">Jenny Leidig</a></div>
                 </span>
             </div>
         </footer>

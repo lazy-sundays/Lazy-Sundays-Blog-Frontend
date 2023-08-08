@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
+import ReactMarkdown from 'react-markdown'
 import axios from "axios";
 import {useParams} from "react-router-dom";
+import remarkGfm from "remark-gfm";
+import rehypeFigure from "rehype-figure";
+import rehypeRaw from "rehype-raw";
 
 export default function Article({isFeatured}) {
     const [articleInfo, setArticleInfo] = useState('');
@@ -43,13 +47,15 @@ export default function Article({isFeatured}) {
                 <>
                     <div className="">
                         <div className={"sm:relative"+(isFeatured ? " sm:mb-10":"")}>
-                            <div className="aspect-w-16 aspect-h-6">
-                                <img className="w-full h-full object-center object-cover" src={articleInfo.attributes.hero}/>
+                            <div className={`mt-4 ${(articleInfo.attributes.hero == null) ? "" : "aspect-w-16 aspect-h-6"}`}>
+                                { (articleInfo.attributes.hero != null) &&
+                                    <img className="w-full h-full object-center object-cover" src={articleInfo.attributes.hero}/>
+                                }
                             </div>
                             {/* TODO: fix the spacing */}
-                            <div className={"sm:absolute bottom-0 pt-4 sm:pb-4"+(isFeatured ? "":" md:pb-8 lg:pb-12")+" w-full sm:px-10 md:px-24 xl:px-52 text-center sm:bg-white/50 sm:dark:bg-black/50 sm:backdrop-blur-sm"}>
+                            <div className={`${(articleInfo.attributes.hero == null) ? "pb-4":"sm:absolute sm:bottom-0"} pt-4 pb-4 ${(isFeatured ? "":" md:pb-8 lg:pb-12")} w-full sm:px-10 md:px-24 xl:px-52 text-center bg-white/50 dark:bg-black/50 backdrop-blur-sm`}>
                                 <h2 className="text-3xl md:text-4xl mb-4 px-5 font-bold">{articleInfo.attributes.title}</h2>
-                                <p className="italic px-5">{articleInfo.attributes.tagline}</p>
+                                <p className="text-texttertiary italic px-5">{articleInfo.attributes.tagline}</p>
                                 {/* Featured article info */}
                                 { isFeatured && 
                                     <div className={"flex justify-center justify-items-center gap-x-10 text-center text-sm max-w-96 mx-auto mt-5 px-5"+(isFeatured ? " sm:pb-4":"")}>
@@ -60,7 +66,9 @@ export default function Article({isFeatured}) {
                                             }
                                         </span>
                                         <span className="">
-                                            Words by { articleInfo.attributes.authors.data.map((author, i, all) => {
+                                            Words by {(articleInfo.attributes.authors.data.length === 0) && "¯\\_(ツ)_/¯"}
+                                            {
+                                                articleInfo.attributes.authors.data.map((author, i, all) => {
                                                     return (
                                                         <>
                                                             <a href={`/authors/${author.attributes.slug}`} className="text-accentprimary hover:underline hover:decoration-accentprimary hover:decoration-2">
@@ -88,7 +96,9 @@ export default function Article({isFeatured}) {
                                     }
                                 </span>
                                 <span className="">
-                                    Words by { articleInfo.attributes.authors.data.map((author, i, all) => {
+                                    Words by {(articleInfo.attributes.authors.data.length === 0) && "¯\\_(ツ)_/¯"}
+                                    {
+                                        articleInfo.attributes.authors.data.map((author, i, all) => {
                                             return (
                                                 <>
                                                     <a href={`/authors/${author.attributes.slug}`} className="text-accentprimary hover:underline hover:decoration-accentprimary hover:decoration-2">
@@ -106,9 +116,16 @@ export default function Article({isFeatured}) {
                         }
                     </div>
                     {!isFeatured ? <hr className="w-1/3 my-5 border-textprimary/25 m-auto" /> : <hr className="w-1/3 my-5 border-textprimary/25 m-auto sm:hidden" />}
-                    <div className={"max-w-[75ch] px-5 md:px-0 mx-auto mb-10 text-justify text-lg"+(isFeatured ? " max-h-60 overflow-hidden gradient-mask-b-0" : "")}>
-                        Body: {articleInfo.attributes.body}
+                    {/* Article body */}
+                    <div className={"flex justify-center px-5 md:px-0 mx-auto mb-10 text-lg"+(isFeatured ? " max-h-60 overflow-hidden gradient-mask-b-0" : "")}>
+                        <ReactMarkdown 
+                            remarkPlugins={[remarkGfm]} 
+                            rehypePlugins={[rehypeFigure]} 
+                            children={articleInfo.attributes.body} 
+                            className="prose prose-article max-w-full md:max-w-[75ch] text-left"
+                        />
                     </div>
+                    {/* Featured article "continue reading" button */}
                     { isFeatured &&
                         <button className="relative group w-fit p-4 sm:px-10 md:px-14 lg:px-120 m-auto rounded-md font-semibold text-lg bg-bgsecondary
                             transition ease-in delay-100 hover:ease-out group-hover:delay-200 hover:-translate-x-1 hover:-translate-y-1"

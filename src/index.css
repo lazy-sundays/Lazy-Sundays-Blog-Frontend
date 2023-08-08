@@ -4,22 +4,14 @@
 
 @layer base {
   :root {
-    /* global colors */
-    --off-white: #D8D8D8;
-
-    /* theme colors */
-    --1-primary: #048BA8;
-    --1-secondary: #F18F01;
-    --1-tertiary: #C072A5;
-    --2-primary: #E8998D;
-    --2-secondary: #6C9A8B;
-    --2-tertiary: #EED2CC;
 
     /* default dark and light colors */
     --bg-primary: 216 216 216; /*#D8D8D8;*/
     --bg-secondary: 229 229 229; /*#e5e5e5;*/
 
     --text-primary: 15 23 42; /*#0f172a;*/
+    --text-secondary: 51 65 85; /*#334155;*/
+    --text-tertiary: 102 102 102 40; /*#666666;*/
 
     /* default accent theme colors*/
     --accent-primary: 4 139 168; /*#048BA8;*/
@@ -32,6 +24,8 @@
     --bg-secondary: 51 65 85; /*#334155;*/
 
     --text-primary: 216 216 216; /*#D8D8D8;*/
+    --text-secondary: 229 229 229; /*#e5e5e5;*/
+    --text-tertiary: 179 179 179 70; /*#B3B3B3;*/
   }
    
   /* accent color themes */
