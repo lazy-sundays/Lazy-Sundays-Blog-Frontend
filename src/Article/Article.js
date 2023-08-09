@@ -7,6 +7,8 @@ import rehypeFigure from "rehype-figure";
 import rehypeRaw from "rehype-raw";
 import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter'
 import {oneDark, oneLight} from 'react-syntax-highlighter/dist/esm/styles/prism'
+
+
 export default function Article({isFeatured}) {
     const [articleInfo, setArticleInfo] = useState('');
     const {slug} = useParams();
@@ -132,6 +134,15 @@ export default function Article({isFeatured}) {
                                       {...props}
                                       children={String(children).replace(/\n$/, '')}
                                       style={oneDark}
+                                      customStyle={{
+                                        backgroundColor: 'rgb(var(--bg-secondary))',
+                                        textShadow: "transparent",
+                                        color: "rgb(var(--text-primary))",
+                                      }}
+                                      codeTagProps={{
+
+                                      
+                                      }}
                                       language={match[1]}
                                       PreTag="div"
                                       showLineNumbers={true}
