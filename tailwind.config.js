@@ -46,7 +46,7 @@ module.exports = {
             '--tw-prose-captions': theme('colors.texttertiary / 100%'),
             '--tw-prose-code': theme('colors.accenttertiary / 100%'),
             '--tw-prose-pre-code': theme('colors.bgprimary / 100%'),
-            '--tw-prose-pre-bg': theme('colors.textsecondary / 100%'),
+            '--tw-prose-pre-bg': theme('colors.bgprimary / 100%'),
             '--tw-prose-th-borders': theme('colors.textprimary / 100%'),
             '--tw-prose-td-borders': theme('colors.texttertiary / 100%'),
           },

@@ -25,7 +25,7 @@ export default function ContributorPlaque({ as: Component, author }) {
                     })}
                 </span>
             </div>
-            <div className="flex w-auto h-auto grow justify-end items-center" aria-hidden>
+            <div className="flex w-auto h-auto grow justify-end items-center group-hover:transition-none transition-colors delay-200 ease-linear" aria-hidden>
                 <FontAwesomeIcon icon={faAngleRight} className="mr-10"/>
             </div>
             <div id="rectangle" aria-hidden
