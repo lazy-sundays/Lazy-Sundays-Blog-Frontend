@@ -8,6 +8,7 @@ import Archive from './Archive/Archive';
 import Article from './Article/Article';
 import Author from './Author/Author';
 import RandomArticle from './Common/RandomArticle';
+import useDarkMode from "./hooks/useDarkMode";
 
 import './App.css';
 
@@ -19,6 +20,7 @@ function App() {
   document.body.classList.add("bg-bgprimary");
   document.body.classList.add("text-textprimary");
   window.document.documentElement.classList.add('sunset-overlook');
+
 
   return (
       <Router>
