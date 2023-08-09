@@ -5,7 +5,8 @@ import {useParams} from "react-router-dom";
 import remarkGfm from "remark-gfm";
 import rehypeFigure from "rehype-figure";
 import rehypeRaw from "rehype-raw";
-
+import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter'
+import {oneDark, oneLight} from 'react-syntax-highlighter/dist/esm/styles/prism'
 export default function Article({isFeatured}) {
     const [articleInfo, setArticleInfo] = useState('');
     const {slug} = useParams();
@@ -123,14 +124,34 @@ export default function Article({isFeatured}) {
                             rehypePlugins={[rehypeFigure]} 
                             children={articleInfo.attributes.body} 
                             className="prose prose-article max-w-full md:max-w-[75ch] text-left"
+                            components={{
+                                code({node, inline, className, children, ...props}) {
+                                  const match = /language-(\w+)/.exec(className || '')
+                                  return !inline && match ? (
+                                    <SyntaxHighlighter
+                                      {...props}
+                                      children={String(children).replace(/\n$/, '')}
+                                      style={oneDark}
+                                      language={match[1]}
+                                      PreTag="div"
+                                      showLineNumbers={true}
+                                      showInlineLineNumbers={true}
+                                    />
+                                  ) : (
+                                    <code {...props} className={className}>
+                                      {children}
+                                    </code>
+                                  )
+                                }
+                              }}
                         />
                     </div>
                     {/* Featured article "continue reading" button */}
                     { isFeatured &&
                         <button className="relative group w-fit p-4 sm:px-10 md:px-14 lg:px-120 m-auto rounded-md font-semibold text-lg bg-bgsecondary
-                            transition ease-in delay-100 hover:ease-out group-hover:delay-200 hover:-translate-x-1 hover:-translate-y-1"
+                            transition-transform ease-in delay-100 hover:ease-out group-hover:delay-200 hover:-translate-x-1 hover:-translate-y-1 hover:text-bgprimary"
                         >
-                            <a href={`/articles/${articleInfo.attributes.slug}`} aria-label={`go to article: ${articleInfo.attributes.title}`}>
+                            <a className="group-hover:transition-none transition-colors delay-200 ease-linear" href={`/articles/${articleInfo.attributes.slug}`} aria-label={`go to article: ${articleInfo.attributes.title}`}>
                                 <span className="absolute inset-0" aria-hidden/>
                                 Continue Reading
                             </a>

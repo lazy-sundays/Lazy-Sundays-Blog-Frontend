@@ -14,9 +14,9 @@
     --text-tertiary: 102 102 102 40; /*#666666;*/
 
     /* default accent theme colors*/
-    --accent-primary: 4 139 168; /*#048BA8;*/
-    --accent-secondary: 241 143 1; /*#F18F01;*/
-    --accent-tertiary: 192 114 165; /*#C072A5;*/
+    --accent-primary: 232 153 141; /*#E8998D;*/
+    --accent-secondary: 108 154 139; /*#6C9A8B;*/
+    --accent-tertiary: 238 210 204; /*#EED2CC;*/
   }
 
   .dark {
@@ -25,14 +25,20 @@
 
     --text-primary: 216 216 216; /*#D8D8D8;*/
     --text-secondary: 229 229 229; /*#e5e5e5;*/
-    --text-tertiary: 179 179 179 70; /*#B3B3B3;*/
+    --text-tertiary: 179 179 179; /*#B3B3B3;*/
   }
-   
+
   /* accent color themes */
-  .sunset-overlook {
-    --accent-primary: 4 139 168; /*#048BA8;*/
-    --accent-secondary: 241 143 1; /*#F18F01;*/
-    --accent-tertiary: 192 114 165; /*#C072A5;*/
+  .sunset-overlook{
+  --accent-primary: 18 97 117; /*#024555;*/
+  --accent-secondary: 241 143 1; /*#F18F01;*/
+  --accent-tertiary: 160 91 136 /*#a05b88;*/
+  }
+
+  .dark.sunset-overlook {
+    --accent-primary: 121 228 252; /*#79e4fc;*/
+    --accent-secondary: 254 206 133; /*#FECE85;*/
+    --accent-tertiary: 233 206 223; /*#E9CEDF;*/
   }
 
   .picnic-in-spring {

@@ -18,7 +18,7 @@ function App() {
   // add theme utilities to body
   document.body.classList.add("bg-bgprimary");
   document.body.classList.add("text-textprimary");
-  // window.document.documentElement.classList.add('picnic-in-spring');
+  window.document.documentElement.classList.add('sunset-overlook');
 
   return (
       <Router>
