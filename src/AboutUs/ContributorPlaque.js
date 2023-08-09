@@ -7,14 +7,14 @@ export default function ContributorPlaque({ as: Component, author }) {
 
     return (
         <Component className="flex group relative w-full p-2 lg:basis-[calc(50%-1.5rem)] bg-bgsecondary border border-bgsecondary/80 rounded-md
-            transition ease-in delay-100 hover:ease-out group-hover:delay-200 hover:-translate-x-1 hover:-translate-y-1"
+            transition-transform ease-in delay-100 hover:ease-out group-hover:delay-200 hover:-translate-x-1 hover:-translate-y-1 hover:text-bgprimary"
         >
             <div className="group-hover:z-10" aria-hidden>
                 <img src={author.attributes.avatar}
                     className={" max-w-24 max-h-24 mr-4 rounded-full border-2 border-textprimary/25"}
                 />
             </div>
-            <div className="w-1/2 flex flex-col justify-center">
+            <div className="w-1/2 flex flex-col justify-center group-hover:transition-none transition-colors delay-200 ease-linear">
                 <h3 className="w-full text-xl font-semibold group-hover:animate-fancy-shadow-1">
                     {author.attributes.name}
                 </h3>
