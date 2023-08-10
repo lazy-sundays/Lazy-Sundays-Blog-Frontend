@@ -33,20 +33,11 @@ export default function Home() {
     }, []);
 
     return (
-        <article id="pg-content" className="flex lg:grid lg:grid-cols-[3fr_1fr] flex-wrap gap-x-10 gap-y-10 px-4 pt-5 pb-10 sm:px-14 lg:px-20">
-            <div id="featured-article" className="">
+        <article id="pg-content" className="w-screen flex lg:grid lg:grid-cols-[3fr_1fr] flex-wrap gap-x-10 gap-y-10 px-4 pt-5 pb-10 sm:px-14 lg:px-20">
+            <div id="featured-article" className="max-w-full">
                 <h1 className="text-3xl md:text-4xl font-bold uppercase mb-5">
                     Featured Article
                 </h1>
-                {/* <ArticlePlaque 
-                    id={featuredArticlePlaceholderResponse.data.id}
-                    title={featuredArticlePlaceholderResponse.data.attributes.title}
-                    hero={featuredArticlePlaceholderResponse.data.attributes.hero}
-                    tagline={featuredArticlePlaceholderResponse.data.attributes.tagline}
-                    authors={featuredArticlePlaceholderResponse.data.attributes.authors}
-                    createdAt={featuredArticlePlaceholderResponse.data.attributes.createdAt}
-                    readTime={featuredArticlePlaceholderResponse.data.attributes.readTime}
-                /> */}
                 <Article isFeatured/>
             </div>
             <div id="recent-articles" className="grow">

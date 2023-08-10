@@ -11,11 +11,11 @@ export default function ContributorPlaque({ as: Component, author }) {
         >
             <div className="group-hover:z-10" aria-hidden>
                 <img src={author.attributes.avatar}
-                    className={" max-w-24 max-h-24 mr-4 rounded-full border-2 border-textprimary/25"}
+                    className={"w-24 h-24 mr-4 rounded-full border-2 border-textprimary/25"}
                 />
             </div>
-            <div className="w-1/2 flex flex-col justify-center group-hover:transition-none transition-colors delay-200 ease-linear">
-                <h3 className="w-full text-xl font-semibold group-hover:animate-fancy-shadow-1">
+            <div className="w-1/2 flex flex-col justify-center group-hover:transition-none group-hover:invisible transition-[visibility] delay-200 ease-linear">
+                <h3 className="w-full text-xl font-semibold">
                     {author.attributes.name}
                 </h3>
                 <span className="text-lg">
@@ -26,11 +26,34 @@ export default function ContributorPlaque({ as: Component, author }) {
                 </span>
             </div>
             <div className="flex w-auto h-auto grow justify-end items-center" aria-hidden>
-                <FontAwesomeIcon icon={faAngleRight} className="mr-10"/>
+                <FontAwesomeIcon icon={faAngleRight} className="mr-10 group-hover:transition-none group-hover:invisible transition-[visibility] delay-200 ease-linear"/>
             </div>
             <div id="rectangle" aria-hidden
-                className="-z-10 absolute w-full h-full p-2 bg-accentprimary rounded-md -translate-x-2 -translate-y-2"
-            />
+                className="-z-10 absolute flex w-full h-full p-2 lg:basis-[calc(50%-1.5rem)] bg-accentprimary rounded-md -translate-x-2 -translate-y-2"
+            >
+                {/* "shadow" elements allow text to smoothly transition color between all possible states 
+                    (image included to guarantee correct spacing; this can later be changed to the same 
+                    reference as above for optimization purposes) */}
+                <div aria-hidden>
+                    <img src={author.attributes.avatar}
+                        className={"invisible w-24 h-24 mr-4 border-2"}
+                    />
+                </div>
+                <div className="w-1/2 flex flex-col justify-center text-bgprimary">
+                    <h3 className="w-full text-xl font-semibold">
+                        {author.attributes.name}
+                    </h3>
+                    <span className="text-lg">
+                        Contributor since {createdDate.toLocaleString("en-US", {
+                            month: "long",
+                            year: "numeric"
+                        })}
+                    </span>
+                </div>
+                <div className="flex w-auto h-auto grow justify-end items-center" aria-hidden>
+                    <FontAwesomeIcon icon={faAngleRight} className="mr-10 text-bgprimary"/>
+                </div>
+            </div>
             <div id="rectangle" aria-hidden
                 className="-z-20 absolute w-full h-full p-2 bg-accentsecondary rounded-md -translate-x-2 -translate-y-2
                     transition ease-in delay-150 group-hover:transition group-hover:ease-out group-hover:delay-150

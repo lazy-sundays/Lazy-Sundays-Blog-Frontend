@@ -70,7 +70,7 @@ export default function Article({isFeatured}) {
                                             }
                                         </span>
                                         <span className="">
-                                            Words by {(articleInfo.attributes.authors.data.length === 0) && "¯\\_(ツ)_/¯"}
+                                            Words by {(articleInfo.attributes.authors.data.length === 0) && "Anonymous"}
                                             {
                                                 articleInfo.attributes.authors.data.map((author, i, all) => {
                                                     return (
@@ -100,7 +100,7 @@ export default function Article({isFeatured}) {
                                     }
                                 </span>
                                 <span className="">
-                                    Words by {(articleInfo.attributes.authors.data.length === 0) && "¯\\_(ツ)_/¯"}
+                                    Words by {(articleInfo.attributes.authors.data.length === 0) && "Anonymous"}
                                     {
                                         articleInfo.attributes.authors.data.map((author, i, all) => {
                                             return (
@@ -162,13 +162,18 @@ export default function Article({isFeatured}) {
                     { isFeatured &&
                         <button className="relative group w-fit p-4 sm:px-10 md:px-14 lg:px-120 m-auto rounded-md font-semibold text-lg bg-bgsecondary
                             transition-transform ease-in delay-100 hover:ease-out group-hover:delay-200 hover:-translate-x-1 hover:-translate-y-1"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                window.location.href=`/articles/${articleInfo.attributes.slug}`;
+                            }}
+                            aria-label="continue reading article"
                         >
-                            <a className="group-hover:transition-none group-hover:invisible transition-[visibility] delay-200 ease-linear" href={`/articles/${articleInfo.attributes.slug}`} aria-label={`go to article: ${articleInfo.attributes.title}`}>
-                                <span className="absolute inset-0" aria-hidden/>
+                            <span className="group-hover:transition-none group-hover:invisible transition-[visibility] delay-200 ease-linear">
                                 Continue Reading
-                            </a>
+                            </span>
                             <div id="rectangle" aria-hidden
-                                className="-z-10 absolute w-full h-full p-4 bg-accentprimary rounded-md top-0 left-0 text-bgprimary ">
+                                className="-z-10 absolute w-full h-full p-4 bg-accentprimary rounded-md top-0 left-0 text-bgprimary">
+                                    {/* "shadow" text allows smooth transition of color between all possible states */}
                                     Continue Reading
                             </div>
                             <div id="rectangle" aria-hidden
