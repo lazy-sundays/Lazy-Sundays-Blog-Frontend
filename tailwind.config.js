@@ -30,6 +30,10 @@ module.exports = {
           },
         },
       },
+      screens: {
+        'xs': '480px',
+        '2xs': '360px',
+      },
       typography: ({theme}) => ({
         article: {
           css: {

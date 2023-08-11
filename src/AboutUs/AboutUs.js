@@ -113,7 +113,7 @@ export default function AboutUs() {
                         contacts.map((contact) => 
                             <li className="mb-3 break-words">
                                 {contact.attributes.infoName}: 
-                                <a href={(contact.attributes.infoName.trim().toLowerCase() === "email" ? "mailto:" : "") + contact.attributes.info} className="mx-2 italic hover:underline hover:decoration-1-primary hover:decoration-2">
+                                <a href={(contact.attributes.infoName.trim().toLowerCase() === "email" ? "mailto:" : "") + contact.attributes.info} className="mx-2 italic hover:underline hover:decoration-accentprimary hover:decoration-2">
                                     {contact.attributes.info}
                                 </a>
                             </li>

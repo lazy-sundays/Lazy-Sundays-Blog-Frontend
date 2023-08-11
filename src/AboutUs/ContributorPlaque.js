@@ -9,7 +9,7 @@ export default function ContributorPlaque({ as: Component, author }) {
         <Component className="flex group relative w-full p-2 lg:basis-[calc(50%-1.5rem)] bg-bgsecondary border border-bgsecondary/80 rounded-md
             transition-transform ease-in delay-100 hover:ease-out group-hover:delay-200 hover:-translate-x-1 hover:-translate-y-1 hover:text-bgprimary"
         >
-            <div className="group-hover:z-10" aria-hidden>
+            <div className="collapse 2xs:visible group-hover:z-10" aria-hidden>
                 <img src={author.attributes.avatar}
                     className={"w-24 h-24 mr-4 rounded-full border-2 border-textprimary/25"}
                 />
@@ -34,7 +34,7 @@ export default function ContributorPlaque({ as: Component, author }) {
                 {/* "shadow" elements allow text to smoothly transition color between all possible states 
                     (image included to guarantee correct spacing; this can later be changed to the same 
                     reference as above for optimization purposes) */}
-                <div aria-hidden>
+                <div className="collapse 2xs:visible" aria-hidden>
                     <img src={author.attributes.avatar}
                         className={"invisible w-24 h-24 mr-4 border-2"}
                     />
