@@ -1,6 +1,7 @@
 import React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
+import sunConcept from "../media/sun-concept.png";
 
 export default function ContributorPlaque({ as: Component, author }) {
     const createdDate = new Date(author.attributes.createdAt);
@@ -10,7 +11,7 @@ export default function ContributorPlaque({ as: Component, author }) {
             transition-transform ease-in delay-100 hover:ease-out group-hover:delay-200 hover:-translate-x-1 hover:-translate-y-1 hover:text-bgprimary"
         >
             <div className="collapse 2xs:visible group-hover:z-10" aria-hidden>
-                <img src={author.attributes.avatar}
+                <img src={author.attributes.avatar || sunConcept}
                     className={"w-24 h-24 mr-4 rounded-full border-2 border-textprimary/25"}
                 />
             </div>
