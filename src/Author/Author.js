@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import {useParams} from "react-router-dom";
+import sunConcept from "../media/sun-concept.png";
 
 export default function Author() {
     const [authorInfo, setAuthorInfo] = useState('');
@@ -83,7 +84,7 @@ export default function Author() {
                     <div className="flex flex-wrap mr-0 sm:mr-8 max-w-3xl">
                         <div className="w-28 sm:w-36 md:w-44 h-28 sm:h-36 md:h-44 shrink-0">
                             { 
-                                <img src={authorInfo.attributes.avatar}
+                                <img src={authorInfo.attributes.avatar || sunConcept}
                                     className={"w-full h-full object-cover mr-4 rounded-full border-2 border-textprimary/50"}
                                 />
                             }
