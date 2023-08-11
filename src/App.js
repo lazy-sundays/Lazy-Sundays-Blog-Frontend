@@ -8,7 +8,7 @@ import Archive from './Archive/Archive';
 import Article from './Article/Article';
 import Author from './Author/Author';
 import RandomArticle from './Common/RandomArticle';
-import useDarkMode from "./hooks/useDarkMode";
+import BackToTop from './Common/BackToTop';
 
 import './App.css';
 
@@ -40,6 +40,7 @@ function App() {
             <Route path='*' element={<Navigate to='/error/404'/>} />
           </Routes>
         </main>
+        <BackToTop />
         <Footer />
       </Router>
   );
