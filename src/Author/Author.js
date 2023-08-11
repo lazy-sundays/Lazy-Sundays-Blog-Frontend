@@ -126,7 +126,7 @@ export default function Author() {
                             authorInfo.attributes.linkTree.data.map((linkItem) =>
                             <li className="mb-3 break-words">
                                 {linkItem.attributes.siteName}:
-                                <a href={(linkItem.attributes.siteName === "Email" ? "mailto:" : "") + linkItem.attributes.link} className="mx-2 italic hover:underline hover:decoration-1-primary hover:decoration-2">
+                                <a href={(linkItem.attributes.siteName === "Email" ? "mailto:" : "") + linkItem.attributes.link} className="mx-2 italic hover:underline hover:decoration-accentprimary hover:decoration-2">
                                     {linkItem.attributes.link}
                                 </a>
                             </li>
