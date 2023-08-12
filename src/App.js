@@ -11,6 +11,7 @@ import RandomArticle from './Common/RandomArticle';
 import BackToTop from './Common/BackToTop';
 
 import './App.css';
+import Secret from './Secret/Secret';
 
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
             <Route path='/authors' element={<Navigate to='/about-us'/>}/>
             <Route path='/about-us' element={<AboutUs />} />
             <Route path='/error/:status' element={<Error />} />
+            <Route path='/secret' element={<Secret />} />
             <Route path='*' element={<Navigate to='/error/404'/>} />
           </Routes>
         </main>

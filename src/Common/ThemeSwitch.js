@@ -21,7 +21,7 @@ export default function ThemeSwitch() {
             <button 
                 title="Toggle Dark Mode" 
                 onClick={toggleDarkMode} 
-                className={checked ? "hover:brightness-75" : "hover:brightness-200"}>
+                className={"hover:opacity-75"}>
                 <FontAwesomeIcon icon={checked ? faMoon : faSun} className="w-5 h-5 align-middle sm:align-[-0.23em]" />
             </button>
         </>
