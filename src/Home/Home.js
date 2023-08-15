@@ -54,7 +54,7 @@ export default function Home() {
                 </h1>
                 <Article isFeatured/>
             </div>
-            <div id="recent-articles" className="grow">
+            <aside id="recent-articles" className="grow">
                 <h1 className="text-3xl md:text-4xl font-bold uppercase mb-5">
                     Most Recent Articles
                 </h1>
@@ -82,7 +82,7 @@ export default function Home() {
                         );
                     })}
                 </ul>}
-            </div>
+            </aside>
         </article>
     );
 }

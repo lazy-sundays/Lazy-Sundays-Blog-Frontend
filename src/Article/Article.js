@@ -8,11 +8,14 @@ import rehypeRaw from "rehype-raw";
 import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter'
 import {oneDark, oneLight} from 'react-syntax-highlighter/dist/esm/styles/prism'
 import useDarkMode from "../hooks/useDarkMode";
+import useDocumentTitle from "../hooks/useDocumentTitle";
 
 
 export default function Article({isFeatured}) {
     const [articleInfo, setArticleInfo] = useState('');
     const {slug} = useParams();
+    const [title, setTitle] = useState(slug ? slug.replace("-", " ") : document.title);
+    useDocumentTitle(title);
 
     const articleIsLoading = () => (articleInfo === '');
 
@@ -53,17 +56,22 @@ export default function Article({isFeatured}) {
         }       
     };
 
+    //runs on page load
     useEffect(() =>{
 
         if(articleIsLoading()) getArticleInfo();
-
     }, []);
+    //runs when article content is updated
+    useEffect(() =>{
+        if(!isFeatured && !articleIsLoading()) setTitle(articleInfo.attributes.title);
+    }, [articleInfo]);
 
     return (
         <article className="text-center">
             {articleIsLoading() ? <>Loading...</> :
                 <>
-                    <div className="">
+                    <meta name="author" content={articleInfo.attributes.authors.data.map((author, i, all) => `${author.attributes.name}`)}></meta>
+                    <header className="">
                         <div className={"sm:relative"+(isFeatured ? " sm:mb-10":"")}>
                             <div className={`mt-4 ${(articleInfo.attributes.hero == null) ? "" : "aspect-w-16 aspect-h-6"}`}>
                                 { (articleInfo.attributes.hero != null) &&
@@ -132,13 +140,13 @@ export default function Article({isFeatured}) {
                                 </span>
                             </div>
                         }
-                    </div>
-                    {!isFeatured ? <hr className="w-1/3 my-5 border-textprimary/25 m-auto" /> : <hr className="w-1/3 my-5 border-textprimary/25 m-auto sm:hidden" />}
+                    </header>
+                    {!isFeatured ? <hr className="w-1/3 my-5 border-textprimary/25 m-auto" aria-hidden /> : <hr className="w-1/3 my-5 border-textprimary/25 m-auto sm:hidden" aria-hidden />}
                     {/* Article body */}
-                    <div className={"flex justify-center px-5 md:px-0 mx-auto mb-10 text-lg"+(isFeatured ? " max-h-60 overflow-hidden gradient-mask-b-0" : "")}>
+                    <section className={"flex justify-center px-5 md:px-0 mx-auto mb-10 text-lg"+(isFeatured ? " max-h-60 overflow-hidden gradient-mask-b-0" : "")}>
                         <ReactMarkdown 
                             remarkPlugins={[remarkGfm]} 
-                            rehypePlugins={[rehypeFigure]} 
+                            rehypePlugins={[rehypeFigure, rehypeRaw]} 
                             children={articleInfo.attributes.body} 
                             className="prose prose-article max-w-full md:max-w-[75ch] text-left"
                             components={{
@@ -171,7 +179,7 @@ export default function Article({isFeatured}) {
                                 }
                               }}
                         />
-                    </div>
+                    </section>
                     {/* Featured article "continue reading" button */}
                     { isFeatured &&
                         <button className="relative group w-fit p-4 sm:px-10 md:px-14 lg:px-120 m-auto rounded-md font-semibold text-lg bg-bgsecondary
