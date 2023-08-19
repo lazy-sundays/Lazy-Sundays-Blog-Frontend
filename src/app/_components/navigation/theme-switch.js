@@ -4,11 +4,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons'
 import { useTheme } from 'next-themes'
 
+const THEMES = ["light", "dark"];
+
 export default function ThemeSwitch() {
     const [mounted, setMounted] = useState(false);
-    const [themeIndex, setThemeIndex] = useState(0);
     const {theme, setTheme} = useTheme();
-    const THEMES = ["light", "dark"];
+    const [themeIndex, setThemeIndex] = useState(THEMES.findIndex((x) => (x === theme)));
 
     const toggleDarkMode = (checked) => {
         const newIndex = (themeIndex + 1) % THEMES.length;

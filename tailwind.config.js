@@ -7,7 +7,6 @@ module.exports = {
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   darkMode:'class',
   theme: {
@@ -36,6 +35,13 @@ module.exports = {
         accentprimary: 'rgb(var(--accent-primary) / <alpha-value>)',
         accentsecondary : 'rgb(var(--accent-secondary) / <alpha-value>)',
         accenttertiary: 'rgb(var(--accent-tertiary) / <alpha-value>)',
+      },
+      fontFamily: {
+        logo: 'var(--font-bricolage-grotesque), var(--font-noto-sans-jp), var(--font-noto-color-emoji)',
+        // header: 'var(--font-libre-inter)',
+        serif: 'var(--font-libre-baskerville), var(--font-noto-sans-jp), var(--font-noto-color-emoji)',
+        sans: 'var(--font-public-sans), var(--font-noto-sans-jp), system-ui, var(--font-noto-color-emoji)',
+        mono: 'var(--font-fira-code)',
       },
       keyframes: {
         blink: {
@@ -70,6 +76,19 @@ module.exports = {
             '--tw-prose-pre-bg': theme('colors.bgcode / 100%'),
             '--tw-prose-th-borders': theme('colors.textprimary / 100%'),
             '--tw-prose-td-borders': theme('colors.texttertiary / 100%'),
+            fontFamily: theme('fontFamily.serif'),
+            // 'h1, h2, h3, h4, th, figcaption': {
+            //   fontFamily: theme('fontFamily.sans'),
+            // },
+            '.lead, h1, h2, h3, h4, table, thead, tr, th, td, blockquote, figcaption': {
+              fontFamily: theme('fontFamily.sans'),
+            },
+            'code': {
+              fontFamily: theme('fontFamily.mono'),
+            },
+            'blockquote, thead, th': {
+              'font-weight': 'bold',
+            },
           },
         },
       })
