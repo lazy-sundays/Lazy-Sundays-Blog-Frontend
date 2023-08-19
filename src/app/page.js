@@ -1,9 +1,66 @@
 import Image from 'next/image'
+import FeaturedArticle from './_components/featured-article';
+import Link from 'next/link';
 
-export default function Home() {
+export default async function Home() {
+  async function getRecentArticles() {
+    const res = await fetch(
+        process.env.STRAPI_URI_ROOT+"/api/articles?sort[0]=publishedAt:desc&fields[0]=publishedAt&fields[1]=title&fields[2]=slug&pagination[page]=1&pagination[pageSize]=10", 
+        {
+            method: "GET",
+            headers: {
+                "Authorization": "Bearer "+process.env.STRAPI_API_KEY,
+            },
+        }
+    );
+    
+    if (!res.ok) {
+        // This will activate the closest `error.js` Error Boundary
+        throw new Error(`Failed to fetch recent article data. HTTP status code: ${res.status}`);
+    }
+    return res.json();
+  }
+
+  const recentArticles = (await getRecentArticles()).data;
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
+    <div className="w-full flex lg:grid lg:grid-cols-[3fr_1fr] flex-wrap gap-x-10 gap-y-10">
+      <section id="featured-article" className="max-w-full">
+          <h1 className="text-3xl md:text-4xl font-bold uppercase mb-5">
+              Featured Article
+          </h1>
+          <FeaturedArticle />
+      </section>
+      <aside id="recent-articles" className="grow">
+          <h1 className="text-3xl md:text-4xl font-bold uppercase mb-5">
+              Most Recent Articles
+          </h1>
+          <ul>
+              {recentArticles.map( (article, i, all) => {
+                  return (
+                      <>
+                      <li className={`relative group ${("py-6")} mx-2 sm:px-8 hover:bg-bgsecondary`}>
+                          <span className="text-xs text-accentprimary">
+                              {(new Date(article.attributes.publishedAt)).toLocaleDateString( "en-US",
+                                  {month: '2-digit', day: '2-digit'}
+                              )}
+                          </span>
+                          <span className="ml-2 text-xl font-semibold group-hover:underline group-hover:decoration-accentprimary group-hover:decoration-2">
+                              {article.attributes.title}
+                          </span>
+                          <Link href={`/articles/${article.attributes.slug}`} aria-label={"read article"}>
+                              <span className="absolute inset-0" aria-hidden/>
+                          </Link>
+                      </li>
+                      {(i < all.length-1) &&
+                          <hr className="mx-2 border-textprimary/25" />
+                      }
+                      </>
+                  );
+              })}
+          </ul>
+      </aside>
+      {/* <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
         <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
           Get started by editing&nbsp;
           <code className="font-mono font-bold">src/app/page.js</code>
@@ -107,7 +164,7 @@ export default function Home() {
             Instantly deploy your Next.js site to a shareable URL with Vercel.
           </p>
         </a>
-      </div>
-    </main>
+      </div> */}
+    </div>
   )
 }

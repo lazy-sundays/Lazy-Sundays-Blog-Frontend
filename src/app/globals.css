@@ -1,14 +1,71 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
 :root {
-  --foreground-rgb: 0, 0, 0;
+  /* --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --background-end-rgb: 255, 255, 255; */
+  
+  /* default dark and light colors */
+  --bg-primary: 216 216 216; /*#D8D8D8;*/
+  --bg-secondary: 229 229 229; /*#e5e5e5;*/
+  --bg-code: 51 65 85; /*#334155;*/
+
+  --text-primary: 15 23 42; /*#0f172a;*/
+  --text-secondary: 51 65 85; /*#334155;*/
+  --text-tertiary: 102 102 102; /*#666666;*/
+  --text-code: 216 216 216; /*#D8D8D8;*/
+
+  /* default accent theme colors*/
+  --accent-primary: 232 153 141; /*#E8998D;*/
+  --accent-secondary: 108 154 139; /*#6C9A8B;*/
+  --accent-tertiary: 238 210 204; /*#EED2CC;*/
 }
 
-@media (prefers-color-scheme: dark) {
+.dark {
+  --bg-primary: 30 41 59; /*#1e293b;*/
+  --bg-secondary: 51 65 85; /*#334155;*/
+
+  --text-primary: 216 216 216; /*#D8D8D8;*/
+  --text-secondary: 229 229 229; /*#e5e5e5;*/
+  --text-tertiary: 179 179 179; /*#B3B3B3;*/
+}
+
+/* accent color themes */
+.sunset-overlook{
+--accent-primary: 18 97 117; /*#024555;*/
+--accent-secondary: 241 143 1; /*#F18F01;*/
+--accent-tertiary: 160 91 136 /*#a05b88;*/
+}
+
+.dark .sunset-overlook, .dark.sunset-overlook {
+  --accent-primary: 121 228 252; /*#79e4fc;*/
+  --accent-secondary: 254 206 133; /*#FECE85;*/
+  --accent-tertiary: 160 91 136; /*#a05b88;;*/
+}
+
+.picnic-in-spring {
+  --accent-primary: 232 153 141; /*#E8998D;*/
+  --accent-secondary: 108 154 139; /*#6C9A8B;*/
+  --accent-tertiary: 238 210 204; /*#EED2CC;*/
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+} 
+
+/* @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 0, 0, 0;
@@ -24,4 +81,4 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
-}
+} */
