@@ -31,7 +31,7 @@ export default async function FeaturedArticle() {
             <meta name="author" content={articleInfo.attributes.authors.data.map((author, i, all) => `${author.attributes.name}`)}></meta>
             <header className="">
                 <div className={"sm:relative sm:mb-10"}>
-                    <div className={`mt-4 ${(articleInfo.attributes.hero == null) ? "" : "aspect-w-16 aspect-h-6"}`}>
+                    <div className={`mt-4 ${(articleInfo.attributes.hero == null) ? "" : "aspect-21/9"}`}>
                         { (articleInfo.attributes.hero != null) &&
                             <img className="w-full h-full object-center object-cover" src={articleInfo.attributes.hero}/>
                         }

@@ -15,6 +15,11 @@ module.exports = {
       animation: {
         'blink': 'blink 1s cubic-bezier(0.34, 1.56, 0.64, 1)',
       },
+      aspectRatio: {
+        '4/3': '4 / 3',
+        '16/9': '16 / 9',
+        '21/9': '21 / 9',
+      },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
