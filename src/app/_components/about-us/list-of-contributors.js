@@ -49,7 +49,7 @@ export default function ListOfContributors({ apiKey, rootURI }) {
                         onClick={() => setSize(size + 1)} 
                         ariaLabel='load more contributors' 
                         disabled={(isLoading || isValidating || !hasMoreData)} 
-                        className={!hasMoreData && "hidden"}
+                        className={!hasMoreData ?  "hidden" : ""}
                     >
                         {(isLoading || isValidating) ? "Loading..." : "Load More"}
                     </Button>
