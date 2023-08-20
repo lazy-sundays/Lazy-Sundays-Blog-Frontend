@@ -21,7 +21,7 @@ export default function Construction(){
                 className='m-auto'
                 //TODO: add alt text
             />
-            <p className='mt-10 text-lg md:text-xl lg:text-2xl'>Please Check Back in Soon</p>
+            <p className='mt-10 text-lg md:text-xl lg:text-2xl'>Please check back in soon! &#128034;</p>
         </div>
     )
 }
