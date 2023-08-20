@@ -17,7 +17,7 @@ export default function ContributorPlaque({ as: Component = "div", author }) {
                     src={author.attributes.avatar || sunConcept}
                     width={96}
                     height={96}
-                    className={"aspect-square mr-4 rounded-full border-2 border-textprimary/25"}
+                    className={"aspect-square mr-4 rounded-full border-2 border-slate-400 dark:border-slate-500"}
                 />
             </div>
             <div className="w-1/2 flex flex-col justify-center group-hover:transition-none group-hover:invisible transition-[visibility] delay-200 ease-linear">
