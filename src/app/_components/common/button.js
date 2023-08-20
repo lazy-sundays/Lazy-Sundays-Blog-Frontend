@@ -20,7 +20,7 @@ export default function Button({
             aria-label={ariaLabel}
             disabled={disabled}
         >
-            <span className={!disabled && `group-hover:transition-none group-hover:invisible transition-[visibility] delay-200 ease-linear`}>
+            <span className={!disabled ? `group-hover:transition-none group-hover:invisible transition-[visibility] delay-200 ease-linear` : undefined}>
                 {children}
             </span>
             { !disabled && 
