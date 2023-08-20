@@ -32,12 +32,12 @@ export default function ListOfContributors({ apiKey, rootURI }) {
                 <h1 className="text-3xl md:text-4xl font-bold uppercase mb-5">
                     List of Contributors
                 </h1>
-                <ul className="flex flex-wrap gap-6 mx-2 sm:mx-8">
+                <ul className="flex flex-col md:flex-none md:grid md:grid-cols-2 gap-6">
                     {!isLoading ?
                         data.map((page, i) => {
                             return (page.data.map((author, j) => {
                                 return (
-                                    <ContributorPlaque as={"li"} author={author} key={`${i}${j}`} />
+                                    <ContributorPlaque author={author} key={`${i}${j}`} />
                                 );
                             }));
                         }) : <>Loading...</>
@@ -49,7 +49,7 @@ export default function ListOfContributors({ apiKey, rootURI }) {
                         onClick={() => setSize(size + 1)} 
                         ariaLabel='load more contributors' 
                         disabled={(isLoading || isValidating || !hasMoreData)} 
-                        className={!hasMoreData ?  "hidden" : undefined}
+                        className={((!hasMoreData) ? "hidden" : undefined)}
                     >
                         {(isLoading || isValidating) ? "Loading..." : "Load More"}
                     </Button>

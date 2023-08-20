@@ -1,4 +1,5 @@
 import ListOfContributors from "../_components/about-us/list-of-contributors";
+import LinkButton from "@/app/_components/common/link-button";
 
 export default async function AboutUs() {
     async function getBlurb() {
@@ -46,25 +47,27 @@ export default async function AboutUs() {
                 <h1 className="text-3xl md:text-4xl font-bold uppercase mb-5">
                     About Us
                 </h1>
-                <p className="mx-2 sm:mx-8 max-w-3xl">
+                <p className="mx-2 sm:mx-8 max-w-3xl lg:text-lg">
                     {/* TODO: update placeholder with better placeholder */}
                     {blurb}
                 </p>
             </section>
-            <aside className="w-auto max-w-full md:max-w-[25%]">
+            <aside className="w-full md:max-w-[25%]">
                 <h1 className="text-3xl md:text-4xl font-bold uppercase mb-5">
                     Contact Us
                 </h1>
-                <ul className="mx-2 sm:mx-8">
+                <ul className="flex flex-col">
                     {/* TODO: update placeholder with better placeholder */}
                     {
                         contacts.map((contact) => 
-                            <li className="mb-3 break-words">
-                                {contact.attributes.infoName}: 
-                                <a href={(contact.attributes.infoName.trim().toLowerCase() === "email" ? "mailto:" : "") + contact.attributes.info} className="mx-2 italic hover:underline hover:decoration-accentprimary hover:decoration-2">
-                                    {contact.attributes.info}
-                                </a>
-                            </li>
+                            <LinkButton 
+                                as="li"
+                                className="w-full mb-3"
+                                ariaLabel={`go to ${contact.attributes.infoName}`}
+                                href={((contact.attributes.infoName.toLowerCase().replace("-", "")) === "email" ? "mailto:" : "") + contact.attributes.info}
+                            >
+                                {contact.attributes.infoName}
+                            </LinkButton>
                         )
                     }
                 </ul>
