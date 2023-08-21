@@ -4,6 +4,7 @@ import Navbar from './_components/navigation/navbar'
 import Providers from './_theme/providers'
 import './globals.css'
 import { Public_Sans, Fira_Code, Bricolage_Grotesque, Libre_Baskerville, Noto_Sans_JP, Noto_Color_Emoji } from 'next/font/google'
+import View from "./_components/view-tracking/view"
 
 const bricoGro = Bricolage_Grotesque({ 
   subsets: ['latin'],
@@ -51,6 +52,7 @@ export default function RootLayout({ children }) {
               </main>
               <BackToTop />
               <Footer />
+              <View id="home"/>
             </Providers>
           </body>
       </html>

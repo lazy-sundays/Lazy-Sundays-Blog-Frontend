@@ -5,6 +5,7 @@ import rehypeFigure from "rehype-figure";
 import rehypeRaw from "rehype-raw";
 import CodeBlock from '../../_components/common/code-block';
 import Link from 'next/link';
+import View from '../../_components/view-tracking/view'
 
 export default async function Article({ params }) {
     async function getArticleInfo() {
@@ -103,6 +104,7 @@ export default async function Article({ params }) {
                     </section>                    
                 </>
             }
+            <View id={articleInfo.id}/>
         </article>
     );
 }
