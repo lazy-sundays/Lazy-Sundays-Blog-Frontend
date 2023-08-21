@@ -17,8 +17,8 @@ export async function POST(req) {
         return new NextResponse("Slug not found", { status: 400 });
     }
 
+    //if we can get a user's ip, check if duplicate request in 24 hrs
     const ip = (getClientIp(req));
-
     if (ip){
       // Hash the IP and turn it into a hex string
       const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(ip));
@@ -33,9 +33,26 @@ export async function POST(req) {
       });
       if (!isNew) {
     
-        new NextResponse(null, { status: 202 });
+        return new NextResponse(null, { status: 202 });
       }
     }
+
+    //cut down on number of duplicate views on the whole site if no ip by using a cookie to check if a view has already been counted
+    const viewedCookie = req.cookies.get(`hasViewed`)
+    if(viewedCookie){
+      //this is not a new entry within 24 hrs
+      if (viewedCookie.value === id){
+        return new NextResponse(null, { status: 202 });
+      }
+    }
+
+    //this is a new entry within 24 hrs of the person's last view
     await redis.incr(["pageviews", "projects", id].join(":"));
-    return new NextResponse(null, { status: 202 });
+
+    //if the cookie doesnt alreayd exist, set it
+    const cookieValue = (viewedCookie) ? {} : {'Set-Cookie': `hasViewed=home; Max-Age=${60 * 60 * 24}`}; 
+    return new NextResponse(null, { 
+      status: 202,
+      headers: cookieValue, 
+    });
 }
