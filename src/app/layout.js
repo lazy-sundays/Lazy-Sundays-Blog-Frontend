@@ -46,13 +46,13 @@ export default function RootLayout({ children }) {
       <html lang="en" suppressHydrationWarning className={`${publicSans.variable} ${notoSansJP.variable} ${libreBask.variable} ${bricoGro.variable} ${firaCode.variable} ${notoColorEmoji.variable}`}>
           <body className={`font-logo bg-bgprimary text-textprimary sunset-overlook`}>
             <Providers>
+              <View id="home"/>
               <Navbar />
               <main id='pg-content' className='mb-auto min-h-[calc(100vh-18.75rem)] px-4 pt-5 pb-10 sm:px-14 lg:px-20'>
                 {children}
               </main>
               <BackToTop />
               <Footer />
-              <View id="home"/>
             </Providers>
           </body>
       </html>
