@@ -47,7 +47,7 @@ export default async function AboutUs() {
                 <h1 className="text-3xl md:text-4xl font-bold uppercase mb-5">
                     About Us
                 </h1>
-                <p className="mx-2 sm:mx-8 max-w-3xl lg:text-lg">
+                <p className="max-w-3xl lg:text-lg font-sans">
                     {/* TODO: update placeholder with better placeholder */}
                     {blurb}
                 </p>
