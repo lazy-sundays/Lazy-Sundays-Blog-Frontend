@@ -9,6 +9,7 @@ import {
 
 export const bricoGro = Bricolage_Grotesque({ 
     subsets: ['latin'],
+    weight: '400',
     variable: "--font-bricolage-grotesque",
   });
 export const libreBask = Libre_Baskerville({

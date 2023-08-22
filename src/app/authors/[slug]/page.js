@@ -73,28 +73,28 @@ export default async function Author({ params }) {
                             }
                         </div>
                         <div className="flex w-[calc(100%-8.5rem)] sm:w-[calc(100%-12rem)] flex-col gap-1 ml-4">
-                            <div className="font-bold text-xl">
+                            <div className="font-bold text-xl font-logo">
                                 {authorInfo.attributes.name} 
                                 {(
                                     authorInfo.attributes.pronouns != null && 
                                     <span className="italic text-xs text-accentprimary ml-1">({pronounsToString(authorInfo.attributes.pronouns)})</span>
                                 )}
                             </div>
-                            <div className="text-sm">
+                            <div className="text-sm font-mono">
                                 {(numContributions === 0 ) ? <></> : <span>{numContributions} article {(numContributions === 1 ) ? 'contribution' : 'contributions'}</span>}
                             </div>
-                            <div className="text-sm">
+                            <div className="text-sm font-mono">
                                 {<span>Contributor since {new Date(authorInfo.attributes.createdAt).toLocaleString("en-US", {
                                     day: "numeric",
                                     month: "long",
                                     year: "numeric"
                                 })}</span>}
                             </div>
-                            <div className="collapse sm:visible"> {/* bio desktop version */}
+                            <div className="collapse sm:visible font-sans"> {/* bio desktop version */}
                                 {authorInfo.attributes.bio}
                             </div>
                         </div>
-                        <div className="visible sm:collapse w-full mt-4 mx-2"> {/* bio mobile version */}
+                        <div className="visible sm:collapse w-full mt-4 mx-2 font-sans"> {/* bio mobile version */}
                                 {authorInfo.attributes.bio}
                         </div>
                     </div>
