@@ -35,6 +35,10 @@ export async function POST(req) {
     
         return new NextResponse(null, { status: 202 });
       }
+
+      //this is a new entry within 24 hrs of the person's last view
+      await redis.incr(["pageviews", "projects", id].join(":"));
+      return new NextResponse(null, { status: 202 });
     }
 
     //cut down on number of duplicate views on the whole site if no ip by using a cookie to check if a view has already been counted
@@ -49,7 +53,7 @@ export async function POST(req) {
     //this is a new entry within 24 hrs of the person's last view
     await redis.incr(["pageviews", "projects", id].join(":"));
 
-    //if the cookie doesnt alreayd exist, set it
+    //if the cookie doesnt already exist, set it
     const cookieValue = (viewedCookie) ? {} : {'Set-Cookie': `hasViewed=home; Max-Age=${60 * 60 * 24}`}; 
     return new NextResponse(null, { 
       status: 202,
