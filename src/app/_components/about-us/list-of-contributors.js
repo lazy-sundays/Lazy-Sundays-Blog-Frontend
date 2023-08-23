@@ -1,19 +1,16 @@
 "use client"
 import useSWRInfinite from 'swr/infinite'
-import { notFound } from "next/navigation";
 import ContributorPlaque from "./contributor-plaque";
 import Button from '../common/button';
 
-export default function ListOfContributors({ apiKey, rootURI }) {
+export default function ListOfContributors() {
     const getKey = (pageIndex, previousPageData) => {
         if (previousPageData && (previousPageData.meta.pagination.page >= previousPageData.meta.pagination.pageCount)) return null; // reached the end
-        return (`${rootURI}/api/authors?pagination[page]=${(pageIndex+1)}&pagination[pageSize]=2`); // SWR key
+        return (`/api/authors?page=${(pageIndex + 1)}`); // SWR key
     };
     const fetcher = (url) => fetch(url, 
-        { method: "GET",
-            headers: {
-                "Authorization": `Bearer ${apiKey}`
-            } 
+        { 
+            method: "GET",
         }
     ).then((res) => (res.json()));
     const { data, error, isLoading, isValidating, size, setSize } = useSWRInfinite(getKey, fetcher, {
@@ -21,9 +18,7 @@ export default function ListOfContributors({ apiKey, rootURI }) {
         revalidateFirstPage: false,
     });
 
-
     const hasMoreData = data && data[data.length-1].meta.pagination.page < data[data.length-1].meta.pagination.pageCount;
-
 
     if (error) throw new Error(`Failed to fetch contributor data.`);;
     return (
