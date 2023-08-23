@@ -73,7 +73,7 @@ export default async function AboutUs() {
                 </ul>
             </aside>
             
-            <ListOfContributors apiKey={process.env.STRAPI_API_KEY} rootURI={process.env.STRAPI_URI_ROOT}/>
+            <ListOfContributors />
         </div>
     );
 }
