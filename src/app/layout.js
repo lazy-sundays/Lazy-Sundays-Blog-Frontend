@@ -26,7 +26,7 @@ export default function RootLayout({ children }) {
             <Providers>
               <View id="home"/>
               <Navbar />
-              <main id='pg-content' className='mb-auto min-h-[calc(100vh-18.75rem)] px-4 pt-5 pb-10 sm:px-14 lg:px-20'>
+              <main id='pg-content' className='mb-auto min-h-[calc(100vh-18.75rem)] px-4 pt-5 sm:px-14 lg:px-20'>
                 {children}
               </main>
               <BackToTop />

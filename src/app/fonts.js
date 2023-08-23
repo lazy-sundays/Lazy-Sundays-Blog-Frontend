@@ -9,13 +9,12 @@ import {
 
 export const bricoGro = Bricolage_Grotesque({ 
     subsets: ['latin'],
-    weight: '400',
     variable: "--font-bricolage-grotesque",
   });
 export const libreBask = Libre_Baskerville({
     subsets: ['latin'],
     variable: "--font-libre-baskerville",
-    weight: '400'
+    weight: ['400', '700']
 });
 export const publicSans = Public_Sans({ 
     subsets: ['latin'],
@@ -23,7 +22,7 @@ export const publicSans = Public_Sans({
 });
 export const notoSansJP = Noto_Sans_JP({ 
     variable: "--font-noto-sans-jp",
-    weight: '400',
+    weight: ['200', '400', '700'],
     preload: false,
 });
 export const firaCode = Fira_Code({ 

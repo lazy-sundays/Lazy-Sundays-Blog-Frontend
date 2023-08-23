@@ -102,6 +102,7 @@ export default async function FeaturedArticle() {
                 ariaLabel={"continue reading article"}
                 children={<>Continue Reading</>}
                 href={`/articles/${articleInfo.attributes.slug}`}
+                className={`sm:px-10 md:px-14 lg:px-120`}
             />
         </article>
     );
