@@ -1,5 +1,6 @@
 import Image from "next/image";
 import sunConcept from "/public/sun-concept.png";
+import LinkButton from "@/app/_components/common/link-button";
 
 export default async function Author({ params }) {
     async function getAuthorInfo() {
@@ -72,47 +73,48 @@ export default async function Author({ params }) {
                             }
                         </div>
                         <div className="flex w-[calc(100%-8.5rem)] sm:w-[calc(100%-12rem)] flex-col gap-1 ml-4">
-                            <div className="font-bold text-xl">
+                            <div className="font-bold text-xl font-logo">
                                 {authorInfo.attributes.name} 
                                 {(
                                     authorInfo.attributes.pronouns != null && 
                                     <span className="italic text-xs text-accentprimary ml-1">({pronounsToString(authorInfo.attributes.pronouns)})</span>
                                 )}
                             </div>
-                            <div className="text-sm">
+                            <div className="text-sm font-mono">
                                 {(numContributions === 0 ) ? <></> : <span>{numContributions} article {(numContributions === 1 ) ? 'contribution' : 'contributions'}</span>}
                             </div>
-                            <div className="text-sm">
+                            <div className="text-sm font-mono">
                                 {<span>Contributor since {new Date(authorInfo.attributes.createdAt).toLocaleString("en-US", {
                                     day: "numeric",
                                     month: "long",
                                     year: "numeric"
                                 })}</span>}
                             </div>
-                            <div className="collapse sm:visible"> {/* bio desktop version */}
+                            <div className="collapse sm:visible font-sans"> {/* bio desktop version */}
                                 {authorInfo.attributes.bio}
                             </div>
                         </div>
-                        <div className="visible sm:collapse w-full mt-4 mx-2"> {/* bio mobile version */}
+                        <div className="visible sm:collapse w-full mt-4 mx-2 font-sans"> {/* bio mobile version */}
                                 {authorInfo.attributes.bio}
                         </div>
                     </div>
                 }
             </div>
-            <div className="w-auto max-w-full md:max-w-[25%]">
+            <div className="w-full md:max-w-[25%]">
                 <h1 className="text-3xl md:text-4xl font-bold uppercase mb-5">
                     Find {selectThirdPerson(authorInfo.attributes.pronouns)} At
                 </h1>
                 {
-                    <ul className="flex flex-wrap mx-2 sm:mx-8">
+                    <ul className="flex flex-col">
                         {
-                            authorInfo.attributes.linkTree.data.map((linkItem) =>
-                            <li className="mb-3 break-words">
-                                {linkItem.attributes.siteName}:
-                                <a href={(linkItem.attributes.siteName === "Email" ? "mailto:" : "") + linkItem.attributes.link} className="mx-2 italic hover:underline hover:decoration-accentprimary hover:decoration-2">
-                                    {linkItem.attributes.link}
-                                </a>
-                            </li>
+                            authorInfo.attributes.linkTree.data.map((linkItem) => 
+                                <LinkButton 
+                                    className="w-full mb-3"
+                                    ariaLabel={`go to ${linkItem.attributes.siteName}`}
+                                    href={((linkItem.attributes.siteName.trim().toLowerCase()) === "email" ? "mailto:" : "") + linkItem.attributes.link}
+                                >
+                                    {linkItem.attributes.siteName}
+                                </LinkButton>
                             )
                         }
                     </ul>
