@@ -2,8 +2,8 @@ import BackToTop from './_components/common/back-to-top'
 import Footer from './_components/navigation/footer'
 import Navbar from './_components/navigation/navbar'
 import Providers from './_theme/providers'
-import './globals.css'
 import View from "./_components/view-tracking/view"
+import './globals.css'
 import {
   bricoGro,
   firaCode,
