@@ -36,8 +36,8 @@ export default function BackToTop(){
     
     
     return (
-      <div className='sticky w-full flex justify-end bottom-0'>
-        <div className={`${visible ? 'opacity-1 visible' : "opacity-0 invisible"} transition-[opacity] ease-in-out mr-3 md:mr-10 mt-3 md:mt-0 mb-3 md:mb-10`}
+      <div className={`${visible ? 'sticky' : "hidden"} w-full flex justify-end bottom-0`}>
+        <div className={`mr-3 md:mr-10 mt-3 md:mt-0 mb-3 md:mb-10`}
         >
           <button onClick={scrollToTop} className={`p-4 rounded-full bg-bgsecondary hover:bg-accentprimary hover:text-bgsecondary`}>
             <FontAwesomeIcon className={`fa-lg fa-fw`} icon={faArrowUp} />
