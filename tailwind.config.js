@@ -39,7 +39,7 @@ module.exports = {
       fontFamily: {
         logo: ['var(--font-bricolage-grotesque), var(--font-noto-sans-jp)', ...defaultTheme.fontFamily.sans],
         //NOTE: keep this order/format for all subsequent font family sets. I have no idea why but it breaks if you don't
-        serif: [...(defaultTheme.fontFamily.serif.reverse()), 'var(--font-libre-baskerville), var(--font-noto-sans-jp)'],
+        serif: [...(defaultTheme.fontFamily.serif.reverse()), 'var(--font-libre-baskerville), var(--font-noto-serif-jp)'],
         sans: [...(defaultTheme.fontFamily.sans.reverse()),'var(--font-public-sans), var(--font-noto-sans-jp)'],
         mono: [...defaultTheme.fontFamily.mono, 'var(--font-fira-code)'],
         // header: 'var(--font-libre-inter)',

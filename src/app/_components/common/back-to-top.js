@@ -36,10 +36,10 @@ export default function BackToTop(){
     
     
     return (
-      <div className={`${visible ? 'sticky' : "hidden"} w-full flex justify-end bottom-0`}>
+      <div className={`${visible ? 'sticky' : "hidden"} w-full flex justify-end bottom-0 pointer-events-none`}>
         <div className={`mr-3 md:mr-10 mt-3 md:mt-0 mb-3 md:mb-10`}
         >
-          <button onClick={scrollToTop} className={`p-4 rounded-full bg-bgsecondary hover:bg-accentprimary hover:text-bgsecondary`}>
+          <button onClick={scrollToTop} className={`p-4 pointer-events-auto rounded-full bg-bgsecondary hover:bg-accentprimary hover:text-bgsecondary`}>
             <FontAwesomeIcon className={`fa-lg fa-fw`} icon={faArrowUp} />
           </button>
         </div> 

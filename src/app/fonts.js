@@ -4,6 +4,7 @@ import {
     Bricolage_Grotesque, 
     Libre_Baskerville, 
     Noto_Sans_JP, 
+    Noto_Serif_JP, 
     Noto_Color_Emoji 
 } from 'next/font/google';
 
@@ -22,6 +23,11 @@ export const publicSans = Public_Sans({
 });
 export const notoSansJP = Noto_Sans_JP({ 
     variable: "--font-noto-sans-jp",
+    weight: ['200', '400', '700'],
+    preload: false,
+});
+export const notoSerifJP = Noto_Serif_JP({ 
+    variable: "--font-noto-serif-jp",
     weight: ['200', '400', '700'],
     preload: false,
 });
