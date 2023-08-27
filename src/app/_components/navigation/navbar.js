@@ -18,7 +18,6 @@ export default function Navbar() {
         <nav className="sticky px-4 sm:px-14 lg:px-20">
             <div className="flex flex-wrap sm:flex-nowrap items-center py-3">
                 <Link href="/" className="max-w-[50%] mr-auto flex items-center">
-                    {/* <img src={"/logo.svg"} alt="lazy sundays logo" className="max-h-full" /> */}
                     <Image 
                         src={logo}
                         alt="lazy sundays logo"

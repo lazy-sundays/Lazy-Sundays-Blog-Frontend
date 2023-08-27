@@ -6,6 +6,44 @@ import rehypeRaw from "rehype-raw";
 import CodeBlock from '../../_components/common/code-block';
 import Link from 'next/link';
 import View from '../../_components/view-tracking/view'
+import Image from 'next/image';
+
+export async function generateMetadata({ params }, parent) {
+    //fetch data
+    const articleList = await fetch(
+        process.env.STRAPI_URI_ROOT+"/api/articles?filters[slug][$eqi]=sample-markdown&populate=*", 
+        {
+            method: "GET",
+            headers: {
+                "Authorization": "Bearer "+process.env.STRAPI_API_KEY,
+            },
+        }
+    ).then((res) => res.json()).then((res) => res.data);
+    const articleInfo = articleList[0];
+
+    // optionally access and extend (rather than replace) parent metadata
+    const previousImages = (await parent).openGraph?.images || [];
+
+    // build author 
+    const authors = articleInfo.attributes.authors.data.map((author) => {return ({name: author.attributes.name, url: `/authors/${author.attributes.slug}`})})
+
+    return {
+        title: articleInfo.attributes.title,
+        description: articleInfo.attributes.tagline,
+        authors: authors,
+        openGraph: {
+            type: 'article',
+            siteName: 'the lazy sundays blog',
+            locale: 'en_US',
+            title: articleInfo.attributes.title,
+            description: articleInfo.attributes.tagline,
+            publishedTime: articleInfo.attributes.publishedAt,
+            authors: authors.map((author) => author.name),
+            images: [articleInfo.attributes.hero, ...previousImages],
+        },
+        
+    }
+}
 
 export default async function Article({ params }) {
     async function getArticleInfo() {
@@ -38,7 +76,7 @@ export default async function Article({ params }) {
                         <div className={"sm:relative"}>
                             <div className={`mt-4 ${(articleInfo.attributes.hero == null) ? "" : "aspect-21/9"}`}>
                                 { (articleInfo.attributes.hero != null) &&
-                                    <img className="w-full h-full object-center object-cover" src={articleInfo.attributes.hero}/>
+                                    <Image fill={true} className="object-center object-cover" src={articleInfo.attributes.hero}/>
                                 }
                             </div>
                             <div className={`${(articleInfo.attributes.hero == null) ? "pb-4":"sm:absolute sm:bottom-0"} pt-4 pb-4 md:pb-8 lg:pb-12 w-full sm:px-10 md:px-24 xl:px-52 text-center bg-white/50 dark:bg-black/50 backdrop-blur-sm`}>
