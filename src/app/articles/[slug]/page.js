@@ -11,7 +11,7 @@ import Image from 'next/image';
 export async function generateMetadata({ params }, parent) {
     //fetch data
     const articleList = await fetch(
-        process.env.STRAPI_URI_ROOT+"/api/articles?filters[slug][$eqi]=sample-markdown&populate=*", 
+        process.env.STRAPI_URI_ROOT+"/api/articles?filters[slug][$eqi]="+params.slug+"&populate=*", 
         {
             method: "GET",
             headers: {
@@ -24,7 +24,7 @@ export async function generateMetadata({ params }, parent) {
     // optionally access and extend (rather than replace) parent metadata
     const previousImages = (await parent).openGraph?.images || [];
 
-    // build author 
+    // build correctly-formatted author list
     const authors = articleInfo.attributes.authors.data.map((author) => {return ({name: author.attributes.name, url: `/authors/${author.attributes.slug}`})})
 
     return {
@@ -35,13 +35,12 @@ export async function generateMetadata({ params }, parent) {
             type: 'article',
             siteName: 'the lazy sundays blog',
             locale: 'en_US',
-            title: articleInfo.attributes.title,
+            title: `${articleInfo.attributes.title} — the lazy sundays blog`,
             description: articleInfo.attributes.tagline,
             publishedTime: articleInfo.attributes.publishedAt,
             authors: authors.map((author) => author.name),
             images: [articleInfo.attributes.hero, ...previousImages],
         },
-        
     }
 }
 

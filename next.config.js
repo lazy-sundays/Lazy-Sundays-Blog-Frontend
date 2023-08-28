@@ -8,6 +8,12 @@ const nextConfig = {
           port: '',
           pathname: '/dqcr2lwws/image/upload/**',
         },
+        {
+          protocol: 'https',
+          hostname: 'pbs.twimg.com',
+          port: '',
+          pathname: '/media/**',
+        },
       ],
     },
     async redirects() {

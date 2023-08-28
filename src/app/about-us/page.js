@@ -1,6 +1,11 @@
 import ListOfContributors from "../_components/about-us/list-of-contributors";
 import LinkButton from "@/app/_components/common/link-button";
 
+export const metadata = {
+    title: 'About Us',
+    description: `Learn all about how we do things on the lazy sundays blog`
+};
+    
 export default async function AboutUs() {
     async function getBlurb() {
         const res = await fetch(

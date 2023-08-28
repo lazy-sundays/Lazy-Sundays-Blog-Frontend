@@ -1,6 +1,10 @@
-import Image from 'next/image'
 import FeaturedArticle from './_components/featured-article';
 import Link from 'next/link';
+
+export const metadata = {
+    title: 'the lazy sundays blog',
+    description: `This is the lazy sundays blog home page` //TODO: put an actual description here
+};
 
 export default async function Home() {
   async function getRecentArticles() {

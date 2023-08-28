@@ -1,9 +1,8 @@
 import BackToTop from './_components/common/back-to-top'
 import Footer from './_components/navigation/footer'
 import Navbar from './_components/navigation/navbar'
-import Providers from './_theme/providers'
 import View from "./_components/view-tracking/view"
-import './globals.css'
+import Providers from './_theme/providers'
 import {
   bricoGro,
   firaCode,
@@ -13,26 +12,18 @@ import {
   notoSerifJP,
   publicSans,
 } from "./fonts"
+import './globals.css'
 
 export const revalidate = 10;
 export const metadata = {
   title: {
-    template: `%s: the lazy sundays blog`,
+    template: `%s — the lazy sundays blog`,
     default: `the lazy sundays blog`,
   },
   openGraph: {
     siteName: 'the lazy sundays blog',
     locale: 'en_US',
     type: 'website',
-  },
-  icons: {
-    icon: '/sun-concept.png',
-    shortcut: '/sun-concept.png',
-    apple: '/sun-concept.png',
-    other: {
-      rel: 'sun-concept',
-      url: '/sun-concept.png',
-    },
   },
 };
 

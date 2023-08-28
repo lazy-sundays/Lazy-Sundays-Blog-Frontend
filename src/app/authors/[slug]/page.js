@@ -2,6 +2,36 @@ import Image from "next/image";
 import sunConcept from "/public/sun-concept.png";
 import LinkButton from "@/app/_components/common/link-button";
 
+export async function generateMetadata({ params }, parent) {
+    //fetch data
+    const authorList = await fetch(
+        process.env.STRAPI_URI_ROOT+"/api/authors?filters[slug]="+params.slug+"&populate[0]=avatar&populate[1]=linkTree", 
+        {
+            method: "GET",
+            headers: {
+                "Authorization": "Bearer "+process.env.STRAPI_API_KEY,
+            },
+        }
+    ).then((res) => res.json()).then((res) => res.data);
+    const authorInfo = authorList[0];
+
+    // optionally access and extend (rather than replace) parent metadata
+    const previousImages = (await parent).openGraph?.images || [];
+
+    return {
+        title: `${authorInfo.attributes.name}`,
+        description: authorInfo.attributes.bio,
+        openGraph: {
+            type: 'profile',
+            siteName: `the lazy sundays blog`,
+            locale: 'en_US',
+            title: `${authorInfo.attributes.name} — the lazy sundays blog`,
+            description: authorInfo.attributes.bio,
+            images: [authorInfo.attributes.avatar, ...previousImages],
+        },
+    }
+}
+
 export default async function Author({ params }) {
     async function getAuthorInfo() {
         const res = await fetch(
