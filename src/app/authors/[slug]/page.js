@@ -1,6 +1,7 @@
 import Image from "next/image";
 import sunConcept from "/public/sun-concept.png";
 import LinkButton from "@/app/_components/common/link-button";
+import { notFound } from "next/navigation";
 
 export async function generateMetadata({ params }, parent) {
     //fetch data
@@ -14,6 +15,7 @@ export async function generateMetadata({ params }, parent) {
         }
     ).then((res) => res.json()).then((res) => res.data);
     const authorInfo = authorList[0];
+    if (!authorInfo) notFound();
 
     // optionally access and extend (rather than replace) parent metadata
     const previousImages = (await parent).openGraph?.images || [];
@@ -83,7 +85,7 @@ export default async function Author({ params }) {
     };
 
     const authorList = (await getAuthorInfo()).data;
-    if (authorList.length === 0) throw new Error("No matching author found");
+    if (authorList.length === 0) notFound();
     const authorInfo = authorList[0];
     const numContributions = (await getNumContributions()).count;
     return (

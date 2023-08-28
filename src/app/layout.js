@@ -11,6 +11,7 @@ import {
   notoSansJP,
   notoSerifJP,
   publicSans,
+  urwGothic
 } from "./fonts"
 import './globals.css'
 
@@ -29,7 +30,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-      <html lang="en" suppressHydrationWarning className={`${publicSans.variable} ${notoSansJP.variable} ${notoSerifJP.variable} ${libreBask.variable} ${bricoGro.variable} ${firaCode.variable} ${notoColorEmoji.variable}`}>
+      <html lang="en" suppressHydrationWarning className={`${urwGothic.variable} ${publicSans.variable} ${notoSansJP.variable} ${notoSerifJP.variable} ${libreBask.variable} ${bricoGro.variable} ${firaCode.variable} ${notoColorEmoji.variable}`}>
           <body className={`font-logo bg-bgprimary text-textprimary sunset-overlook`}>
             <Providers>
               <View id="home"/>
