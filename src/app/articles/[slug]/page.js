@@ -118,7 +118,6 @@ export default async function Article({ params }) {
                         <ReactMarkdown 
                             remarkPlugins={[remarkGfm]} 
                             rehypePlugins={[rehypeFigure, rehypeRaw]} 
-                            children={articleInfo.attributes.body} 
                             className="prose prose-article max-w-full md:max-w-[75ch] text-left"
                             components={{
                                 code({node, inline, className, children, ...props}) {
@@ -126,10 +125,11 @@ export default async function Article({ params }) {
                                   return !inline && match ? (
                                     <CodeBlock
                                       {...props}
-                                      children={String(children).replace(/\n$/, '')}
                                       language={match[1]}
                                       PreTag="div"
-                                    />
+                                    >
+                                        {String(children).replace(/\n$/, '')}
+                                    </CodeBlock>
                                   ) : (
                                     <code {...props} className={className}>
                                       {children}
@@ -137,7 +137,9 @@ export default async function Article({ params }) {
                                   )
                                 }
                             }}
-                        />
+                        >
+                            {articleInfo.attributes.body} 
+                        </ReactMarkdown>
                     </section>                    
                 </>
             }

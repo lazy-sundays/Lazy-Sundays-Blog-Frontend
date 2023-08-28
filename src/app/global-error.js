@@ -1,4 +1,6 @@
 'use client'
+import Image from "next/image"
+import Button from "./_components/common/button"
 import {
   bricoGro,
   firaCode,

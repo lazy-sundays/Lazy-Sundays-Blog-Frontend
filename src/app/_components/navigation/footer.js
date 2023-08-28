@@ -20,7 +20,7 @@ export default function Footer() {
                         {links.map((link) => {
                             return (
                                  <li>
-                                    <Link href={link.href} className="ml-4 hover:underline hover:decoration-accentprimary hover:decoration-2 md:ml-6">{link.name}</Link>
+                                    <Link key={link.href} href={link.href} className="ml-4 hover:underline hover:decoration-accentprimary hover:decoration-2 md:ml-6">{link.name}</Link>
                                 </li>
                             );
                         })}

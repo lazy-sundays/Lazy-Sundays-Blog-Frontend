@@ -137,8 +137,9 @@ export default async function Author({ params }) {
                 {
                     <ul className="flex flex-col">
                         {
-                            authorInfo.attributes.linkTree.data.map((linkItem) => 
+                            authorInfo.attributes.linkTree.data.map((linkItem, i) => 
                                 <LinkButton 
+                                    key={i}
                                     className="w-full mb-3"
                                     ariaLabel={`go to ${linkItem.attributes.siteName}`}
                                     href={((linkItem.attributes.siteName.trim().toLowerCase()) === "email" ? "mailto:" : "") + linkItem.attributes.link}

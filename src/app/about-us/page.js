@@ -64,8 +64,9 @@ export default async function AboutUs() {
                 <ul className="flex flex-col">
                     {/* TODO: update placeholder with better placeholder */}
                     {
-                        contacts.map((contact) => 
+                        contacts.map((contact, i) => 
                             <LinkButton 
+                                key={i}
                                 as="li"
                                 className="w-full mb-3"
                                 ariaLabel={`go to ${contact.attributes.infoName}`}

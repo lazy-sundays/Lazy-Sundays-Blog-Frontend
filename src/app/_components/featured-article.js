@@ -76,34 +76,37 @@ export default async function FeaturedArticle() {
                 <ReactMarkdown 
                     remarkPlugins={[remarkGfm]} 
                     rehypePlugins={[rehypeFigure, rehypeRaw]} 
-                    children={articleInfo.attributes.body} 
                     className="prose prose-article max-w-full md:max-w-[75ch] text-left"
                     components={{
                         code({node, inline, className, children, ...props}) {
                             const match = /language-(\w+)/.exec(className || '')
                             return !inline && match ? (
-                            <CodeBlock
-                                {...props}
-                                children={String(children).replace(/\n$/, '')}
-                                language={match[1]}
-                                PreTag="div"
-                            />
+                                <CodeBlock
+                                    {...props}
+                                    language={match[1]}
+                                    PreTag="div"
+                                >
+                                    {String(children).replace(/\n$/, '')}
+                                </CodeBlock>
                             ) : (
-                            <code {...props} className={className}>
-                                {children}
-                            </code>
+                                <code {...props} className={className}>
+                                    {children}
+                                </code>
                             )
                         }
                         }}
-                />
+                >
+                    {articleInfo.attributes.body} 
+                </ReactMarkdown>
             </section>
             {/* Featured article "continue reading" button */}
             <LinkButton 
                 ariaLabel={"continue reading article"}
-                children={<>Continue Reading</>}
                 href={`/articles/${articleInfo.attributes.slug}`}
                 className={`sm:px-10 md:px-14 lg:px-120`}
-            />
+            >
+                <>Continue Reading</>
+            </LinkButton>
         </article>
     );
 }
