@@ -16,11 +16,13 @@ export default function Footer() {
                         <span className="self-center text-md font-semibold whitespace-nowrap">the lazy sundays blog</span>
                     </Link>
                     <ul className="flex flex-wrap items-center justify-center mb-4 text-sm font-medium sm:mb-0">
-                        <a href={"/random-article"} className="ml-4 hover:underline hover:decoration-accentprimary hover:decoration-2 md:ml-6">Random Article</a>
+                        <li key={"/random-article"}>
+                            <a href={"/random-article"} className="ml-4 hover:underline hover:decoration-accentprimary hover:decoration-2 md:ml-6">Random Article</a>
+                        </li>
                         {links.map((link) => {
                             return (
-                                 <li>
-                                    <Link key={link.href} href={link.href} className="ml-4 hover:underline hover:decoration-accentprimary hover:decoration-2 md:ml-6">{link.name}</Link>
+                                 <li key={link.href}>
+                                    <Link href={link.href} className="ml-4 hover:underline hover:decoration-accentprimary hover:decoration-2 md:ml-6">{link.name}</Link>
                                 </li>
                             );
                         })}
