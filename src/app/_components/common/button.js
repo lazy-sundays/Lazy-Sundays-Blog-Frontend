@@ -7,12 +7,14 @@ export default function Button({
     className = ``, 
     disabled = false,
     round = false,
+    useAltColorScheme = false,
 }) {
 
     return (
         <button 
             className={
-                `relative group w-fit p-4 m-auto font-semibold text-lg bg-bgsecondary border border-bgprimary 
+                `relative group w-fit p-4 m-auto 
+                ${useAltColorScheme ? `bg-bgsecondary border border-bgsecondary` : `bg-accentprimary border border-accentprimary font-semibold text-lg text-bgprimary`}
                 ${round ? `rounded-full` : `rounded-md`} 
                 ${disabled && `opacity-30`} 
                 ${!disabled && `transition-transform ease-in delay-100 hover:ease-out group-hover:delay-200 hover:-translate-x-1 hover:-translate-y-1`} 
@@ -28,7 +30,7 @@ export default function Button({
             { !disabled && 
                 <>
                     <div aria-hidden
-                        className={`-z-10 absolute w-full h-full p-4 bg-accentprimary ${round ? `rounded-full` : `rounded-md`} top-0 left-0 text-bgprimary`}>
+                        className={`-z-10 absolute w-full h-full p-4 bg-accentprimary ${round ? `rounded-full` : `rounded-md`} top-0 left-0 ${useAltColorScheme && `text-bgprimary`}`}>
                             {/* "shadow" text allows smooth transition of color between all possible states */}
                             {children}
                     </div>

@@ -9,16 +9,18 @@ export default function LinkButton({
     className = ``, 
     disabled = false,
     round = false,
+    useAltColorScheme = false,
 }) {
 
     return (
         <Component
             className={
-                `relative group w-fit p-4 m-auto border border-bgsecondary font-semibold text-center text-lg bg-bgsecondary
+                `${className}
+                relative group w-fit p-4 m-auto font-semibold text-center text-lg
+                ${useAltColorScheme ? `bg-bgsecondary border border-bgsecondary` : `bg-accentprimary border border-accentprimary font-semibold text-lg text-bgprimary`}
                 ${round ? `rounded-full` : `rounded-md`} 
                 ${disabled && `opacity-30`}
-                ${!disabled && `transition-transform ease-in delay-100 hover:ease-out group-hover:delay-200 hover:-translate-x-1 hover:-translate-y-1`}
-                ${className}`
+                ${!disabled && `transition-transform ease-in delay-100 hover:ease-out group-hover:delay-200 hover:-translate-x-1 hover:-translate-y-1`}`
             }
             aria-label={ariaLabel || href}
             disabled={disabled}
@@ -29,7 +31,7 @@ export default function LinkButton({
             { !disabled && 
                 <>
                     <div aria-hidden
-                        className={`-z-10 absolute w-full h-full p-4 bg-accentprimary ${round ? `rounded-full` : `rounded-md`} top-0 left-0 text-bgprimary`}>
+                        className={`-z-10 absolute w-full h-full p-4 bg-accentprimary ${round ? `rounded-full` : `rounded-md`} top-0 left-0 ${useAltColorScheme && `text-bgprimary`}`}>
                             {/* "shadow" text allows smooth transition of color between all possible states */}
                             {children}
                     </div>

@@ -13,7 +13,7 @@ export default function Footer() {
             <div className="w-full max-w-screen-xl mx-auto p-4 md:py-4">
                 <div className="flex items-center justify-between">
                     <Link href="/" className="flex items-center mb-4 sm:mb-0">
-                        <span className="self-center text-md font-semibold whitespace-nowrap">Lazy Sundays Blog</span>
+                        <span className="self-center text-md font-semibold whitespace-nowrap">the lazy sundays blog</span>
                     </Link>
                     <ul className="flex flex-wrap items-center justify-center mb-4 text-sm font-medium sm:mb-0">
                         <a href={"/random-article"} className="ml-4 hover:underline hover:decoration-accentprimary hover:decoration-2 md:ml-6">Random Article</a>
