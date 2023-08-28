@@ -104,7 +104,7 @@ export default async function Article({ params }) {
                     </section>                    
                 </>
             }
-            <View id={articleInfo.id}/>
+            <View id={`article${articleInfo.id}`}/>
         </article>
     );
 }
