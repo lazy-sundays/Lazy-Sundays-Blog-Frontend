@@ -7,7 +7,7 @@ export async function GET(request) {
   let totalArticlePgs = 1;
   let articleSlugs = [];
   for (let i = 1; i <= totalArticlePgs; i++) {
-    articleSlugs = articleSlugs.concat((await fetch(`${process.env.STRAPI_URI_ROOT}/api/articles?fields[0]=slug&pagination[page]=${i}&pagination[pageSize]=1`, {
+    articleSlugs = articleSlugs.concat((await fetch(`${process.env.STRAPI_URI_ROOT}/api/articles?fields[0]=slug&pagination[page]=${i}`, {
       method: "GET",
       headers: {
           "Authorization": "Bearer "+process.env.STRAPI_API_KEY,
@@ -21,7 +21,7 @@ export async function GET(request) {
   let totalAuthorPgs = 1;
   let authorSlugs = [];
   for (let i = 1; i <= totalAuthorPgs; i++) {
-    authorSlugs = authorSlugs.concat((await fetch(`${process.env.STRAPI_URI_ROOT}/api/authors?fields[0]=slug&pagination[page]=${i}&pagination[pageSize]=1`, {
+    authorSlugs = authorSlugs.concat((await fetch(`${process.env.STRAPI_URI_ROOT}/api/authors?fields[0]=slug&pagination[page]=${i}`, {
       method: "GET",
       headers: {
           "Authorization": "Bearer "+process.env.STRAPI_API_KEY,
