@@ -28,7 +28,7 @@ export default function ThemeSwitch() {
                 title="Toggle Dark Mode" 
                 onClick={toggleDarkMode} 
                 className={"hover:opacity-75"}>
-                {mounted && <FontAwesomeIcon icon={theme === 'light' ? faSun : faMoon} className="w-5 h-5 align-middle sm:align-[-0.23em]" />}
+                {mounted && <FontAwesomeIcon icon={theme === 'light' ? faSun : faMoon} className="w-5 xl:w-7 h-5 xl:h-7 sm:align-[-0.23em]" />}
             </button>
         </>
     );

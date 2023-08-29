@@ -92,7 +92,12 @@ module.exports = {
             },
           },
         },
-      })
+      }),
+      maxWidth: {
+        '4xl': '60rem',
+        '5xl': '72rem',
+        'screen-readable': 'calc(1440px + 16vw)',
+      },
     },
   },
   plugins: [

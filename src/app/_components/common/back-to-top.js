@@ -1,9 +1,7 @@
 "use client"
-
 import {useState} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowUp } from '@fortawesome/free-solid-svg-icons'
-import Button from './button';
 
 export default function BackToTop(){
 
@@ -36,10 +34,10 @@ export default function BackToTop(){
     
     
     return (
-      <div className={`${visible ? 'sticky' : "hidden"} w-full flex justify-end bottom-0 pointer-events-none`}>
-        <div className={`mr-3 md:mr-10 mt-3 md:mt-0 mb-3 md:mb-10`}
+      <div className={`${visible ? 'sticky' : "invisible"} w-full flex justify-end bottom-0 pointer-events-none`}>
+        <div className={`-translate-x-6 -translate-y-6 sm:-translate-x-10 sm:-translate-y-10`}
         >
-          <button onClick={scrollToTop} className={`p-4 pointer-events-auto rounded-full bg-bgsecondary hover:bg-accentprimary hover:text-bgsecondary`}>
+          <button onClick={scrollToTop} className={`p-4 pointer-events-auto rounded-full bg-accentprimary text-bgsecondary hover:opacity-75`}>
             <FontAwesomeIcon className={`fa-lg fa-fw`} icon={faArrowUp} />
           </button>
         </div> 

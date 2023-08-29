@@ -15,13 +15,14 @@ export default function Navbar() {
     ];
 
     return (
-        <nav className="sticky px-4 sm:px-14 lg:px-20">
-            <div className="flex flex-wrap sm:flex-nowrap items-center py-3">
+        <nav className="sticky w-full px-4 sm:px-14 lg:px-20 py-14 max-w-screen-readable mx-auto">
+            <div className="flex flex-wrap sm:flex-nowrap h-[90px]">
                 <Link href="/" className="max-w-[50%] mr-auto flex items-center">
                     <Image 
                         src={logo}
                         alt="lazy sundays logo"
                         className="justify-left"
+                        height={90}
                     />
                 </Link>
                 <div className="hidden sm:flex justify-around justify-items-center sm:pr-10 lg:pr-30">
@@ -40,8 +41,8 @@ export default function Navbar() {
                 <Menu>
                     {({ open }) => (
                         <>
-                            <Menu.Button className={"sm:collapse"}><FontAwesomeIcon className={"mr-4 w-5 h-5 align-middle hover:opacity-75"} icon={open ? faXmark : faBars}/></Menu.Button>
-                            <hr />
+                            <Menu.Button className={"sm:collapse self-start"}><FontAwesomeIcon className={"mr-4 w-5 h-5 hover:opacity-75"} icon={open ? faXmark : faBars}/></Menu.Button>
+                            
                             <Transition as={Fragment}
                                 enter="transition ease-out duration-100"
                                 enterFrom="transform opacity-0 scale-95"

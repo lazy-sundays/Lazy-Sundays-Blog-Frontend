@@ -30,7 +30,7 @@ export default function Button({
             { !disabled && 
                 <>
                     <div aria-hidden
-                        className={`-z-10 absolute w-full h-full p-4 bg-accentprimary ${round ? `rounded-full` : `rounded-md`} top-0 left-0 ${useAltColorScheme && `text-bgprimary`}`}>
+                        className={`-z-10 absolute w-full h-full p-4 bg-accentprimary ${round ? `rounded-full` : `rounded-md`} top-0 left-0 ${useAltColorScheme ? `text-bgprimary` : ``}`}>
                             {/* "shadow" text allows smooth transition of color between all possible states */}
                             {children}
                     </div>

@@ -71,7 +71,7 @@ export default async function Article({ params }) {
         <article className="text-center">
             {
                 <>
-                    <header className="-mx-4 sm:-mx-14 lg:-mx-20 -mt-5">
+                    <header className="-mt-5">
                         <div className={"md:relative"}>
                             <div className={`relative mt-4 ${(articleInfo.attributes.hero == null) ? "" : "aspect-21/9"}`}>
                                 { (articleInfo.attributes.hero != null) &&
