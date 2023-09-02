@@ -28,7 +28,7 @@ export default async function Home() {
   const recentArticles = (await getRecentArticles()).data;
 
   return (
-    <div className="w-full flex lg:grid lg:grid-cols-[3fr_1fr] flex-wrap gap-x-10 gap-y-10">
+    <div className="w-full flex xl:grid xl:grid-cols-[3fr_1fr] flex-wrap gap-x-10 gap-y-10">
       <section id="featured-article" className="grow max-w-full">
           <h1 className="text-3xl md:text-4xl font-bold uppercase mb-5">
               Featured Article
