@@ -2,6 +2,7 @@ import Image from "next/image";
 import sunConcept from "/public/sun-concept.png";
 import LinkButton from "@/app/_components/common/link-button";
 import { notFound } from "next/navigation";
+import getDomainIcon from "@/app/_lib/get-domain-icon";
 
 export async function generateMetadata({ params }, parent) {
     //fetch data
@@ -139,8 +140,9 @@ export default async function Author({ params }) {
                                     key={i}
                                     className="w-full mb-3"
                                     ariaLabel={`go to ${linkItem.attributes.siteName}`}
-                                    href={((linkItem.attributes.siteName.trim().toLowerCase()) === "email" ? "mailto:" : "") + linkItem.attributes.link}
+                                    href={linkItem.attributes.link}
                                 >
+                                    {getDomainIcon(linkItem.attributes.link)}
                                     {linkItem.attributes.siteName}
                                 </LinkButton>
                             )
