@@ -37,12 +37,16 @@ module.exports = {
         accenttertiary: 'rgb(var(--accent-tertiary) / <alpha-value>)',
       },
       fontFamily: {
+        //  special 'article-[serif/sans/mono] families are specified with the lists reversed to remedy a really dumb bug. 
+        //  this is only a band-aid solution, but it works!
         logo: ['var(--font-bricolage-grotesque), var(--font-noto-sans-jp)', ...defaultTheme.fontFamily.sans],
         header: ['var(--font-urw-gothic), var(--font-noto-sans-jp)', ...defaultTheme.fontFamily.sans],
-        //NOTE: keep this order/format for all subsequent font family sets. I have no idea why but it breaks if you don't
-        serif: [...(defaultTheme.fontFamily.serif.reverse()), 'var(--font-libre-baskerville), var(--font-noto-serif-jp)'],
-        sans: [...(defaultTheme.fontFamily.sans.reverse()),'var(--font-public-sans), var(--font-noto-sans-jp)'],
-        mono: [...defaultTheme.fontFamily.mono, 'var(--font-fira-code)'],
+        serif: ['var(--font-libre-baskerville), var(--font-noto-serif-jp)', ...(defaultTheme.fontFamily.serif)],
+        'article-serif': [...(defaultTheme.fontFamily.serif.reverse()), 'var(--font-libre-baskerville), var(--font-noto-serif-jp)'],
+        sans: ['var(--font-public-sans), var(--font-noto-sans-jp)', ...(defaultTheme.fontFamily.sans)],
+        'article-sans': [...(defaultTheme.fontFamily.sans.reverse()), 'var(--font-public-sans), var(--font-noto-sans-jp)'],
+        mono: ['var(--font-fira-code)', ...defaultTheme.fontFamily.mono],
+        'article-mono': [...defaultTheme.fontFamily.mono, 'var(--font-fira-code)'],
       },
       keyframes: {
         blink: {
@@ -77,15 +81,12 @@ module.exports = {
             '--tw-prose-pre-bg': theme('colors.bgcode / 100%'),
             '--tw-prose-th-borders': theme('colors.textprimary / 100%'),
             '--tw-prose-td-borders': theme('colors.texttertiary / 100%'),
-            fontFamily: theme('fontFamily.serif'),
-            // 'h1, h2, h3, h4, th, figcaption': {
-            //   fontFamily: theme('fontFamily.sans'),
-            // },
+            fontFamily: theme('fontFamily.article-serif'),
             '.lead, h1, h2, h3, h4, table, thead, tr, th, td, blockquote, figcaption': {
-              fontFamily: theme('fontFamily.sans'),
+              fontFamily: theme('fontFamily.article-sans'),
             },
             'code': {
-              fontFamily: theme('fontFamily.mono'),
+              fontFamily: theme('fontFamily.article-mono'),
             },
             'blockquote, thead, th': {
               'font-weight': 'bold',

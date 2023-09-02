@@ -11,15 +11,18 @@ import localFont from 'next/font/local'
 
 export const bricoGro = Bricolage_Grotesque({ 
     subsets: ['latin'],
+    weight: ['200', '400', '700'],
     variable: "--font-bricolage-grotesque",
   });
 export const libreBask = Libre_Baskerville({
     subsets: ['latin'],
+    weight: ['400', '700'],
     variable: "--font-libre-baskerville",
     weight: ['400', '700']
 });
 export const publicSans = Public_Sans({ 
     subsets: ['latin'],
+    weight: ['200', '400', '700'],
     variable: "--font-public-sans",
 });
 export const notoSansJP = Noto_Sans_JP({ 
@@ -34,6 +37,7 @@ export const notoSerifJP = Noto_Serif_JP({
 });
 export const firaCode = Fira_Code({ 
     subsets: ['latin'],
+    weight: ['400', '700'],
     variable: "--font-fira-code",
 });
 export const notoColorEmoji = Noto_Color_Emoji({ 
