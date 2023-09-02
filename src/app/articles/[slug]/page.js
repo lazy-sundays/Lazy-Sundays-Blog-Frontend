@@ -7,6 +7,9 @@ import Link from 'next/link';
 import View from '../../_components/view-tracking/view'
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
+import { Redis } from "@upstash/redis";
+
+const redis = Redis.fromEnv();
 
 export async function generateMetadata({ params }, parent) {
     //fetch data
@@ -68,6 +71,8 @@ export default async function Article({ params }) {
     if (articleList.length === 0) notFound();
     const articleInfo = articleList[0];
 
+    const views = (await redis.get(["pageviews", "page", `article${articleInfo.id}`].join(":"))) ?? 0;
+
     return (
         <article className="text-center">
             {
@@ -86,7 +91,7 @@ export default async function Article({ params }) {
                         </div>
                         {/* article info */}
                         {
-                            <div className="flex justify-center justify-items-center gap-x-10 text-center max-w-96 mx-auto mt-5 px-5 text-sm" aria-hidden>
+                            <div className="flex flex-wrap justify-center justify-items-center gap-x-10 gap-y-2 text-center max-w-96 mx-auto mt-5 px-5 text-sm" aria-hidden>
                                 <span className="italic">
                                     {       
                                         (new Date(articleInfo.attributes.publishedAt)).toLocaleDateString( "en-US",
@@ -110,10 +115,13 @@ export default async function Article({ params }) {
                                 <span className="italic">
                                     ~ {Math.round(articleInfo.attributes.readTime)} min. read
                                 </span>
+                                <span className="italic">
+                                    <span className='text-accentsecondary font-bold'>{views}</span> views
+                                </span>
                             </div>
                         }
                     </header>
-                    {<hr className="w-1/3 my-5 border-textprimary/25 m-auto" aria-hidden />}
+                    {<hr className="w-[75ch] max-w-[80%] my-5 border-textprimary/25 m-auto" aria-hidden />}
                     {/* Article body */}
                     <section className={"flex justify-center mx-auto mb-10 text-lg"}>
                         <ReactMarkdown 
