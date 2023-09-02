@@ -15,6 +15,7 @@ export default function ContributorPlaque({author }) {
             href={`/authors/${author.attributes.slug}`}
             ariaLabel={`go to ${author.attributes.name}'s page`}
             className="grow w-full"
+            useAltColorScheme
         >
             <div className="flex">
                 <div className="collapse mr-4 2xs:visible group-hover:z-10" aria-hidden>

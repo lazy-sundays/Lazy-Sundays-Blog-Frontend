@@ -1,9 +1,7 @@
 "use client"
-
 import {useState} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowUp } from '@fortawesome/free-solid-svg-icons'
-import Button from './button';
 
 export default function BackToTop(){
 
@@ -14,10 +12,10 @@ export default function BackToTop(){
     const toggleVisible = () => {
         if (!isBrowser()) return;
         const scrolled = document.documentElement.scrollTop;
-        if (scrolled > 300){
+        if (scrolled > window.innerHeight){
           setVisible(true)
         } 
-        else if (scrolled <= 300){
+        else if (scrolled <= window.innerHeight){
           setVisible(false)
         }
       };
@@ -36,10 +34,10 @@ export default function BackToTop(){
     
     
     return (
-      <div className={`${visible ? 'sticky' : "hidden"} w-full flex justify-end bottom-0`}>
-        <div className={`mr-3 md:mr-10 mt-3 md:mt-0 mb-3 md:mb-10`}
+      <div className={`${visible ? 'sticky' : "invisible"} w-full flex justify-end bottom-0 pointer-events-none`}>
+        <div className={`mt-6 sm:mt-10 -translate-x-6 -translate-y-6 sm:-translate-x-10 sm:-translate-y-10`}
         >
-          <button onClick={scrollToTop} className={`p-4 rounded-full bg-bgsecondary hover:bg-accentprimary hover:text-bgsecondary`}>
+          <button onClick={scrollToTop} className={`p-4 pointer-events-auto rounded-full bg-accentprimary text-bgsecondary hover:opacity-75`}>
             <FontAwesomeIcon className={`fa-lg fa-fw`} icon={faArrowUp} />
           </button>
         </div> 
