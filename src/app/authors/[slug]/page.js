@@ -91,7 +91,7 @@ export default async function Author({ params }) {
     const numContributions = (await getNumContributions()).count;
     return (
         <article className="flex flex-wrap place-content-between gap-y-10">
-            <div className="flex flex-col ">
+            <div className="flex flex-col w-full md:w-auto">
                 <h1 className="text-3xl md:text-4xl font-bold uppercase mb-5">
                     Biography
                 </h1>
@@ -128,13 +128,15 @@ export default async function Author({ params }) {
                     </div>
                 }
             </div>
-            <div className="w-full md:max-w-[25%]">
+            <div className="w-full md:max-w-[50%] xl:max-w-[25%]">
                 <h1 className="text-3xl md:text-4xl font-bold uppercase mb-5">
                     Find {selectThirdPerson(authorInfo.attributes.pronouns)} At
                 </h1>
                 {
                     <ul className="flex flex-col">
                         {
+                            authorInfo.attributes.linkTree.data.length === 0 ?
+                            <>{`Nowhere else (yet). A lazy sundays exclusive!`}</> :
                             authorInfo.attributes.linkTree.data.map((linkItem, i) => 
                                 <LinkButton 
                                     key={i}

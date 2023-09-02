@@ -1,5 +1,6 @@
 import ListOfContributors from "../_components/about-us/list-of-contributors";
 import LinkButton from "@/app/_components/common/link-button";
+import getDomainIcon from "../_lib/get-domain-icon";
 
 export const metadata = {
     title: 'About Us',
@@ -70,9 +71,9 @@ export default async function AboutUs() {
                                 as="li"
                                 className="w-full mb-3"
                                 ariaLabel={`go to ${contact.attributes.infoName}`}
-                                href={((contact.attributes.infoName.toLowerCase().replace("-", "")) === "email" ? "mailto:" : "") + contact.attributes.info}
+                                href={contact.attributes.info}
                             >
-                                {contact.attributes.infoName}
+                                {getDomainIcon(contact.attributes.info)} {contact.attributes.infoName}
                             </LinkButton>
                         )
                     }

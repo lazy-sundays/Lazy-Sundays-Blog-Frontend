@@ -51,9 +51,13 @@ export default function getDomainIcon(url) {
     //check if URL is an email address
     if (url.includes("mailto:")) return <FontAwesomeIcon icon={faEnvelope} className='mr-2 align-[-0.15em]'/>;
 
-    //separate domain from full URL
-    const uri = new URL(url);
-    console.log(uri);
-
-    return (iconLookup[uri.hostname] ? <FontAwesomeIcon icon={iconLookup[uri.hostname]} className='mr-2 align-[-0.15em]'/> : <FontAwesomeIcon icon={faLink} className='mr-2 align-[-0.15em]'/>);
+    try{
+        //separate domain from full URL
+        const uri = new URL(url);
+    
+        return (iconLookup[uri.hostname] ? <FontAwesomeIcon icon={iconLookup[uri.hostname]} className='mr-2 align-[-0.15em]'/> : <FontAwesomeIcon icon={faLink} className='mr-2 align-[-0.15em]'/>);
+    }
+    catch {
+        return <FontAwesomeIcon icon={faLink} className='mr-2 align-[-0.15em]'/>;
+    }
 }
