@@ -19,7 +19,7 @@ export default async function Footer() {
                 <div className="flex items-center justify-between">
                     <div className='flex flex-col text-center'>
                         <Link href="/" className="flex items-center mb-4 sm:mb-0">
-                            <span className="self-center text-md font-semibold whitespace-nowrap">The Lazy Sundays Blog</span>
+                            <span className="self-center text-md font-semibold whitespace-nowrap">the lazy sundays blog</span>
                         </Link>
                         <span className='italic text-sm font-sans'>You are visitor <span className='text-accentsecondary font-bold'>#{views}</span>!</span>
                     </div>
