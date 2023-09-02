@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from "remark-gfm";
+import remarkEmoji from 'remark-emoji';
 import rehypeFigure from "rehype-figure";
 import rehypeRaw from "rehype-raw";
 import CodeBlock from './common/code-block';
@@ -75,7 +76,7 @@ export default async function FeaturedArticle() {
             {/* Article body */}
             <section className={"flex justify-center px-5 md:px-0 mx-auto mb-10 text-lg max-h-60 overflow-hidden gradient-mask-b-0"} inert="true">
                 <ReactMarkdown 
-                    remarkPlugins={[remarkGfm]} 
+                    remarkPlugins={[remarkGfm, [remarkEmoji, { accessible: true }]]} 
                     rehypePlugins={[rehypeFigure, rehypeRaw]} 
                     className="prose prose-article max-w-full md:max-w-[75ch] text-left"
                     components={{

@@ -1,5 +1,6 @@
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from "remark-gfm";
+import remarkEmoji from 'remark-emoji';
 import rehypeRaw from "rehype-raw";
 import CodeBlock from '../../_components/common/code-block';
 import Link from 'next/link';
@@ -116,7 +117,7 @@ export default async function Article({ params }) {
                     {/* Article body */}
                     <section className={"flex justify-center mx-auto mb-10 text-lg"}>
                         <ReactMarkdown 
-                            remarkPlugins={[remarkGfm]} 
+                            remarkPlugins={[remarkGfm, [remarkEmoji, { accessible: true }]]} 
                             rehypePlugins={[rehypeRaw]} 
                             className="prose prose-article max-w-full lg:max-w-[75ch] text-left"
                             components={{
