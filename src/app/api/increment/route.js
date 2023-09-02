@@ -37,7 +37,7 @@ export async function POST(req) {
       }
 
       //this is a new entry within 24 hrs of the person's last view
-      await redis.incr(["pageviews", "projects", id].join(":"));
+      await redis.incr(["pageviews", "page", id].join(":"));
       return new NextResponse(null, { status: 202 });
     }
 
@@ -51,7 +51,7 @@ export async function POST(req) {
     }
 
     //this is a new entry within 24 hrs of the person's last view
-    await redis.incr(["pageviews", "projects", id].join(":"));
+    await redis.incr(["pageviews", "page", id].join(":"));
 
     //if the cookie doesnt already exist, set it
     const cookieValue = (viewedCookie) ? {} : {'Set-Cookie': `hasViewed=home; Max-Age=${60 * 60 * 24}`}; 
