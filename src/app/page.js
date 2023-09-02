@@ -36,33 +36,33 @@ export default async function Home() {
           <FeaturedArticle />
       </section>
       <aside id="recent-articles" className="grow">
-          <h1 className="text-3xl md:text-4xl font-bold uppercase mb-5">
-              Most Recent Articles
-          </h1>
-          <ul>
-              {recentArticles.map((article, i, all) => {
-                  return (
-                      <>
-                        <li className={`relative group ${("py-6")} mx-2 sm:px-8 hover:bg-bgsecondary`} key={article.attributes.id}>
-                            <span className="text-xs text-accentprimary">
-                                {(new Date(article.attributes.publishedAt)).toLocaleDateString( "en-US",
-                                    {month: '2-digit', day: '2-digit'}
-                                )}
-                            </span>
-                            <span className="ml-2 text-xl font-semibold group-hover:underline group-hover:decoration-accentprimary group-hover:decoration-2">
-                                {article.attributes.title}
-                            </span>
-                            <Link href={`/articles/${article.attributes.slug}`} aria-label={"read article"}>
-                                <span className="absolute inset-0" aria-hidden/>
-                            </Link>
-                        </li>
-                        {(i < all.length-1) &&
-                        <hr className="mx-2 border-textprimary/25" />
-                        }
-                      </>
-                  );
-              })}
-          </ul>
+            <h1 className="text-3xl md:text-4xl font-bold uppercase mb-5">
+                Most Recent Articles
+            </h1>
+            <ul>
+                {recentArticles.map((article, i, all) => {
+                    return (
+                        <>
+                            <li className={`relative group ${("py-6")} mx-2 sm:px-8 hover:bg-bgsecondary`} key={article.attributes.id}>
+                                <span className="text-xs text-accentprimary">
+                                    {(new Date(article.attributes.publishedAt)).toLocaleDateString( "en-US",
+                                        {month: '2-digit', day: '2-digit'}
+                                    )}
+                                </span>
+                                <span className="ml-2 text-xl font-semibold group-hover:underline group-hover:decoration-accentprimary group-hover:decoration-2">
+                                    {article.attributes.title}
+                                </span>
+                                <Link href={`/articles/${article.attributes.slug}`} aria-label={"read article"}>
+                                    <span className="absolute inset-0" aria-hidden/>
+                                </Link>
+                            </li>
+                            {(i < all.length-1) &&
+                            <hr className="mx-2 border-textprimary/25" />
+                            }
+                        </>
+                    );
+                })}
+            </ul>
       </aside>
     </div>
   )

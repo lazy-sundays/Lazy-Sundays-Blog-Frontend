@@ -72,7 +72,7 @@ export default async function FeaturedArticle() {
                     </div>
                 </div>
             </header>
-            <hr className="w-1/3 my-5 border-textprimary/25 m-auto" aria-hidden />
+            <hr className="w-[75ch] max-w-[80%] my-5 border-textprimary/25 m-auto" aria-hidden />
             {/* Article body */}
             <section className={"flex justify-center px-5 md:px-0 mx-auto mb-10 text-lg max-h-60 overflow-hidden gradient-mask-b-0"} inert="true">
                 <ReactMarkdown 
