@@ -12,10 +12,10 @@ export default function BackToTop(){
     const toggleVisible = () => {
         if (!isBrowser()) return;
         const scrolled = document.documentElement.scrollTop;
-        if (scrolled > 300){
+        if (scrolled > window.innerHeight){
           setVisible(true)
         } 
-        else if (scrolled <= 300){
+        else if (scrolled <= window.innerHeight){
           setVisible(false)
         }
       };
@@ -35,7 +35,7 @@ export default function BackToTop(){
     
     return (
       <div className={`${visible ? 'sticky' : "invisible"} w-full flex justify-end bottom-0 pointer-events-none`}>
-        <div className={`-translate-x-6 -translate-y-6 sm:-translate-x-10 sm:-translate-y-10`}
+        <div className={`mt-6 sm:mt-10 -translate-x-6 -translate-y-6 sm:-translate-x-10 sm:-translate-y-10`}
         >
           <button onClick={scrollToTop} className={`p-4 pointer-events-auto rounded-full bg-accentprimary text-bgsecondary hover:opacity-75`}>
             <FontAwesomeIcon className={`fa-lg fa-fw`} icon={faArrowUp} />
