@@ -17,7 +17,7 @@ export default function Navbar() {
         <nav className="sticky w-full px-4 sm:px-14 lg:px-20 mt-7 mb-14 max-w-screen-readable mx-auto">
             <div className="flex flex-wrap sm:flex-nowrap">
                 <Link href="/" className="max-w-[50%] mr-auto flex items-center">
-                    <Logo className={`
+                    <Logo aria-label={"the lazy sundays blog logo"} className={`
                         min-w-[7rem] w-[10vw] max-w-[13rem] h-auto
                         invert-[6%] sepia-[23%] saturate-[3901%] hue-rotate-[203deg] brightness-[97%] contrast-[94%]
                         dark:invert-[98%] dark:saturate-[7374%] dark:hue-rotate-[326deg] dark:brightness-[130%] dark:contrast-[96%]

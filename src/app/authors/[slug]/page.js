@@ -97,8 +97,9 @@ export default async function Author({ params }) {
                 </h1>
                 {
                     <div className="md:flex md:flex-wrap gap-y-4 mr-0 sm:mr-8 max-w-3xl">
-                        <figure className="relative shrink-0 w-48 h-48 mx-auto md:mx-4">
+                        <figure className="relative shrink-0 w-48 h-48 mx-auto md:mx-4" aria-label={`a digital portrait of ${authorInfo.attributes.name}`}>
                             <Image src={authorInfo.attributes.avatar || starConcept}
+                                alt={`${authorInfo.attributes.name}'s profile picture`}
                                 className={"object-cover rounded-full border-2 border-textprimary/50"}
                                 fill
                             />

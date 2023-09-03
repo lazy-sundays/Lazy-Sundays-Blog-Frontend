@@ -21,7 +21,7 @@ export default function ContributorPlaque({author }) {
                 <div className="collapse mr-4 2xs:visible group-hover:z-10" aria-hidden>
                     <Image 
                         src={author.attributes.avatar || starConcept}
-                        alt={`author image`}
+                        alt={`${author.attributes.name}'s profile picture`}
                         width={96}
                         height={96}
                         className={"aspect-square rounded-full border-2 border-slate-400 dark:border-slate-500"}
