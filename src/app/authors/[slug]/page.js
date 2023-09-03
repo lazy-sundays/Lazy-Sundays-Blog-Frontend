@@ -1,5 +1,5 @@
 import Image from "next/image";
-import sunConcept from "/public/sun-concept.png";
+import starConcept from "/public/star-concept.png";
 import LinkButton from "@/app/_components/common/link-button";
 import { notFound } from "next/navigation";
 import getDomainIcon from "@/app/_lib/get-domain-icon";
@@ -98,7 +98,7 @@ export default async function Author({ params }) {
                 {
                     <div className="md:flex md:flex-wrap gap-y-4 mr-0 sm:mr-8 max-w-3xl">
                         <figure className="relative shrink-0 w-48 h-48 mx-auto md:mx-4">
-                            <Image src={authorInfo.attributes.avatar || sunConcept}
+                            <Image src={authorInfo.attributes.avatar || starConcept}
                                 className={"object-cover rounded-full border-2 border-textprimary/50"}
                                 fill
                             />

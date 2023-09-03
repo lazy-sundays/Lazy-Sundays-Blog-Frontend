@@ -43,7 +43,7 @@ export default async function Footer() {
                     </div>
                 </div>
                 <span className="block text-xs text-center">
-                    <div className="">Est. 2023.</div>
+                    <div className="">Ver. {process.env.APP_VERSION} | Est. 2023.</div>
                     <div className="">Designed by <Link href="/authors/devin-toms" className="text-accentprimary font-bold hover:underline hover:decoration-accentprimary hover:decoration-2">Devin Toms</Link> and <Link href="/authors/jenny-leidig" className="text-accentprimary font-bold hover:underline hover:decoration-accentprimary hover:decoration-2">Jenny Leidig</Link></div>
                     <div className="mb-2">Lazy Sundays &copy; 2023</div>
                 </span>
