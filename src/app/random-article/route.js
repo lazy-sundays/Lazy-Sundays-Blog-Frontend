@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 
-export async function GET(request) {
+
+export async function GET(request) { // eslint-disable-line
     
     const res = await fetch(process.env.STRAPI_URI_ROOT+"/api/random-article", 
         {

@@ -21,7 +21,7 @@ export default function GlobalError({ error, reset }) {
                   width={150}
                   height={150}
                   className='m-auto'
-                  //TODO: add alt text
+                  alt="a disembodied arm smashing a laptop in frustration"
               />
               <p className='mt-5 text-lg md:text-xl lg:text-2xl'>{error.message}</p>
               <Button onClick={() => reset()} className={"mt-10"}>Try Again</Button>

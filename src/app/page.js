@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export const metadata = {
     title: 'the lazy sundays blog',
-    description: `This is the lazy sundays blog home page` //TODO: put an actual description here
+    description: `This is the lazy sundays blog, a collective of personal blogs for games, movies. tv, music, etc.`
 };
 
 export default async function Home() {
