@@ -39,6 +39,7 @@ const iconLookup = {
     "playstation.com": faPlaystation,
     "soundcloud.com": faSoundcloud,
     "spotify.com": faSpotify,
+    "open.spotify.com": faSpotify,
     "tiktok.com": faTiktok,
     "tumblr.com": faTumblr,
     "twitch.tv": faTwitch,

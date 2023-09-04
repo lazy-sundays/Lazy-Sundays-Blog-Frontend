@@ -2,8 +2,8 @@ import { getServerSideSitemap } from 'next-sitemap'
 
 export const revalidate = 60 * 60 * 24 // revalidate at most once per day
 
-export async function GET(request) {
-  // Get article/author slugs from cms
+export async function GET() {
+  // Get article slugs from cms
   let totalArticlePgs = 1;
   let articleSlugs = [];
   for (let i = 1; i <= totalArticlePgs; i++) {
@@ -17,7 +17,7 @@ export async function GET(request) {
       return (res.data);
     })).map((article) => article.attributes.slug));
   }
-
+  // Get author slugs from cms
   let totalAuthorPgs = 1;
   let authorSlugs = [];
   for (let i = 1; i <= totalAuthorPgs; i++) {

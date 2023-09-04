@@ -27,7 +27,7 @@ export default async function AboutUs() {
     }
     async function getContacts() {
         const res = await fetch(
-            process.env.STRAPI_URI_ROOT+"/api/contact-us?fields[0]=contactInfo&populate[contactInfo][fields][0]=infoName&populate[contactInfo][fields][1]=info", 
+            process.env.STRAPI_URI_ROOT+"/api/contact-us?populate=contactInfo", 
             {
                 method: "GET",
                 headers: {

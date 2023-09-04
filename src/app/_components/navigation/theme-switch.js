@@ -11,7 +11,7 @@ export default function ThemeSwitch() {
     const {theme, setTheme} = useTheme();
     const [themeIndex, setThemeIndex] = useState(THEMES.findIndex((x) => (x === theme)));
 
-    const toggleDarkMode = (checked) => {
+    const toggleDarkMode = () => {
         const newIndex = (themeIndex + 1) % THEMES.length;
         //change dark mode preference
         setThemeIndex(newIndex);

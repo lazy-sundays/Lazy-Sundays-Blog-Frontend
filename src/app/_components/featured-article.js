@@ -30,12 +30,12 @@ export default async function FeaturedArticle() {
 
     return (
         <article className="text-center">
-            <meta name="author" content={articleInfo.attributes.authors.data.map((author, i, all) => `${author.attributes.name}`)}></meta>
+            <meta name="author" content={articleInfo.attributes.authors.data.map((author) => `${author.attributes.name}`)}></meta>
             <header className="">
                 <div className={"md:relative sm:mb-10"}>
                     <div className={`relative mt-4 ${(articleInfo.attributes.hero == null) ? "" : "aspect-21/9"}`}>
                         { (articleInfo.attributes.hero != null) &&
-                            <Image fill className="object-center object-cover" src={articleInfo.attributes.hero}/>
+                            <Image fill className="object-center object-cover" src={articleInfo.attributes.hero} alt={articleInfo.attributes.heroAltText}/>
                         }
                     </div>
                     <div className={`${(articleInfo.attributes.hero == null) ? "pb-4":"md:absolute md:bottom-0"} pt-4 pb-4 w-full sm:px-10 md:px-24 xl:px-52 text-center bg-white/50 dark:bg-black/50 backdrop-blur-sm`}>
@@ -80,7 +80,7 @@ export default async function FeaturedArticle() {
                     rehypePlugins={[rehypeFigure, rehypeRaw]} 
                     className="prose prose-article max-w-full md:max-w-[75ch] text-left"
                     components={{
-                        code({node, inline, className, children, ...props}) {
+                        code({inline, className, children, ...props}) {
                             const match = /language-(\w+)/.exec(className || '')
                             return !inline && match ? (
                                 <CodeBlock

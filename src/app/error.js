@@ -5,7 +5,7 @@ import errorGIF from "/public/error.gif";
  
 export default function Error({ error, reset }) {
 
-    console.log(error);
+    // console.log(error);
     return (
         <div className='text-center'>
             <h2 className='mt-5 text-wrap text-3xl md:text-5xl lg:text-7xl'>Something broke!</h2>
@@ -14,7 +14,7 @@ export default function Error({ error, reset }) {
                 width={150}
                 height={150}
                 className='m-auto'
-                //TODO: add alt text
+                alt="a disembodied arm smashing a laptop in frustration"
             />
             <p className='mt-5 text-lg md:text-xl lg:text-2xl'>{error.message}</p>
             <Button onClick={() => reset()} className={"mt-10"}>Try Again</Button>

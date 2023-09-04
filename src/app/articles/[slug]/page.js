@@ -81,7 +81,7 @@ export default async function Article({ params }) {
                         <div className={"md:relative"}>
                             <div className={`relative mt-4 ${(articleInfo.attributes.hero == null) ? "" : "aspect-21/9"}`}>
                                 { (articleInfo.attributes.hero != null) &&
-                                    <Image fill={true} className="object-center object-cover" src={articleInfo.attributes.hero}/>
+                                    <Image fill={true} className="object-center object-cover" src={articleInfo.attributes.hero} alt={articleInfo.attributes.heroAltText}/>
                                 }
                             </div>
                             <div className={`${(articleInfo.attributes.hero == null) ? "pb-4":"md:absolute md:bottom-0"} pt-4 pb-4 md:pb-8 lg:pb-12 w-full px-4 sm:px-14 lg:px-20 text-center bg-white/50 dark:bg-black/50 backdrop-blur-sm`}>
@@ -129,7 +129,7 @@ export default async function Article({ params }) {
                             rehypePlugins={[rehypeRaw]} 
                             className="prose prose-article max-w-full lg:max-w-[75ch] text-left"
                             components={{
-                                code({node, inline, className, children, ...props}) {
+                                code({inline, className, children, ...props}) {
                                   const match = /language-(\w+)/.exec(className || '')
                                   return !inline && match ? (
                                     <CodeBlock
