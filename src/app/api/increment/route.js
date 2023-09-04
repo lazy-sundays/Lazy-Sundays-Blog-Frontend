@@ -1,6 +1,6 @@
 import { Redis } from "@upstash/redis";
 import { NextResponse } from "next/server";
-import { getClientIp } from "request-ip";
+import { ipAddress } from "@vercel/edge";
  
 const redis = Redis.fromEnv();
  
@@ -18,7 +18,7 @@ export async function POST(req) {
     }
 
     //if we can get a user's ip, check if duplicate request in 24 hrs
-    const ip = (getClientIp(req));
+    const ip = (ipAddress(req));
     if (ip){
       // Hash the IP and turn it into a hex string
       const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(ip));
