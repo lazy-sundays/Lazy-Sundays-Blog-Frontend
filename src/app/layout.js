@@ -15,7 +15,7 @@ import {
 } from "./fonts"
 import './globals.css'
 
-export const revalidate = 10;
+export const revalidate = process.env.REVALIDATION_TIME;
 export const metadata = {
   title: {
     template: `%s — the lazy sundays blog`,
