@@ -16,5 +16,4 @@ module.exports = {
         ],
     },
     generateIndexSitemap: false,
-    outDir: 'src/app',
   }
