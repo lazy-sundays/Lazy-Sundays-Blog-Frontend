@@ -31,7 +31,7 @@ export default function Navbar() {
                         );
                     })}
                 </div>
-                <div className="mr-4 sm:mr-0 mt-3 sm:mt-4 md:text-2xl">
+                <div className="mr-4 sm:mr-0 mt-[.80rem] sm:mt-4 text-2xl">
                         <ThemeSwitch />
                 </div>
 
@@ -39,7 +39,7 @@ export default function Navbar() {
                 <Menu>
                     {({ open }) => (
                         <>
-                            <Menu.Button className={"sm:collapse self-start"}><FontAwesomeIcon className={"mt-4 mr-4 w-5 h-5 hover:opacity-75"} icon={open ? faXmark : faBars}/></Menu.Button>
+                            <Menu.Button className={"text-2xl sm:collapse self-start"}><FontAwesomeIcon className={"mt-4 mr-4 w-5 h-5 hover:opacity-75"} icon={open ? faXmark : faBars}/></Menu.Button>
                             
                             <Transition as={Fragment}
                                 enter="transition ease-out duration-100"
