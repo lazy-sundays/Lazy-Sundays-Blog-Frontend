@@ -31,7 +31,7 @@ export default function Navbar() {
                         );
                     })}
                 </div>
-                <div className="mr-4 sm:mr-0 mt-[.80rem] sm:mt-4 text-2xl">
+                <div className="mr-4 sm:mr-0 mt-3 sm:mt-4 text-2xl">
                         <ThemeSwitch />
                 </div>
 
