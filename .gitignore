@@ -35,5 +35,5 @@ yarn-error.log*
 next-env.d.ts
 
 # seo files
-/src/app/robots.txt
-/src/app/sitemap.xml
+/public/robots.txt
+/public/sitemap.xml
