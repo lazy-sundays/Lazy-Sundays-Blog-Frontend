@@ -11,7 +11,7 @@ export default function NotFound() {
             width={100}
             height={100}
             className='m-auto'
-            //TODO: add alt text
+            alt='a round yellow emoji guy shrugging his shoulders in confusion'
         />
         <p className='mt-5 text-lg md:text-xl lg:text-2xl'>Could not find requested resource. Are you sure the address is correct?</p>
         <LinkButton href="/" className={"mt-10"}>Return Home</LinkButton>

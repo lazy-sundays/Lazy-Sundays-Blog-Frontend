@@ -1,5 +1,12 @@
 import ListOfContributors from "../_components/about-us/list-of-contributors";
+import LinkButton from "@/app/_components/common/link-button";
+import getDomainIcon from "../_lib/get-domain-icon";
 
+export const metadata = {
+    title: 'About Us',
+    description: `Learn all about how we do things on the lazy sundays blog`
+};
+    
 export default async function AboutUs() {
     async function getBlurb() {
         const res = await fetch(
@@ -20,7 +27,7 @@ export default async function AboutUs() {
     }
     async function getContacts() {
         const res = await fetch(
-            process.env.STRAPI_URI_ROOT+"/api/contact-us?fields[0]=contactInfo&populate[contactInfo][fields][0]=infoName&populate[contactInfo][fields][1]=info", 
+            process.env.STRAPI_URI_ROOT+"/api/contact-us?populate=contactInfo", 
             {
                 method: "GET",
                 headers: {
@@ -46,31 +53,34 @@ export default async function AboutUs() {
                 <h1 className="text-3xl md:text-4xl font-bold uppercase mb-5">
                     About Us
                 </h1>
-                <p className="mx-2 sm:mx-8 max-w-3xl">
+                <p className="max-w-3xl lg:text-lg font-sans">
                     {/* TODO: update placeholder with better placeholder */}
                     {blurb}
                 </p>
             </section>
-            <aside className="w-auto max-w-full md:max-w-[25%]">
+            <aside className="w-full md:max-w-[25%]">
                 <h1 className="text-3xl md:text-4xl font-bold uppercase mb-5">
                     Contact Us
                 </h1>
-                <ul className="mx-2 sm:mx-8">
+                <ul className="flex flex-col">
                     {/* TODO: update placeholder with better placeholder */}
                     {
-                        contacts.map((contact) => 
-                            <li className="mb-3 break-words">
-                                {contact.attributes.infoName}: 
-                                <a href={(contact.attributes.infoName.trim().toLowerCase() === "email" ? "mailto:" : "") + contact.attributes.info} className="mx-2 italic hover:underline hover:decoration-accentprimary hover:decoration-2">
-                                    {contact.attributes.info}
-                                </a>
-                            </li>
+                        contacts.map((contact, i) => 
+                            <LinkButton 
+                                key={i}
+                                as="li"
+                                className="w-full mb-3"
+                                ariaLabel={`go to ${contact.attributes.infoName}`}
+                                href={contact.attributes.info}
+                            >
+                                {getDomainIcon(contact.attributes.info)} {contact.attributes.infoName}
+                            </LinkButton>
                         )
                     }
                 </ul>
             </aside>
             
-            <ListOfContributors apiKey={process.env.STRAPI_API_KEY} rootURI={process.env.STRAPI_URI_ROOT}/>
+            <ListOfContributors />
         </div>
     );
 }

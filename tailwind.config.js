@@ -1,19 +1,23 @@
 /** @type {import('tailwindcss').Config} */
 const plugin = require('tailwindcss/plugin')
-const colors = require('tailwindcss/colors')
+const defaultTheme = require('tailwindcss/defaultTheme')
 
 module.exports = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   darkMode:'class',
   theme: {
     extend: {
       animation: {
         'blink': 'blink 1s cubic-bezier(0.34, 1.56, 0.64, 1)',
+      },
+      aspectRatio: {
+        '4/3': '4 / 3',
+        '16/9': '16 / 9',
+        '21/9': '21 / 9',
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
@@ -31,6 +35,18 @@ module.exports = {
         accentprimary: 'rgb(var(--accent-primary) / <alpha-value>)',
         accentsecondary : 'rgb(var(--accent-secondary) / <alpha-value>)',
         accenttertiary: 'rgb(var(--accent-tertiary) / <alpha-value>)',
+      },
+      fontFamily: {
+        //  special 'article-[serif/sans/mono] families are specified with the lists reversed to remedy a really dumb bug. 
+        //  this is only a band-aid solution, but it works!
+        logo: ['var(--font-bricolage-grotesque), var(--font-noto-sans-jp)', ...defaultTheme.fontFamily.sans],
+        header: ['var(--font-urw-gothic), var(--font-noto-sans-jp)', ...defaultTheme.fontFamily.sans],
+        serif: ['var(--font-libre-baskerville), var(--font-noto-serif-jp)', ...(defaultTheme.fontFamily.serif)],
+        'article-serif': [...(defaultTheme.fontFamily.serif.reverse()), 'var(--font-libre-baskerville), var(--font-noto-serif-jp)'],
+        sans: ['var(--font-public-sans), var(--font-noto-sans-jp)', ...(defaultTheme.fontFamily.sans)],
+        'article-sans': [...(defaultTheme.fontFamily.sans.reverse()), 'var(--font-public-sans), var(--font-noto-sans-jp)'],
+        mono: ['var(--font-fira-code)', ...defaultTheme.fontFamily.mono],
+        'article-mono': [...defaultTheme.fontFamily.mono, 'var(--font-fira-code)'],
       },
       keyframes: {
         blink: {
@@ -65,9 +81,24 @@ module.exports = {
             '--tw-prose-pre-bg': theme('colors.bgcode / 100%'),
             '--tw-prose-th-borders': theme('colors.textprimary / 100%'),
             '--tw-prose-td-borders': theme('colors.texttertiary / 100%'),
+            fontFamily: theme('fontFamily.article-serif'),
+            '.lead, h1, h2, h3, h4, table, thead, tr, th, td, blockquote, figcaption': {
+              fontFamily: theme('fontFamily.article-sans'),
+            },
+            'code': {
+              fontFamily: theme('fontFamily.article-mono'),
+            },
+            'blockquote, thead, th': {
+              'font-weight': 'bold',
+            },
           },
         },
-      })
+      }),
+      maxWidth: {
+        '4xl': '60rem',
+        '5xl': '72rem',
+        'screen-readable': 'calc(1440px + 16vw)',
+      },
     },
   },
   plugins: [

@@ -4,9 +4,8 @@ import { Menu, Transition } from "@headlessui/react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons'
 import Link from "next/link";
-import Image from 'next/image';
 import ThemeSwitch from "./theme-switch";
-import logo from "/public/logo.svg" ;
+import Logo from "/public/logo.svg" ;
 
 export default function Navbar() {
     let links = [
@@ -15,17 +14,16 @@ export default function Navbar() {
     ];
 
     return (
-        <nav className="sticky px-4 sm:px-14 lg:px-20">
-            <div className="flex flex-wrap sm:flex-nowrap items-center py-3">
+        <nav className="sticky w-full px-4 sm:px-14 lg:px-20 mt-7 mb-14 max-w-screen-readable mx-auto">
+            <div className="flex flex-wrap sm:flex-nowrap">
                 <Link href="/" className="max-w-[50%] mr-auto flex items-center">
-                    {/* <img src={"/logo.svg"} alt="lazy sundays logo" className="max-h-full" /> */}
-                    <Image 
-                        src={logo}
-                        alt="lazy sundays logo"
-                        className="justify-left"
-                    />
+                    <Logo aria-label={"the lazy sundays blog logo"} className={`
+                        min-w-[7rem] w-[10vw] max-w-[13rem] h-auto
+                        invert-[6%] sepia-[23%] saturate-[3901%] hue-rotate-[203deg] brightness-[97%] contrast-[94%]
+                        dark:invert-[98%] dark:saturate-[7374%] dark:hue-rotate-[326deg] dark:brightness-[130%] dark:contrast-[96%]
+                    `}/>
                 </Link>
-                <div className="hidden sm:flex justify-around justify-items-center sm:pr-10 lg:pr-30">
+                <div className="hidden sm:flex justify-around justify-items-center sm:pr-10 lg:pr-30 mt-4">
                     <a href={"/random-article"} className="sm:ml-8 px-1 md:text-xl hover:underline hover:decoration-accentprimary hover:decoration-2">Random Article</a>
                     {links.map((link) => {
                         return (
@@ -33,7 +31,7 @@ export default function Navbar() {
                         );
                     })}
                 </div>
-                <div className="mr-4 sm:mr-0">
+                <div className="mr-4 sm:mr-0 mt-4">
                         <ThemeSwitch />
                 </div>
 
@@ -41,8 +39,8 @@ export default function Navbar() {
                 <Menu>
                     {({ open }) => (
                         <>
-                            <Menu.Button className={"sm:collapse"}><FontAwesomeIcon className={"mr-4 w-5 h-5 align-middle hover:opacity-75"} icon={open ? faXmark : faBars}/></Menu.Button>
-                            <hr />
+                            <Menu.Button className={"sm:collapse self-start"}><FontAwesomeIcon className={"mt-4 mr-4 w-5 h-5 hover:opacity-75"} icon={open ? faXmark : faBars}/></Menu.Button>
+                            
                             <Transition as={Fragment}
                                 enter="transition ease-out duration-100"
                                 enterFrom="transform opacity-0 scale-95"
