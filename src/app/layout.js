@@ -21,7 +21,7 @@ import '@fortawesome/fontawesome-svg-core/styles.css';
 import { config } from '@fortawesome/fontawesome-svg-core';
 config.autoAddCss = false; /* eslint-disable import/first */
 
-export const revalidate = process.env.REVALIDATION_TIME;
+export const revalidate = 1800;
 export const metadata = {
   title: {
     template: `%s — the lazy sundays blog`,

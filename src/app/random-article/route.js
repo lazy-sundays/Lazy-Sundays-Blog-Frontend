@@ -4,6 +4,9 @@ export const dynamic = "force-dynamic";
 export const fetchCache = "force-no-store";
 
 export async function GET(request) { // eslint-disable-line
+
+    console.log(process.env.STRAPI_URI_ROOT);
+    console.log(process.env.STRAPI_API_KEY);
     
     const res = await fetch(process.env.STRAPI_URI_ROOT+"/api/random-article", 
         {
