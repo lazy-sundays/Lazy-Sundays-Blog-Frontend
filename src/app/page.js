@@ -1,5 +1,6 @@
 import FeaturedArticle from './_components/featured-article';
 import Link from 'next/link';
+import { apiTags } from './_lib/api-tags';
 
 export const metadata = {
     title: 'the lazy sundays blog',
@@ -15,6 +16,9 @@ export default async function Home() {
             headers: {
                 "Authorization": "Bearer "+process.env.STRAPI_API_KEY,
             },
+            next: {
+                tags: [apiTags.mostRecentArticles]
+            }
         }
     );
     

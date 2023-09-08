@@ -8,6 +8,7 @@ import View from '../../_components/view-tracking/view'
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { Redis } from "@upstash/redis";
+import { apiTags } from '@/app/_lib/api-tags';
 
 const redis = Redis.fromEnv();
 
@@ -20,6 +21,9 @@ export async function generateMetadata({ params }, parent) {
             headers: {
                 "Authorization": "Bearer "+process.env.STRAPI_API_KEY,
             },
+            next: {
+                tags: [apiTags.article + params.slug]
+            }
         }
     ).then((res) => res.json()).then((res) => res.data);
     const articleInfo= articleList[0];

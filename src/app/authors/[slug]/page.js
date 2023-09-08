@@ -3,6 +3,7 @@ import starConcept from "/public/star-concept.png";
 import LinkButton from "@/app/_components/common/link-button";
 import { notFound } from "next/navigation";
 import getDomainIcon from "@/app/_lib/get-domain-icon";
+import { apiTags } from '@/app/_lib/api-tags';
 
 export async function generateMetadata({ params }, parent) {
     //fetch data
@@ -13,6 +14,10 @@ export async function generateMetadata({ params }, parent) {
             headers: {
                 "Authorization": "Bearer "+process.env.STRAPI_API_KEY,
             },
+            next: {
+                tags: [apiTags.author + params.slug]
+            }
+
         }
     ).then((res) => res.json()).then((res) => res.data);
     const authorInfo = authorList[0];
@@ -44,6 +49,9 @@ export default async function Author({ params }) {
                 headers: {
                     "Authorization": "Bearer "+process.env.STRAPI_API_KEY,
                 },
+                next: {
+                    tags: [apiTags.author + params.slug]
+                }
             }
         );
         
@@ -61,6 +69,9 @@ export default async function Author({ params }) {
                 headers: {
                     "Authorization": "Bearer "+process.env.STRAPI_API_KEY,
                 },
+                next: {
+                    tags: [apiTags.numContrib]
+                }
             }
         );
     
