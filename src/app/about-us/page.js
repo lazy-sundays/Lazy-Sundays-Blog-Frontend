@@ -1,6 +1,7 @@
 import ListOfContributors from "../_components/about-us/list-of-contributors";
 import LinkButton from "@/app/_components/common/link-button";
 import getDomainIcon from "../_lib/get-domain-icon";
+import { apiTags } from "../_lib/api-tags";
 
 export const metadata = {
     title: 'About Us',
@@ -16,6 +17,9 @@ export default async function AboutUs() {
                 headers: {
                     "Authorization": "Bearer "+process.env.STRAPI_API_KEY,
                 },
+                next: {
+                    tags: [apiTags.aboutUs]
+                }
             }
         );
         
@@ -33,6 +37,9 @@ export default async function AboutUs() {
                 headers: {
                     "Authorization": "Bearer "+process.env.STRAPI_API_KEY,
                 },
+                next: {
+                    tags: [apiTags.contactInfo, apiTags.contactUs]
+                }
             }
         );
         

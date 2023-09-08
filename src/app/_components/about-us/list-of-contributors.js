@@ -11,6 +11,7 @@ export default function ListOfContributors() {
     const fetcher = (url) => fetch(url, 
         { 
             method: "GET",
+            cache: 'no-store'
         }
     ).then((res) => (res.json()));
     const { data, error, isLoading, isValidating, size, setSize } = useSWRInfinite(getKey, fetcher, {

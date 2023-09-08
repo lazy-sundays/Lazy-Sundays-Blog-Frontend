@@ -6,6 +6,7 @@ import rehypeFigure from "rehype-figure";
 import rehypeRaw from "rehype-raw";
 import CodeBlock from './common/code-block';
 import LinkButton from './common/link-button';
+import { apiTags } from '../_lib/api-tags';
 
 export default async function FeaturedArticle() {
     async function getFeaturedArticleInfo() {
@@ -16,6 +17,9 @@ export default async function FeaturedArticle() {
                 headers: {
                     "Authorization": "Bearer "+process.env.STRAPI_API_KEY,
                 },
+                next: {
+                    tags: [apiTags.featuredArticle]
+                }
             }
         );
         
