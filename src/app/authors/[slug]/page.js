@@ -116,7 +116,7 @@ export default async function Author({ params }) {
                         <figure className="relative shrink-0 w-40 h-40" aria-label={`a digital portrait of ${authorInfo.attributes.name}`}>
                             <Image src={authorInfo.attributes.avatar || starConcept}
                                 alt={`${authorInfo.attributes.name}'s profile picture`}
-                                className={"object-cover rounded-2xl border-2 border-textcode bg-textcode/75"}
+                                className={"object-cover rounded-md border-2 border-textcode bg-textcode/75"}
                                 fill
                             />
                         </figure>
@@ -134,7 +134,7 @@ export default async function Author({ params }) {
                             </div>
                         </div>
                         {/* author bio */}
-                        <div className="block col-span-2 w-full mt-4 mr-2 font-sans"> 
+                        <div className="block text-lg col-span-2 w-full mt-4 mr-2 font-sans"> 
                                 {authorInfo.attributes.bio}
                         </div>
                     </div>

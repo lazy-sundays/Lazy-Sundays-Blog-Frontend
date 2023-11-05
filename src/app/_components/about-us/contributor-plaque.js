@@ -24,7 +24,7 @@ export default function ContributorPlaque({author }) {
                         alt={`${author.attributes.name}'s profile picture`}
                         width={96}
                         height={96}
-                        className={"aspect-square rounded-2xl border-2 border-textcode bg-textcode/75"}
+                        className={"aspect-square rounded-md border-2 border-textcode bg-textcode/75"}
                     />
                 </div>
                 <div className="grow self-center text-left">
