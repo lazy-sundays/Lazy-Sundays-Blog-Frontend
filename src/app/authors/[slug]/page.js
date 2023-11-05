@@ -104,28 +104,27 @@ export default async function Author({ params }) {
         <article className="flex flex-wrap place-content-between gap-y-10">
             <div className="flex flex-col w-full md:w-auto">
                 <h1 className="text-3xl md:text-4xl font-bold uppercase mb-5">
-                    Biography
+                    {authorInfo.attributes.name}
+                    {(
+                        authorInfo.attributes.pronouns != null && 
+                        <span className="block lowercase italic text-sm text-accentprimary/75">({pronounsToString(authorInfo.attributes.pronouns)})</span>
+                    )}
                 </h1>
                 {
-                    <div className="md:flex md:flex-wrap gap-y-4 mr-0 sm:mr-8 max-w-3xl">
-                        <figure className="relative shrink-0 w-48 h-48 mx-auto md:mx-4" aria-label={`a digital portrait of ${authorInfo.attributes.name}`}>
+                    <div className="gap-y-4 mr-0 sm:mr-8 max-w-3xl">
+                        {/* author profile picture */}
+                        <figure className="relative shrink-0 w-40 h-40" aria-label={`a digital portrait of ${authorInfo.attributes.name}`}>
                             <Image src={authorInfo.attributes.avatar || starConcept}
                                 alt={`${authorInfo.attributes.name}'s profile picture`}
-                                className={"object-cover rounded-full border-2 border-textprimary/50"}
+                                className={"object-cover rounded-2xl border-2 border-textcode bg-textcode/75"}
                                 fill
                             />
                         </figure>
-                        <div className="grow flex flex-col gap-1 justify-center mx-2 text-center md:text-start">
-                            <div className="font-bold text-2xl lg:text-4xl font-logo">
-                                {authorInfo.attributes.name} 
-                                {(
-                                    authorInfo.attributes.pronouns != null && 
-                                    <span className="block xs:inline italic text-sm text-accentprimary ml-1">({pronounsToString(authorInfo.attributes.pronouns)})</span>
-                                )}
-                            </div>
-                            <div className="text-texttertiary text-sm font-mono">
-                                {(numContributions === 0 ) ? <></> : <span>{numContributions} article {(numContributions === 1 ) ? 'contribution' : 'contributions'}</span>}
-                            </div>
+                        {/* author contribution stats */}
+                        <div className="normal-case mt-4">
+                            <span className="text-texttertiary text-sm font-mono">
+                                {(numContributions > 0) && <span>{numContributions} article {(numContributions === 1 ) ? 'contribution' : 'contributions'}</span>}
+                            </span>
                             <div className="text-texttertiary text-sm font-mono">
                                 {<span>Contributor since {new Date(authorInfo.attributes.createdAt).toLocaleString("en-US", {
                                     day: "numeric",
@@ -134,7 +133,8 @@ export default async function Author({ params }) {
                                 })}</span>}
                             </div>
                         </div>
-                        <div className="block col-span-2 w-full mt-4 md:mt-0 mx-2 font-sans"> {/* bio mobile version */}
+                        {/* author bio */}
+                        <div className="block col-span-2 w-full mt-4 mr-2 font-sans"> 
                                 {authorInfo.attributes.bio}
                         </div>
                     </div>
@@ -145,7 +145,7 @@ export default async function Author({ params }) {
                     Find {selectThirdPerson(authorInfo.attributes.pronouns)} At
                 </h1>
                 {
-                    <ul className="flex flex-col">
+                    <ul className="flex flex-col mx-auto">
                         {
                             authorInfo.attributes.linkTree.data.length === 0 ?
                             <>{`Nowhere else (yet). A lazy sundays exclusive!`}</> :
