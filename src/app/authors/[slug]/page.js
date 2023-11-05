@@ -102,7 +102,7 @@ export default async function Author({ params }) {
     const numContributions = (await getNumContributions()).count;
     return (
         <article className="flex flex-wrap place-content-between gap-y-10">
-            <div className="flex flex-col w-full md:w-auto">
+            <section className="flex flex-col w-full md:w-auto md:pr-8">
                 <h1 className="text-3xl md:text-4xl font-bold uppercase mb-5">
                     {authorInfo.attributes.name}
                     {(
@@ -113,7 +113,7 @@ export default async function Author({ params }) {
                 {
                     <div className="gap-y-4 mr-0 sm:mr-8 max-w-3xl">
                         {/* author profile picture */}
-                        <figure className="relative shrink-0 w-40 h-40" aria-label={`a digital portrait of ${authorInfo.attributes.name}`}>
+                        <figure className="relative shrink-0 w-40 h-40 ml-4" aria-label={`a digital portrait of ${authorInfo.attributes.name}`}>
                             <Image src={authorInfo.attributes.avatar || starConcept}
                                 alt={`${authorInfo.attributes.name}'s profile picture`}
                                 className={"object-cover rounded-md border-2 border-textcode bg-textcode/75"}
@@ -134,21 +134,21 @@ export default async function Author({ params }) {
                             </div>
                         </div>
                         {/* author bio */}
-                        <div className="block text-lg col-span-2 w-full mt-4 mr-2 font-sans"> 
+                        <div className="block text-lg w-full mt-4 font-sans"> 
                                 {authorInfo.attributes.bio}
                         </div>
                     </div>
                 }
-            </div>
-            <div className="w-full md:max-w-[50%] xl:max-w-[25%]">
+            </section>
+            <aside className="w-full md:w-fit xl:max-w-[32rem] grow">
                 <h1 className="text-3xl md:text-4xl font-bold uppercase mb-5">
                     Find {selectThirdPerson(authorInfo.attributes.pronouns)} At
                 </h1>
                 {
-                    <ul className="flex flex-col mx-auto">
+                    <ul className="flex flex-col mx-auto md:max-w-none">
                         {
                             authorInfo.attributes.linkTree.data.length === 0 ?
-                            <>{`Nowhere else (yet). A lazy sundays exclusive!`}</> :
+                            <>{`Nowhere else (yet). A lazy sundays blog exclusive!`}</> :
                             authorInfo.attributes.linkTree.data.map((linkItem, i) => 
                                 <LinkButton 
                                     key={i}
@@ -163,7 +163,7 @@ export default async function Author({ params }) {
                         }
                     </ul>
                 }
-            </div>
+            </aside>
         </article>
     );
 }
