@@ -9,6 +9,7 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { Redis } from "@upstash/redis";
 import { apiTags } from '@/app/_lib/api-tags';
+import ArticleHeader from '@/app/_components/articles/article-header';
 
 const redis = Redis.fromEnv();
 
@@ -81,51 +82,16 @@ export default async function Article({ params }) {
         <article className="text-center">
             {
                 <>
-                    <header className="-mt-5">
-                        <div className={"md:relative"}>
-                            <div className={`relative mt-4 ${(articleInfo.attributes.hero == null) ? "" : "aspect-21/9"}`}>
-                                { (articleInfo.attributes.hero != null) &&
-                                    <Image fill={true} className="object-center object-cover" src={articleInfo.attributes.hero} alt={articleInfo.attributes.heroAltText}/>
-                                }
-                            </div>
-                            <div className={`${(articleInfo.attributes.hero == null) ? "pb-4":"md:absolute md:bottom-0"} pt-4 pb-4 md:pb-8 lg:pb-12 w-full px-4 sm:px-14 lg:px-20 text-center bg-white/50 dark:bg-black/50 backdrop-blur-sm`}>
-                                <h2 className="text-5xl sm:text-4xl xl:6xl 2xl:text-7xl mb-4 font-header font-bold">{articleInfo.attributes.title}</h2>
-                                <p className="font-sans text-xl sm:text-lg xl:text-2xl 2xl:text-3xl text-texttertiary italic px-5">{articleInfo.attributes.tagline}</p>
-                            </div>
-                        </div>
-                        {/* article info */}
-                        {
-                            <div className="flex flex-wrap justify-center justify-items-center gap-x-10 gap-y-2 text-center max-w-96 mx-auto mt-5 px-5 text-sm" aria-hidden>
-                                <span className="italic">
-                                    {       
-                                        (new Date(articleInfo.attributes.publishedAt)).toLocaleDateString( "en-US",
-                                            {month: 'short', day: 'numeric', year: 'numeric'})
-                                    }
-                                </span>
-                                <span className="">
-                                    Words by {(articleInfo.attributes.authors.data.length === 0) && "Anonymous"}
-                                    {
-                                        articleInfo.attributes.authors.data.map((author, i, all) => {
-                                            return (
-                                                <>
-                                                    <Link href={`/authors/${author.attributes.slug}`} className="text-accentprimary font-bold hover:underline hover:decoration-accentprimary hover:decoration-2">
-                                                        {author.attributes.name}
-                                                    </Link>{(all.length > 1 && i < all.length-1) ? ", ": ""}
-                                                </>
-                                            );
-                                        })
-                                    }
-                                </span>
-                                <span className="italic">
-                                    ~ {Math.round(articleInfo.attributes.readTime)} min. read
-                                </span>
-                                <span className="italic">
-                                    <span className='text-accentsecondary font-bold'>{views}</span> views
-                                </span>
-                            </div>
-                        }
-                    </header>
-                    {<hr className="w-[75ch] max-w-[80%] my-5 border-textprimary/25 m-auto" aria-hidden />}
+                    <ArticleHeader 
+                        hero={articleInfo.attributes.hero}
+                        heroAltText={articleInfo.attributes.heroAltText}
+                        title={articleInfo.attributes.title}
+                        tagline={articleInfo.attributes.tagline}
+                        publishedAt={articleInfo.attributes.publishedAt}
+                        authors={articleInfo.attributes.authors}
+                        readTime={articleInfo.attributes.readTime}
+                        views={views}
+                    />
                     {/* Article body */}
                     <section className={"flex justify-center mx-auto mb-10 text-lg"}>
                         <ReactMarkdown 

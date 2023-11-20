@@ -7,6 +7,7 @@ import rehypeRaw from "rehype-raw";
 import CodeBlock from './common/code-block';
 import LinkButton from './common/link-button';
 import { apiTags } from '../_lib/api-tags';
+import ArticleHeader from './articles/article-header';
 
 export default async function FeaturedArticle() {
     async function getFeaturedArticleInfo() {
@@ -33,50 +34,17 @@ export default async function FeaturedArticle() {
     const articleInfo = (await getFeaturedArticleInfo()).data.attributes.article.data;
 
     return (
-        <article className="text-center">
+        <article className="text-center pt-8">
             <meta name="author" content={articleInfo.attributes.authors.data.map((author) => `${author.attributes.name}`)}></meta>
-            <header className="">
-                <div className={"md:relative sm:mb-10"}>
-                    <div className={`relative mt-4 ${(articleInfo.attributes.hero == null) ? "" : "aspect-21/9"}`}>
-                        { (articleInfo.attributes.hero != null) &&
-                            <Image fill className="object-center object-cover" src={articleInfo.attributes.hero} alt={articleInfo.attributes.heroAltText}/>
-                        }
-                    </div>
-                    <div className={`${(articleInfo.attributes.hero == null) ? "pb-4":"md:absolute md:bottom-0"} pt-4 pb-4 w-full sm:px-10 md:px-24 xl:px-52 text-center bg-white/50 dark:bg-black/50 backdrop-blur-sm`}>
-                        <h2 className="text-5xl sm:text-4xl xl:6xl 2xl:text-7xl mb-4 font-header font-bold">{articleInfo.attributes.title}</h2>
-                        <p className="font-sans text-xl sm:text-lg xl:text-2xl 2xl:text-3xl text-texttertiary italic px-5">{articleInfo.attributes.tagline}</p>
-                        {/* Featured article info */}
-                        {
-                            <div className={"flex justify-center justify-items-center gap-x-10 text-center text-sm max-w-96 mx-auto mt-5 px-5 sm:pb-4"}>
-                                <span className="italic">
-                                    {       
-                                        (new Date(articleInfo.attributes.publishedAt)).toLocaleDateString( "en-US",
-                                            {month: 'short', day: 'numeric', year: 'numeric'})
-                                    }
-                                </span>
-                                <span className="">
-                                    Words by {(articleInfo.attributes.authors.data.length === 0) && "Anonymous"}
-                                    {
-                                        articleInfo.attributes.authors.data.map((author, i, all) => {
-                                            return (
-                                                <>
-                                                    <a href={`/authors/${author.attributes.slug}`} className="text-accentprimary hover:underline hover:decoration-accentprimary hover:decoration-2">
-                                                        {author.attributes.name}
-                                                    </a>{(all.length > 1 && i < all.length-1) ? ", ": ""}
-                                                </>
-                                            );
-                                        })
-                                    }
-                                </span>
-                                <span className="italic">
-                                    ~ {Math.round(articleInfo.attributes.readTime)} min. read
-                                </span>
-                            </div>
-                        }
-                    </div>
-                </div>
-            </header>
-            <hr className="w-[75ch] max-w-[80%] my-5 border-textprimary/25 m-auto" aria-hidden />
+            <ArticleHeader 
+                hero={articleInfo.attributes.hero}
+                heroAltText={articleInfo.attributes.heroAltText}
+                title={articleInfo.attributes.title}
+                tagline={articleInfo.attributes.tagline}
+                publishedAt={articleInfo.attributes.publishedAt}
+                authors={articleInfo.attributes.authors}
+                readTime={articleInfo.attributes.readTime}
+            />
             {/* Article body */}
             <section className={"flex justify-center px-5 md:px-0 mx-auto mb-10 text-lg max-h-60 overflow-hidden gradient-mask-b-0"} inert="true">
                 <ReactMarkdown 
