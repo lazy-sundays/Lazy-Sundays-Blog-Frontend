@@ -55,8 +55,8 @@ export default async function AboutUs() {
     const contacts = (await getContacts()).data.attributes.contactInfo.data;
 
     return (
-        <div id="pg-content" className="flex flex-wrap gap-y-10">
-            <section className="grow md:max-w-[75%]">
+        <div id="pg-content" className="flex flex-wrap place-content-between gap-y-10">
+            <section className="flex flex-col w-full md:w-auto md:pr-8">
                 <h1 className="text-3xl md:text-4xl font-bold uppercase mb-5">
                     About Us
                 </h1>
@@ -65,11 +65,11 @@ export default async function AboutUs() {
                     {blurb}
                 </p>
             </section>
-            <aside className="w-full md:max-w-[25%]">
+            <aside className="w-full md:w-fit xl:max-w-[32rem] grow">
                 <h1 className="text-3xl md:text-4xl font-bold uppercase mb-5">
                     Contact Us
                 </h1>
-                <ul className="flex flex-col">
+                <ul className="flex flex-col mx-auto md:max-w-none">
                     {/* TODO: update placeholder with better placeholder */}
                     {
                         contacts.map((contact, i) => 
