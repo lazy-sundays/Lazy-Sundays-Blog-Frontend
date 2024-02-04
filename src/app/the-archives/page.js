@@ -1,4 +1,4 @@
-import Construction from "../_components/construction"
+import ArticleList from "../_components/the-archives/article-list";
 
 export const metadata = {
     title: 'The Archives',
@@ -6,8 +6,12 @@ export const metadata = {
 };
 
 export default function TheArchives({ params }) { // eslint-disable-line
-
     return (
-        <Construction />
+        <>
+            <h1 className="text-3xl md:text-4xl font-bold uppercase mb-5">
+                The Archives
+            </h1>
+            <ArticleList />
+        </>
     )
 }

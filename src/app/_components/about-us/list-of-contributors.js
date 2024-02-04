@@ -21,7 +21,7 @@ export default function ListOfContributors() {
 
     const hasMoreData = data && data[data.length-1].meta.pagination.page < data[data.length-1].meta.pagination.pageCount;
 
-    if (error) throw new Error(`Failed to fetch contributor data.`);;
+    if (error) throw new Error(`Failed to fetch contributor data.`);
     return (
         <>
             <section className="w-full"> 

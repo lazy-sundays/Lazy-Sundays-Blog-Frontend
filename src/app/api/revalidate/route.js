@@ -33,6 +33,7 @@ export async function POST(request) {
             revalidateTag(apiTags.article + body.entry.slug);
             revalidateTag(apiTags.numContrib);
             revalidateTag(apiTags.mostRecentArticles);
+            revalidateTag(apiTags.listOfArticles);
             break;
         case(apiTags.author):
             revalidateTag(apiTags.author + body.entry.slug);
@@ -42,6 +43,7 @@ export async function POST(request) {
             revalidateTag(apiTags.contactInfo);
             break;  
         case(apiTags.linkTree):
+            // update not needed because link tree is part of author API call
             break;
         case(apiTags.tag):
             break;

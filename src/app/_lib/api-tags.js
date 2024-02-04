@@ -11,4 +11,5 @@ export const apiTags ={
     mostRecentArticles: "most-recent-articles",
     listOfContr: "list-of-contrib",
     numContrib: "num-contrib",
+    listOfArticles: "list-of-articles",
 };
