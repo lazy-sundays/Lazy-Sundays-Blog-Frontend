@@ -30,30 +30,31 @@ export default function ArticleList({ params }) { // eslint-disable-line
     
     if (error) throw new Error(`Failed to fetch archive data.`);
     return (
-        <section>
-            <ul>
-                {!isLoading ? 
-                    data.map((page) => {
-                        return page.data.map((article, i) => {
-                            return (
-                                <>
-                                    
-                                    <ArticleListItem article={article}/>
-                                    {
-                                        // current index is less than the total page size OR not in the final page of the current load
-                                        (((i < pageSize - 1) || (page.meta.pagination.page < size)) && 
-                                        //the current page is not the final page OR current index is not the final item in current page of loaded data
-                                        ((page.meta.pagination.page < page.meta.pagination.pageCount) || (i < page.data.length - 1))) && 
-                                        //then draw a horizontal line
-                                        <hr className="mx-2 border-textprimary/25" />
-                                    }
-                                </>
-                            );
-                        })
-                    }) : <>Loading...</>
-                }
-            </ul>
+        <>
+            <section>
+                <ul>
+                    {!isLoading ? 
+                        data.map((page) => {
+                            return page.data.map((article, i) => {
+                                return (
+                                    <>
+                                        
+                                        <ArticleListItem article={article}/>
+                                        {
+                                            // current index is not the final item in current page of loaded data OR not in the final page of the current load
+                                            ((i < page.data.length - 1) || (page.meta.pagination.page < size)) && 
+                                            //then draw a horizontal line
+                                            <hr className="mx-2 border-textprimary/25" />
+                                        }
+                                    </>
+                                );
+                            })
+                        }) : <>Loading...</>
+                    }
+                </ul>
+            </section>
             {
+                <div className="mt-3 flex items-center mx-auto md:max-w-none justify-center">
                     <Button 
                         onClick={handleLoadMoreClick} 
                         ariaLabel='load more articles' 
@@ -62,7 +63,9 @@ export default function ArticleList({ params }) { // eslint-disable-line
                     >
                         {(isLoading || isValidating) ? "Loading..." : "Load More"}
                     </Button>
+                </div>
             }
-        </section>
+        </>
+        
     )
 }
