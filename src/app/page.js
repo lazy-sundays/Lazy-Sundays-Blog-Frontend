@@ -48,7 +48,7 @@ export default async function Home() {
                     return (
                         <>
                             <li className={`relative group ${("py-6")} mx-2 sm:px-8 hover:bg-bgsecondary`} key={article.attributes.id}>
-                                <span className="text-xs text-accentprimary">
+                                <span className="text-xs text-accentsecondary">
                                     {(new Date(article.attributes.publishedAt)).toLocaleDateString( "en-US",
                                         {month: '2-digit', day: '2-digit'}
                                     )}
