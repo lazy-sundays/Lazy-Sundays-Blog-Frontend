@@ -2,12 +2,11 @@
 import useSWRInfinite from 'swr/infinite'
 import Button from '../common/button';
 import ArticleListItem from './article-list-item';
-import { useState } from 'react';
 
 export default function ArticleList({ params }) { // eslint-disable-line
-    const [firstTime, setFirstTime] = useState(true);
+    const pageSize = 5;
     const getKey = (pageIndex, previousPageData) => {
-        const pageSize = 5;
+        
         if (previousPageData && (previousPageData.meta.pagination.page >= previousPageData.meta.pagination.pageCount)) return null; // reached the end
         return (`/api/articles?page=${pageIndex + 1}&pageSize=${pageSize}`); // SWR key
     };
@@ -38,8 +37,16 @@ export default function ArticleList({ params }) { // eslint-disable-line
                         return page.data.map((article, i) => {
                             return (
                                 <>
-                                    <hr className="mx-2 border-textprimary/25"/>
+                                    
                                     <ArticleListItem article={article}/>
+                                    {
+                                        // current index is less than the total page size OR not in the final page of the current load
+                                        (((i < pageSize - 1) || (page.meta.pagination.page < size)) && 
+                                        //the current page is not the final page OR current index is not the final item in current page of loaded data
+                                        ((page.meta.pagination.page < page.meta.pagination.pageCount) || (i < page.data.length - 1))) && 
+                                        //then draw a horizontal line
+                                        <hr className="mx-2 border-textprimary/25" />
+                                    }
                                 </>
                             );
                         })
