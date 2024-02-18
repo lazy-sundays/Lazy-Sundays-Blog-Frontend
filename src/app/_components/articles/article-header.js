@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import ImageSourceBadge from './img-source-badge';
 
 export default function ArticleHeader({
     hero, 
@@ -27,6 +28,11 @@ export default function ArticleHeader({
                         { (hero != null) &&
                             <Image fill={true} className="object-center object-cover" src={hero} alt={heroAltText}/>
                         }
+                        {/* <ImageSourceBadge 
+                            srcText='Sabotage Studio' 
+                            srcUrl={"https://sabotagestudio.com/"}
+                            className='absolute bg-bgprimary/75 px-1 top-2 right-2 font-sans text-texttertiary italic' 
+                        /> */}
                     </div>
                 </div>
                 {/* article info */}
