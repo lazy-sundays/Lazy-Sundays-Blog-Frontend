@@ -91,6 +91,13 @@ module.exports = {
             'blockquote, thead, th': {
               'font-weight': 'bold',
             },
+            // figure-related styles
+            'figure img': {
+              width: '100%',
+            },
+            'figure figcaption': {
+              textAlign: 'end',
+            }
           },
         },
       }),
