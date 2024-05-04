@@ -31,7 +31,7 @@ export default function ContributorPlaque({author }) {
                     <h3 className="w-full text-xl font-bold">
                         {author.attributes.name}
                     </h3>
-                    <span className="text-lg">
+                    <span className="text-lg font-normal">
                         Contributor since {createdDate.toLocaleString("en-US", {
                             month: "long",
                             year: "numeric"
