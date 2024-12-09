@@ -39,7 +39,7 @@ export default function ArticleList({ params }) { // eslint-disable-line
                                 return (
                                     <>
                                         
-                                        <ArticleListItem article={article}/>
+                                        <ArticleListItem article={article} key={i}/>
                                         {
                                             // current index is not the final item in current page of loaded data OR not in the final page of the current load
                                             ((i < page.data.length - 1) || (page.meta.pagination.page < size)) && 

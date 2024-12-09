@@ -77,7 +77,7 @@ export default async function Author({ params }) {
     
         if (!res.ok) {
             // This will activate the closest `error.js` Error Boundary
-            throw new Error(`Failed to fetch contributon data. HTTP status code: ${res.status}`);
+            throw new Error(`Failed to fetch contribution data. HTTP status code: ${res.status}`);
         }
         return res.json();
     }
