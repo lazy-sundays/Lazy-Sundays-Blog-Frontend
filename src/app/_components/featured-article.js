@@ -39,6 +39,7 @@ export default async function FeaturedArticle() {
             <ArticleHeader 
                 hero={articleInfo.attributes.hero}
                 heroAltText={articleInfo.attributes.heroAltText}
+                heroAttribution={articleInfo.attributes.heroAttribution}
                 title={articleInfo.attributes.title}
                 tagline={articleInfo.attributes.tagline}
                 publishedAt={articleInfo.attributes.publishedAt}

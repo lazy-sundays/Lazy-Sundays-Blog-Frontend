@@ -1,10 +1,10 @@
 import Link from "next/link";
 
 
-export default function ImageSourceBadge({ srcUrl = null, srcText = "", className = "" }) {
+export default function ImageSourceBadge({ srcUrl = null, srcText, className = "" }) {
 
-    return (
-        <div className={` ${className}`}>
+    return ( srcText &&
+        <div className={`text-xs ${className}`}>
             <p>
                 Image Source: {srcUrl ? 
                                     <Link 
