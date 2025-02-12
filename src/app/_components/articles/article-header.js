@@ -21,9 +21,11 @@ export default function ArticleHeader({
                         <h2 className={`${(hero) ? "xl:mr-20 xl:p-2 xl:bg-bgprimary/75 w-fit" : ""} font-header font-bold break-words pb-2 max-w-prose`}>
                             {title}
                         </h2>
-                        <p className={`${(hero) ? "xl:ml-8 xl:mr-12 xl:p-2 xl:bg-bgprimary/75 w-fit" : ""} font-sans text-2xl text-texttertiary italic break-words max-w-prose`}>
-                            {tagline}
-                        </p>
+                        { tagline &&
+                            <p className={`${(hero) ? "xl:ml-8 xl:mr-12 xl:p-2 xl:bg-bgprimary/75 w-fit" : ""} font-sans text-2xl text-texttertiary italic break-words max-w-prose`}>
+                                {tagline}
+                            </p>
+                        }
                     </div>
                     <div className={`relative mt-4 ${(hero == null) ? "" : "aspect-21/9"}`}>
                         { (hero != null) &&
