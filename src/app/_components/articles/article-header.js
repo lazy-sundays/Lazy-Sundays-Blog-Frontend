@@ -5,6 +5,7 @@ import ImageSourceBadge from './img-source-badge';
 export default function ArticleHeader({
     hero, 
     heroAltText, 
+    heroAttribution,
     publishedAt,
     title, 
     tagline,
@@ -20,19 +21,20 @@ export default function ArticleHeader({
                         <h2 className={`${(hero) ? "xl:mr-20 xl:p-2 xl:bg-bgprimary/75 w-fit" : ""} font-header font-bold break-words pb-2 max-w-prose`}>
                             {title}
                         </h2>
-                        <p className={`${(hero) ? "xl:ml-8 xl:mr-12 xl:p-2 xl:bg-bgprimary/75 w-fit" : ""} font-sans text-2xl text-texttertiary italic break-words max-w-prose`}>
-                            {tagline}
-                        </p>
+                        { tagline &&
+                            <p className={`${(hero) ? "xl:ml-8 xl:mr-12 xl:p-2 xl:bg-bgprimary/75 w-fit" : ""} font-sans text-2xl text-texttertiary italic break-words max-w-prose`}>
+                                {tagline}
+                            </p>
+                        }
                     </div>
                     <div className={`relative mt-4 ${(hero == null) ? "" : "aspect-21/9"}`}>
                         { (hero != null) &&
                             <Image fill={true} className="object-center object-cover" src={hero} alt={heroAltText}/>
                         }
-                        {/* <ImageSourceBadge 
-                            srcText='Sabotage Studio' 
-                            srcUrl={"https://sabotagestudio.com/"}
+                        <ImageSourceBadge 
+                            srcText={heroAttribution} 
                             className='absolute bg-bgprimary/75 px-1 top-2 right-2 font-sans text-texttertiary italic' 
-                        /> */}
+                        />
                     </div>
                 </div>
                 {/* article info */}
