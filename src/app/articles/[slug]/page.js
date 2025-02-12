@@ -3,9 +3,7 @@ import remarkGfm from "remark-gfm";
 import remarkEmoji from 'remark-emoji';
 import rehypeRaw from "rehype-raw";
 import CodeBlock from '../../_components/common/code-block';
-import Link from 'next/link';
 import View from '../../_components/view-tracking/view'
-import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { Redis } from "@upstash/redis";
 import { apiTags } from '@/app/_lib/api-tags';
@@ -85,6 +83,7 @@ export default async function Article({ params }) {
                     <ArticleHeader 
                         hero={articleInfo.attributes.hero}
                         heroAltText={articleInfo.attributes.heroAltText}
+                        heroAttribution={articleInfo.attributes.heroAttribution}
                         title={articleInfo.attributes.title}
                         tagline={articleInfo.attributes.tagline}
                         publishedAt={articleInfo.attributes.publishedAt}

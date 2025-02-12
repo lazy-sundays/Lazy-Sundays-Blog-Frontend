@@ -14,6 +14,7 @@ import {
   urwGothic
 } from "./fonts"
 import './globals.css'
+import { Analytics } from "@vercel/analytics/react"
 // The following import prevents a Font Awesome icon server-side rendering bug,
 // where the icons flash from a very large icon down to a properly sized one:
 import '@fortawesome/fontawesome-svg-core/styles.css';
@@ -42,6 +43,7 @@ export default function RootLayout({ children }) {
               <Navbar />
               <main id='pg-content' className='self-center w-full px-4 sm:px-14 lg:px-20 pb-5 max-w-screen-readable'>
                 {children}
+                <Analytics />
               </main>
               <BackToTop />
               <Footer />
