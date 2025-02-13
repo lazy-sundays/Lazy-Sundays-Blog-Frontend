@@ -14,7 +14,7 @@ export default function ArticleListItem({ article }) {
             <div className='flex flex-col'>
                 <span className="text-xs text-accentsecondary">
                     {(new Date(article.attributes.publishedAt)).toLocaleDateString( "en-US",
-                        {month: '2-digit', day: '2-digit'}
+                        {month: '2-digit', day: '2-digit', year: '2-digit'}
                     )}
                 </span>
                 <h3 className="text-xl font-semibold group-hover:underline group-hover:decoration-accentprimary group-hover:decoration-2">
