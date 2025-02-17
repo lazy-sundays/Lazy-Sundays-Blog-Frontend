@@ -74,7 +74,7 @@ export default async function Article({ params }) {
     if (articleList.length === 0) notFound();
     const articleInfo = articleList[0];
 
-    const views = (await redis.get(["pageviews", "page", `article${articleInfo.id}`].join(":"))) ?? 0;
+    const views = (await redis.get(["pageviews", "page", `article${articleInfo.id}`].join(":"))) ?? 1;
 
     return (
         <article className="text-center">
