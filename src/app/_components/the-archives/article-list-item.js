@@ -7,7 +7,7 @@ export default function ArticleListItem({ article }) {
     return (
         <li className={`relative flex flex-col sm:flex-row group ${("py-6")} mx-2 sm:px-8 hover:bg-bgsecondary`} key={article.attributes.id}>
             {(article.attributes.hero != null) && 
-            <div className='relative aspect-16/9 h-28 -translate-x-1 sm:-translate-x-4'>
+            <div className='relative aspect-16/9 h-28'>
                 <Image src={article.attributes.hero} alt={article.attributes.heroAltText} fill className="object-center object-cover"/>
             </div>
             }
