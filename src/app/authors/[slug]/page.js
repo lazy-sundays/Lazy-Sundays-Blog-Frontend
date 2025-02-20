@@ -43,7 +43,7 @@ export async function generateMetadata({ params }, parent) {
 export default async function Author({ params }) {
     async function getAuthorInfo() {
         const res = await fetch(
-            process.env.STRAPI_URI_ROOT+"/api/authors?filters[slug]="+params.slug+"&populate[0]=avatar&populate[1]=linkTree", 
+            process.env.STRAPI_URI_ROOT+"/api/authors?filters[slug]="+params.slug+"&populate[0]=avatar", 
             {
                 method: "GET",
                 headers: {
@@ -51,6 +51,26 @@ export default async function Author({ params }) {
                 },
                 next: {
                     tags: [apiTags.author + params.slug]
+                }
+            }
+        );
+        
+        if (!res.ok) {
+            // This will activate the closest `error.js` Error Boundary
+            throw new Error(`Failed to fetch author data. HTTP status code: ${res.status}`);
+        }
+        return res.json();
+    }
+    async function getAuthorLinkTree() {
+        const res = await fetch(
+            process.env.STRAPI_URI_ROOT+"/api/link-trees?populate=author&filters[author][slug][$eq]="+params.slug+"&sort=id", 
+            {
+                method: "GET",
+                headers: {
+                    "Authorization": "Bearer "+process.env.STRAPI_API_KEY,
+                },
+                next: {
+                    tags: [apiTags.linkTree + params.slug]
                 }
             }
         );
@@ -99,6 +119,7 @@ export default async function Author({ params }) {
     const authorList = (await getAuthorInfo()).data;
     if (authorList.length === 0) notFound();
     const authorInfo = authorList[0];
+    const authorLinkTree = (await getAuthorLinkTree()).data;
     const numContributions = (await getNumContributions()).count;
     return (
         <article className="flex flex-wrap place-content-between gap-y-10">
@@ -147,9 +168,9 @@ export default async function Author({ params }) {
                 {
                     <ul className="flex flex-col mx-auto md:max-w-none">
                         {
-                            authorInfo.attributes.linkTree.data.length === 0 ?
+                            authorLinkTree.length === 0 ?
                             <>{`Nowhere else (yet). A lazy sundays blog exclusive!`}</> :
-                            authorInfo.attributes.linkTree.data.map((linkItem, i) => 
+                            authorLinkTree.map((linkItem, i) => 
                                 <LinkButton 
                                     key={i}
                                     className="w-full mb-3"
