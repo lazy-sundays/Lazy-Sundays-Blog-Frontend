@@ -11,7 +11,7 @@ export default function ArticleListItem({ article }) {
                 <Image src={article.attributes.hero} alt={article.attributes.heroAltText} fill className="object-center object-cover"/>
             </div>
             }
-            <div className='flex flex-col'>
+            <div className='flex flex-col sm:ml-2'>
                 <span className="text-xs text-accentsecondary">
                     {(new Date(article.attributes.publishedAt)).toLocaleDateString( "en-US",
                         {month: '2-digit', day: '2-digit', year: '2-digit'}
