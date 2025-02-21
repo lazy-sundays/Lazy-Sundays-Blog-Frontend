@@ -27,8 +27,6 @@ export async function POST(request) {
 
     const body = await request.json();
 
-    console.log(body);
-    
     //revalidate based on the type of model that was updated
     switch(body.model){
         case (apiTags.article):
