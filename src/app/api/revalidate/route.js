@@ -26,6 +26,8 @@ export async function POST(request) {
     }
 
     const body = await request.json();
+
+    console.log(body);
     
     //revalidate based on the type of model that was updated
     switch(body.model){
@@ -43,7 +45,7 @@ export async function POST(request) {
             revalidateTag(apiTags.contactInfo);
             break;  
         case(apiTags.linkTree):
-            // update not needed because link tree is part of author API call
+            revalidateTag(apiTags.linkTree + body.entry.author.slug);
             break;
         case(apiTags.tag):
             break;

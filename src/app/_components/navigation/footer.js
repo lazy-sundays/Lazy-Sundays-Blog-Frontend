@@ -11,7 +11,7 @@ export default async function Footer() {
         {key: 2, name: "About Us", href: "/about-us"},
     ];
 
-    const views = (await redis.get(["pageviews", "page", `home`].join(":"))) ?? 1;
+    const views = (!(process.env.UPSTASH_REDIS_LOCAL) && (await redis.get(["pageviews", "page", `home`].join(":")))) ?? 1;
 
     return (
         <footer className="bg-bgsecondary w-full h-full mx-auto p-4 md:py-4 mt-auto">
