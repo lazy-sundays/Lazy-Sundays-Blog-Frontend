@@ -39,7 +39,7 @@ export default function RootLayout({ children }) {
       <html lang="en" suppressHydrationWarning className={`${urwGothic.variable} ${publicSans.variable} ${notoSansJP.variable} ${notoSerifJP.variable} ${libreBask.variable} ${bricoGro.variable} ${firaCode.variable} ${notoColorEmoji.variable}`}>
           <body className={`flex flex-col min-h-screen justify-start content-center font-logo bg-bgprimary text-textprimary sunset-overlook`}>
             <Providers>
-              <View id="home"/>
+              {process.env.UPSTASH_REDIS_LOCAL ? <></> : <View id="home"/>}
               <Navbar />
               <main id='pg-content' className='self-center w-full px-4 sm:px-14 lg:px-20 pb-5 max-w-screen-readable'>
                 {children}

@@ -74,7 +74,7 @@ export default async function Article({ params }) {
     if (articleList.length === 0) notFound();
     const articleInfo = articleList[0];
 
-    const views = (await redis.get(["pageviews", "page", `article${articleInfo.id}`].join(":"))) ?? 1;
+    const views = (!(process.env.UPSTASH_REDIS_LOCAL) && (await redis.get(["pageviews", "page", `article${articleInfo.id}`].join(":")))) ?? 1;
 
     return (
         <article className="text-center">
@@ -121,7 +121,7 @@ export default async function Article({ params }) {
                     </section>                    
                 </>
             }
-            <View id={`article${articleInfo.id}`}/>
+            {process.env.UPSTASH_REDIS_LOCAL ? <></> : <View id={`article${articleInfo.id}`}/>}
         </article>
     );
 }
