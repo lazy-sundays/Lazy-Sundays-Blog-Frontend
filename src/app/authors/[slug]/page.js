@@ -12,7 +12,7 @@ export async function generateMetadata(props, parent) {
     process.env.STRAPI_URI_ROOT +
       "/api/authors?filters[slug][$eqi]=" +
       params.slug +
-      "&fields=avatar&populate=linkTree",
+      "&populate=linkTree",
     {
       method: "GET",
       headers: {
