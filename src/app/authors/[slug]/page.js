@@ -53,7 +53,7 @@ export default async function Author(props) {
       process.env.STRAPI_URI_ROOT +
         "/api/authors?filters[slug][$eqi]=" +
         params.slug +
-        "&fields=avatar&populate=linkTree",
+        "&g&populate=linkTree",
       {
         method: "GET",
         headers: {
