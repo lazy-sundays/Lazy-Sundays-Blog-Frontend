@@ -1,6 +1,7 @@
 import FeaturedArticle from "./_components/featured-article";
 import Link from "next/link";
 import { apiTags } from "./_lib/api-tags";
+import { Fragment } from "react";
 
 export const metadata = {
   title: "the lazy sundays blog",
@@ -49,7 +50,7 @@ export default async function Home() {
         <ul>
           {recentArticles.map((article, i, all) => {
             return (
-              <>
+              <Fragment key={article.id}>
                 <li
                   className={`relative group ${"py-6"} mx-2 sm:px-8 hover:bg-bgsecondary`}
                   key={article.id}
@@ -75,10 +76,10 @@ export default async function Home() {
                     <span className="text-sm italic">
                       {article.authors.map((author, i, all) => {
                         return (
-                          <>
+                          <Fragment key={author.id}>
                             <span className="">By: {author.name}</span>
                             {all.length > 1 && i < all.length - 1 ? ", " : ""}
-                          </>
+                          </Fragment>
                         );
                       })}
                     </span>
@@ -93,7 +94,7 @@ export default async function Home() {
                 {i < all.length - 1 && (
                   <hr className="mx-2 border-textprimary/25" />
                 )}
-              </>
+              </Fragment>
             );
           })}
         </ul>

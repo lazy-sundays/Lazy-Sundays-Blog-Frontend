@@ -9,9 +9,12 @@ import { Redis } from "@upstash/redis";
 import { apiTags } from "@/app/_lib/api-tags";
 import ArticleHeader from "@/app/_components/articles/article-header";
 
-const redis = Redis.fromEnv();
+if (!process.env.UPSTASH_REDIS_LOCAL) {
+  const redis = Redis.fromEnv();
+}
 
-export async function generateMetadata({ params }, parent) {
+export async function generateMetadata(props, parent) {
+  const params = await props.params;
   //fetch data
   const articleList = await fetch(
     process.env.STRAPI_URI_ROOT +
@@ -58,7 +61,8 @@ export async function generateMetadata({ params }, parent) {
   };
 }
 
-export default async function Article({ params }) {
+export default async function Article(props0) {
+  const params = await props0.params;
   async function getArticleInfo() {
     const res = await fetch(
       process.env.STRAPI_URI_ROOT +

@@ -57,7 +57,7 @@ export default async function FeaturedArticle() {
         className={
           "flex justify-center px-5 md:px-0 mx-auto mb-10 text-lg max-h-60 overflow-hidden gradient-mask-b-0"
         }
-        inert="true"
+        inert={true}
       >
         <ReactMarkdown
           remarkPlugins={[remarkGfm, [remarkEmoji, { accessible: true }]]}

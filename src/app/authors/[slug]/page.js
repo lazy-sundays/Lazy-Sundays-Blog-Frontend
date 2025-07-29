@@ -5,7 +5,8 @@ import { notFound } from "next/navigation";
 import getDomainIcon from "@/app/_lib/get-domain-icon";
 import { apiTags } from "@/app/_lib/api-tags";
 
-export async function generateMetadata({ params }, parent) {
+export async function generateMetadata(props, parent) {
+  const params = await props.params;
   //fetch data
   const authorList = await fetch(
     process.env.STRAPI_URI_ROOT +
@@ -45,7 +46,8 @@ export async function generateMetadata({ params }, parent) {
   };
 }
 
-export default async function Author({ params }) {
+export default async function Author(props) {
+  const params = await props.params;
   async function getAuthorInfo() {
     const res = await fetch(
       process.env.STRAPI_URI_ROOT +

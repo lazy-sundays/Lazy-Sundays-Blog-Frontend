@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { Fragment } from "react";
 
 export default function ArticleListItem({ article }) {
   return (
@@ -11,7 +12,7 @@ export default function ArticleListItem({ article }) {
         <div className="relative aspect-16/9 h-28">
           <Image
             src={article.hero}
-            alt={article.heroAltText}
+            alt={article.heroAltText || "Hero Image"}
             fill
             className="object-center object-cover"
           />
@@ -34,10 +35,10 @@ export default function ArticleListItem({ article }) {
         <span className="text-sm italic">
           {article.authors.map((author, i, all) => {
             return (
-              <>
+              <Fragment key={author.id}>
                 <span className="">By: {author.name}</span>
                 {all.length > 1 && i < all.length - 1 ? ", " : ""}
-              </>
+              </Fragment>
             );
           })}
         </span>

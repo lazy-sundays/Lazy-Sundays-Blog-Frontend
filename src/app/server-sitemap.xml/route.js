@@ -10,7 +10,7 @@ export async function GET() {
     articleSlugs = articleSlugs.concat(
       (
         await fetch(
-          `${process.env.STRAPI_URI_ROOT}/api/articles?fields=slug&pagination[page]=${i}`,
+          `${process.env.STRAPI_URI_ROOT}/api/articles?fields=slug&pagination[page]=${i}pagination[pageSize]=25`,
           {
             method: "GET",
             headers: {
@@ -33,7 +33,7 @@ export async function GET() {
     authorSlugs = authorSlugs.concat(
       (
         await fetch(
-          `${process.env.STRAPI_URI_ROOT}/api/authors?fields=slug&pagination[page]=${i}`,
+          `${process.env.STRAPI_URI_ROOT}/api/authors?fields=slug&pagination[page]=${i}pagination[pageSize]=25`,
           {
             method: "GET",
             headers: {

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import ImageSourceBadge from "./img-source-badge";
+import { Fragment } from "react";
 
 export default function ArticleHeader({
   hero,
@@ -45,7 +46,7 @@ export default function ArticleHeader({
                 fill={true}
                 className="object-center object-cover"
                 src={hero}
-                alt={heroAltText}
+                alt={heroAltText ?? "HeroImage"}
               />
             )}
             <ImageSourceBadge
@@ -71,7 +72,7 @@ export default function ArticleHeader({
               Words by {authors.length === 0 && "Anonymous"}
               {authors.map((author, i, all) => {
                 return (
-                  <>
+                  <Fragment key={author.id}>
                     <Link
                       href={`/authors/${author.slug}`}
                       className="text-accentprimary font-bold hover:underline hover:decoration-accentprimary hover:decoration-2"
@@ -79,7 +80,7 @@ export default function ArticleHeader({
                       {author.name}
                     </Link>
                     {all.length > 1 && i < all.length - 1 ? ", " : ""}
-                  </>
+                  </Fragment>
                 );
               })}
             </span>
