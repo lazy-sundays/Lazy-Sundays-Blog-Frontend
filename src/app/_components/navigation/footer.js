@@ -3,8 +3,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSun } from "@fortawesome/free-solid-svg-icons";
 import { Redis } from "@upstash/redis";
 
+const redis = null;
 if (!process.env.UPSTASH_REDIS_LOCAL) {
-  const redis = Redis.fromEnv();
+  redis = Redis.fromEnv();
 }
 
 export default async function Footer() {

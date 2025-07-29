@@ -9,8 +9,9 @@ import { Redis } from "@upstash/redis";
 import { apiTags } from "@/app/_lib/api-tags";
 import ArticleHeader from "@/app/_components/articles/article-header";
 
+const redis = null;
 if (!process.env.UPSTASH_REDIS_LOCAL) {
-  const redis = Redis.fromEnv();
+  redis = Redis.fromEnv();
 }
 
 export async function generateMetadata(props, parent) {

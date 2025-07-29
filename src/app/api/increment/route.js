@@ -2,8 +2,9 @@ import { Redis } from "@upstash/redis";
 import { NextResponse } from "next/server";
 import { ipAddress } from "@vercel/edge";
 
+const redis = null;
 if (!process.env.UPSTASH_REDIS_LOCAL) {
-  const redis = Redis.fromEnv();
+  redis = Redis.fromEnv();
 }
 
 export const runtime = "edge";
