@@ -1,4 +1,3 @@
-import Image from "next/image";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import remarkEmoji from "remark-emoji";

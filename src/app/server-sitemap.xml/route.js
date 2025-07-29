@@ -1,6 +1,6 @@
 import { getServerSideSitemap } from "next-sitemap";
 
-export const revalidate = 60 * 60 * 24; // revalidate at most once per day
+export const revalidate = 86400; // revalidate at most once per day (24 hours)
 
 export async function GET() {
   // Get article slugs from cms
@@ -10,7 +10,7 @@ export async function GET() {
     articleSlugs = articleSlugs.concat(
       (
         await fetch(
-          `${process.env.STRAPI_URI_ROOT}/api/articles?fields=slug&pagination[page]=${i}pagination[pageSize]=25`,
+          `${process.env.STRAPI_URI_ROOT}/api/articles?fields=slug&pagination[page]=${i}&pagination[pageSize]=25`,
           {
             method: "GET",
             headers: {
@@ -33,7 +33,7 @@ export async function GET() {
     authorSlugs = authorSlugs.concat(
       (
         await fetch(
-          `${process.env.STRAPI_URI_ROOT}/api/authors?fields=slug&pagination[page]=${i}pagination[pageSize]=25`,
+          `${process.env.STRAPI_URI_ROOT}/api/authors?fields=slug&pagination[page]=${i}&pagination[pageSize]=25`,
           {
             method: "GET",
             headers: {
