@@ -1,14 +1,6 @@
-import { Redis } from "@upstash/redis";
 import { NextResponse } from "next/server";
 import { ipAddress } from "@vercel/edge";
-
-var redis = null;
-if (!process.env.UPSTASH_REDIS_LOCAL) {
-  redis = new Redis({
-    url: process.env.UPSTASH_REDIS_REST_URL,
-    token: process.env.UPSTASH_REDIS_REST_TOKEN,
-  });
-}
+import { redis, isProduction } from "@/app/_lib/upstash-config";
 
 export const runtime = "edge";
 
@@ -16,6 +8,11 @@ export const runtime = "edge";
  * adapted from https://upstash.com/blog/nextjs13-approuter-view-counter
  */
 export async function POST(req) {
+  // Skip Upstash logic in development or if Redis client is not available
+  if (!isProduction || !redis) {
+    return new NextResponse(null, { status: 202 });
+  }
+
   try {
     const body = await req.json();
     const id = body.id;

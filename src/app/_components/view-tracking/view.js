@@ -9,6 +9,15 @@ export default function ReportView({ id }) {
       return;
     }
 
+    // Skip API call in development
+    if (
+      process.env.NODE_ENV !== "production" &&
+      process.env.VERCEL_ENV !== "production"
+    ) {
+      console.log("ReportView: Skipping view increment in development");
+      return;
+    }
+
     fetch("/api/increment", {
       method: "POST",
       headers: {
