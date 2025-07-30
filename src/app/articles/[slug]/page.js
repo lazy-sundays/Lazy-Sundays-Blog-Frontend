@@ -98,6 +98,13 @@ export default async function Article(props0) {
       views = 1;
     }
   }
+      );
+      views = redisViews ?? 1;
+    } catch (error) {
+      console.error("Error fetching views from Redis:", error);
+      views = 1;
+    }
+  }
 
   return (
     <article className="text-center">
