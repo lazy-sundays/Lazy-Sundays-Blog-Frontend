@@ -9,9 +9,12 @@ import { Redis } from "@upstash/redis";
 import { apiTags } from "@/app/_lib/api-tags";
 import ArticleHeader from "@/app/_components/articles/article-header";
 
-const redis = null;
+var redis = null;
 if (!process.env.UPSTASH_REDIS_LOCAL) {
-  redis = Redis.fromEnv();
+  redis = new Redis({
+    url: process.env.UPSTASH_REDIS_REST_URL,
+    token: process.env.UPSTASH_REDIS_REST_TOKEN,
+  });
 }
 
 export async function generateMetadata(props, parent) {
@@ -91,12 +94,18 @@ export default async function Article(props0) {
   if (articleList.length === 0) notFound();
   const articleInfo = articleList[0];
 
-  const views =
-    (!process.env.UPSTASH_REDIS_LOCAL &&
-      (await redis.get(
+  let views = 1;
+  if (!process.env.UPSTASH_REDIS_LOCAL) {
+    try {
+      const redisViews = await redis.get(
         ["pageviews", "page", `article${articleInfo.id}`].join(":")
-      ))) ??
-    1;
+      );
+      views = redisViews ?? 1;
+    } catch (error) {
+      console.error("Error fetching views from Redis:", error);
+      views = 1;
+    }
+  }
 
   return (
     <article className="text-center">
