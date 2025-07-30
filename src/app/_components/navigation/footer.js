@@ -1,14 +1,7 @@
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSun } from "@fortawesome/free-solid-svg-icons";
-import { Redis } from "@upstash/redis";
-var redis = null;
-if (!process.env.UPSTASH_REDIS_LOCAL) {
-  redis = new Redis({
-    url: process.env.UPSTASH_REDIS_REST_URL,
-    token: process.env.UPSTASH_REDIS_REST_TOKEN,
-  });
-}
+import { redis, isProduction } from "@/app/_lib/upstash-config";
 
 export default async function Footer() {
   let links = [
@@ -17,7 +10,7 @@ export default async function Footer() {
   ];
 
   let views = 1;
-  if (!process.env.UPSTASH_REDIS_LOCAL) {
+  if (isProduction && redis) {
     try {
       const redisViews = await redis.get(
         ["pageviews", "page", `home`].join(":")

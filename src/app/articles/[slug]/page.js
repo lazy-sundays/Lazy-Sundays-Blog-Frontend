@@ -5,17 +5,9 @@ import rehypeRaw from "rehype-raw";
 import CodeBlock from "../../_components/common/code-block";
 import View from "../../_components/view-tracking/view";
 import { notFound } from "next/navigation";
-import { Redis } from "@upstash/redis";
+import { redis, isProduction } from "@/app/_lib/upstash-config";
 import { apiTags } from "@/app/_lib/api-tags";
 import ArticleHeader from "@/app/_components/articles/article-header";
-
-var redis = null;
-if (!process.env.UPSTASH_REDIS_LOCAL) {
-  redis = new Redis({
-    url: process.env.UPSTASH_REDIS_REST_URL,
-    token: process.env.UPSTASH_REDIS_REST_TOKEN,
-  });
-}
 
 export async function generateMetadata(props, parent) {
   const params = await props.params;
@@ -95,7 +87,7 @@ export default async function Article(props0) {
   const articleInfo = articleList[0];
 
   let views = 1;
-  if (!process.env.UPSTASH_REDIS_LOCAL) {
+  if (isProduction && redis) {
     try {
       const redisViews = await redis.get(
         ["pageviews", "page", `article${articleInfo.id}`].join(":")
@@ -148,11 +140,7 @@ export default async function Article(props0) {
           </section>
         </>
       }
-      {process.env.UPSTASH_REDIS_LOCAL ? (
-        <></>
-      ) : (
-        <View id={`article${articleInfo.id}`} />
-      )}
+      {isProduction && redis ? <View id={`article${articleInfo.id}`} /> : null}
     </article>
   );
 }
