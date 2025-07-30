@@ -2,10 +2,12 @@ import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSun } from "@fortawesome/free-solid-svg-icons";
 import { Redis } from "@upstash/redis";
-
-const redis = null;
+var redis = null;
 if (!process.env.UPSTASH_REDIS_LOCAL) {
-  redis = Redis.fromEnv();
+  redis = new Redis({
+    url: process.env.UPSTASH_REDIS_REST_URL,
+    token: process.env.UPSTASH_REDIS_REST_TOKEN,
+  });
 }
 
 export default async function Footer() {
@@ -14,10 +16,18 @@ export default async function Footer() {
     { key: 2, name: "About Us", href: "/about-us" },
   ];
 
-  const views =
-    (!process.env.UPSTASH_REDIS_LOCAL &&
-      (await redis.get(["pageviews", "page", `home`].join(":")))) ??
-    1;
+  let views = 1;
+  if (!process.env.UPSTASH_REDIS_LOCAL) {
+    try {
+      const redisViews = await redis.get(
+        ["pageviews", "page", `home`].join(":")
+      );
+      views = redisViews ?? 1;
+    } catch (error) {
+      console.error("Error fetching home views from Redis:", error);
+      views = 1;
+    }
+  }
 
   return (
     <footer className="bg-bgsecondary w-full h-full mx-auto p-4 md:py-4 mt-auto">
