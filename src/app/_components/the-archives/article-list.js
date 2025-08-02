@@ -2,10 +2,9 @@
 import useSWRInfinite from "swr/infinite";
 import Button from "../common/button";
 import ArticleListItem from "./article-list-item";
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 
-export default function ArticleList({ params }) {
-  // eslint-disable-line
+export default function ArticleList({ filters }) {
   const pageSize = 5;
   const getKey = (pageIndex, previousPageData) => {
     if (
@@ -14,7 +13,24 @@ export default function ArticleList({ params }) {
         previousPageData.meta.pagination.pageCount
     )
       return null; // reached the end
-    return `/api/articles?page=${pageIndex + 1}&pageSize=${pageSize}`; // SWR key
+
+    // Build query parameters
+    const params = new URLSearchParams({
+      page: pageIndex + 1,
+      pageSize: pageSize,
+    });
+
+    // Add sort parameter if provided
+    if (filters?.sort) {
+      params.append("sort", filters.sort);
+    }
+
+    // Add search parameter if provided
+    if (filters?.search) {
+      params.append("search", filters.search);
+    }
+
+    return `/api/articles?${params.toString()}`; // SWR key
   };
   const fetcher = (url) =>
     fetch(url, {
@@ -25,10 +41,18 @@ export default function ArticleList({ params }) {
     useSWRInfinite(getKey, fetcher, {
       initialSize: 1,
       revalidateFirstPage: false,
+      revalidateOnMount: true,
     });
+
+  // Reset pagination when filters change
+  useEffect(() => {
+    setSize(1);
+  }, [filters?.sort, filters?.search, setSize]);
 
   const hasMoreData =
     data &&
+    data.length > 0 &&
+    data[data.length - 1]?.meta?.pagination &&
     data[data.length - 1].meta.pagination.page <
       data[data.length - 1].meta.pagination.pageCount;
 
@@ -37,28 +61,46 @@ export default function ArticleList({ params }) {
   };
 
   if (error) throw new Error(`Failed to fetch archive data.`);
+
+  // Check if we have data but no articles (empty search results)
+  const hasNoResults = data && data.length > 0 && data[0]?.data?.length === 0;
+
   return (
     <>
       <section>
         <ul>
           {!isLoading ? (
-            data.map((page) => {
-              return page.data.map((article, i) => {
-                return (
-                  <Fragment key={article.id}>
-                    <ArticleListItem article={article} />
-                    {
-                      // current index is not the final item in current page of loaded data OR not in the final page of the current load
-                      (i < page.data.length - 1 ||
-                        page.meta.pagination.page < size) && (
-                        //then draw a horizontal line
-                        <hr className="mx-2 border-textprimary/25" />
-                      )
-                    }
-                  </Fragment>
-                );
-              });
-            })
+            hasNoResults ? (
+              <div className="text-center py-8">
+                <p className="text-texttertiary text-lg">
+                  No articles found matching your search criteria.
+                </p>
+                {filters?.search && (
+                  <p className="text-texttertiary text-sm mt-2">
+                    Try adjusting your search terms or clearing the search to
+                    see all articles.
+                  </p>
+                )}
+              </div>
+            ) : (
+              data?.map((page) => {
+                return page?.data?.map((article, i) => {
+                  return (
+                    <Fragment key={article.id}>
+                      <ArticleListItem article={article} />
+                      {
+                        // current index is not the final item in current page of loaded data OR not in the final page of the current load
+                        (i < page.data.length - 1 ||
+                          page?.meta?.pagination?.page < size) && (
+                          //then draw a horizontal line
+                          <hr className="mx-2 border-textprimary/25" />
+                        )
+                      }
+                    </Fragment>
+                  );
+                });
+              })
+            )
           ) : (
             <>Loading...</>
           )}
