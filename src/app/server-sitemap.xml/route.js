@@ -1,6 +1,5 @@
 import { getServerSideSitemap } from "next-sitemap";
-
-export const revalidate = 86400; // revalidate at most once per day (24 hours)
+import { apiTags } from "@/app/_lib/api-tags";
 
 export async function GET() {
   // Get article slugs from cms
@@ -15,6 +14,9 @@ export async function GET() {
             method: "GET",
             headers: {
               Authorization: "Bearer " + process.env.STRAPI_API_KEY,
+            },
+            next: {
+              tags: [apiTags.sitemap],
             },
           }
         )
@@ -38,6 +40,9 @@ export async function GET() {
             method: "GET",
             headers: {
               Authorization: "Bearer " + process.env.STRAPI_API_KEY,
+            },
+            next: {
+              tags: [apiTags.sitemap],
             },
           }
         )
