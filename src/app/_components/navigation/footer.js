@@ -64,7 +64,7 @@ export default async function Footer() {
           <hr className="w-4/5 h-1 my-8 bg-textprimary/25 border-0 rounded " />
           <div className="absolute px-5 -translate-x-1/2 bg-bgsecondary left-1/2 ">
             <Link
-              href={"/rss.xml"}
+              href={"/feed"}
               className="hover:text-accentprimary"
               title="RSS Feed"
             >
