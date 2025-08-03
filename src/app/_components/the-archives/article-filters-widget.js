@@ -51,8 +51,8 @@ export default function ArticleFiltersWidget({ filters, onFiltersChange }) {
       {filters?.search && (
         <div className="mb-4 p-3 bg-accentsecondary/25 border border-accentsecondary rounded-md">
           <p className="text-sm text-textprimary">
-            <span className="font-semibold">Active search:</span> "
-            {filters.search}"
+            <span className="font-semibold">Active search:</span>
+            &nbsp;&ldquo;{filters.search}&ldquo;
           </p>
         </div>
       )}
