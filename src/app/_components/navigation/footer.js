@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSun } from "@fortawesome/free-solid-svg-icons";
+import { faSun, faRss } from "@fortawesome/free-solid-svg-icons";
 import { redis, isProduction } from "@/app/_lib/upstash-config";
 
 export default async function Footer() {
@@ -63,7 +63,13 @@ export default async function Footer() {
         <div className="inline-flex items-center justify-center w-full">
           <hr className="w-4/5 h-1 my-8 bg-textprimary/25 border-0 rounded " />
           <div className="absolute px-5 -translate-x-1/2 bg-bgsecondary left-1/2 ">
-            <FontAwesomeIcon icon={faSun} className="w-5 bg-transparent" />
+            <Link
+              href={"/feed"}
+              className="hover:text-accentprimary"
+              title="RSS Feed"
+            >
+              <FontAwesomeIcon icon={faRss} className="w-5 bg-transparent" />
+            </Link>
           </div>
         </div>
         <span className="block text-xs text-center">
