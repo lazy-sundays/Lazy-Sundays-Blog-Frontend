@@ -1,6 +1,6 @@
 "use client";
-import { Fragment } from "react";
-import { Menu, Transition } from "@headlessui/react";
+import { Fragment, useEffect, useRef } from "react";
+import { Menu, Popover, PopoverButton, PopoverPanel } from "@headlessui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
@@ -8,24 +8,26 @@ import ThemeSwitch from "./theme-switch";
 import ThemeLogo from "./theme-logo";
 
 export default function Navbar() {
+  const popoverRef = useRef(null);
+
   let links = [
     { key: 1, name: "The Archives", href: "/the-archives" },
     { key: 2, name: "About Us", href: "/about-us" },
   ];
 
   return (
-    <nav className="sticky w-full px-4 sm:px-14 lg:px-20 mt-7 mb-14 max-w-screen-readable mx-auto">
-      <div className="flex flex-wrap sm:flex-nowrap">
-        <Link href="/" className="max-w-[50%] mr-auto flex items-center">
+    <nav className="sticky w-full px-4 sm:px-14 lg:px-20 mt-2 mb-14 max-w-screen-readable mx-auto">
+      <div className="flex flex-wrap sm:flex-nowrap sm:items-top">
+        <Link href="/" className="max-w-[50%] mr-auto">
           <ThemeLogo
             label={"the lazy sundays blog logo"}
             className="min-w-[7rem] w-[10vw] max-w-[13rem] h-auto"
           />
         </Link>
-        <div className="hidden sm:flex justify-around justify-items-center sm:pr-10 lg:pr-30 mt-4">
+        <div className="hidden h-fit sm:flex sm:pt-6 justify-around justify-items-center">
           <a
             href={"/random-article"}
-            className="sm:ml-8 px-1 md:text-xl hover:underline hover:decoration-accentprimary hover:decoration-2"
+            className="ml-8 md:text-xl hover:underline hover:decoration-accentprimary hover:decoration-2"
           >
             Random Article
           </a>
@@ -34,65 +36,93 @@ export default function Navbar() {
               <Link
                 key={link.key}
                 href={link.href}
-                className="sm:ml-8 px-1 md:text-xl hover:underline hover:decoration-accentprimary hover:decoration-2"
+                className="ml-8 md:text-xl hover:underline hover:decoration-accentprimary hover:decoration-2"
               >
                 {link.name}
               </Link>
             );
           })}
         </div>
-        <div className="mr-4 sm:mr-0 mt-3 sm:mt-4 text-2xl">
-          <ThemeSwitch />
-        </div>
+        <div className="sm:block sm:grid-rows-none sm:mt-0 grid grid-rows-1 grid-flow-col mt-16 items-center">
+          <div className="sm:mr-0 sm:pt-6 ml-8 text-2xl mr-5">
+            <ThemeSwitch />
+          </div>
 
-        {/* Mobile menu, show/hide based on menu state. */}
-        <Menu>
-          {({ open }) => (
-            <div>
-              <Menu.Button className={"text-2xl sm:collapse self-start"}>
-                <FontAwesomeIcon
-                  className={"mt-4 mr-4 w-5 h-5 hover:opacity-75"}
-                  icon={open ? faXmark : faBars}
-                />
-              </Menu.Button>
+          {/* Mobile menu, show/hide based on menu state. */}
+          <Popover ref={popoverRef}>
+            {({ open, close }) => {
+              // Add click-outside listener when popover is open
+              useEffect(() => {
+                if (!open) return;
 
-              <Transition
-                as={Fragment}
-                enter="transition ease-out duration-100"
-                enterFrom="transform opacity-0 scale-95"
-                enterTo="transform opacity-100 scale-100"
-                leave="transition ease-in duration-75"
-                leaveFrom="transform opacity-100 scale-100"
-                leaveTo="transform opacity-0 scale-95"
-              >
-                <Menu.Items
-                  className={
-                    "sm:hidden grid grid-flow-col text-center auto-cols-auto w-full justify-around mt-2 py-2 bg-bgsecondary"
+                const handleClickOutside = (event) => {
+                  if (
+                    popoverRef.current &&
+                    !popoverRef.current.contains(event.target)
+                  ) {
+                    close();
                   }
-                >
-                  <a
-                    href={"/random-article"}
-                    className="px-1 text-md w-full hover:underline hover:decoration-accentprimary hover:decoration-2"
+                };
+
+                // Use click event to allow link navigation to happen first
+                // Add a small delay to ensure this runs after any link clicks
+                const timeoutId = setTimeout(() => {
+                  document.addEventListener("click", handleClickOutside);
+                }, 0);
+
+                return () => {
+                  clearTimeout(timeoutId);
+                  document.removeEventListener("click", handleClickOutside);
+                };
+              }, [open, close]);
+
+              return (
+                <div>
+                  <PopoverButton
+                    className={"sm:hidden text-2xl focus:outline-none"}
                   >
-                    Random Article
-                  </a>
-                  {links.map((link) => (
-                    <Menu.Item
-                      as={Link}
-                      key={link.key}
-                      href={link.href}
+                    <FontAwesomeIcon
+                      className={`hover:opacity-60 ${open ? "opacity-60" : ""}`}
+                      icon={faBars}
+                    />
+                  </PopoverButton>
+                  <PopoverPanel
+                    transition
+                    anchor="bottom"
+                    className="w-full px-4 origin-top transition duration-300 ease-in-out data-[closed]:opacity-0 data-[closed]:-translate-y-2"
+                  >
+                    <div className="h-4 bg-bgsecondary w-4 absolute top-3 right-4 transform rotate-45 origin-top-right rounded-sm"></div>
+                    <div
                       className={
-                        "px-1 text-md w-full hover:underline hover:decoration-accentprimary hover:decoration-2"
+                        "mt-3 bg-bgsecondary p-3 flex flex-row text-center place-content-center rounded-sm"
                       }
                     >
-                      {link.name}
-                    </Menu.Item>
-                  ))}
-                </Menu.Items>
-              </Transition>
-            </div>
-          )}
-        </Menu>
+                      <a
+                        href={"/random-article"}
+                        className="px-1 text-md w-full hover:underline hover:decoration-accentprimary hover:decoration-2"
+                        onClick={() => close()}
+                      >
+                        Random Article
+                      </a>
+                      {links.map((link) => (
+                        <Link
+                          key={link.key}
+                          href={link.href}
+                          className={
+                            "px-1 text-md w-full hover:underline hover:decoration-accentprimary hover:decoration-2"
+                          }
+                          onClick={() => close()}
+                        >
+                          {link.name}
+                        </Link>
+                      ))}
+                    </div>
+                  </PopoverPanel>
+                </div>
+              );
+            }}
+          </Popover>
+        </div>
       </div>
     </nav>
   );
