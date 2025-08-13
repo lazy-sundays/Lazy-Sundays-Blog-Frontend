@@ -88,7 +88,7 @@ export default function ArticleHeader({
             {views && (
               <span className="italic">
                 <span className="text-accentsecondary font-bold">{views}</span>{" "}
-                views
+                {views === 1 ? "view" : "views"}
               </span>
             )}
           </div>
