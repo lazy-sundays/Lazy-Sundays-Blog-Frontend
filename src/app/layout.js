@@ -2,6 +2,7 @@ import BackToTop from "./_components/common/back-to-top";
 import Footer from "./_components/navigation/footer";
 import Navbar from "./_components/navigation/navbar";
 import View from "./_components/view-tracking/view";
+import PreviewHandler from "./_components/preview/preview-handler";
 import Providers from "./_theme/providers";
 import { isProduction } from "./_lib/upstash-config";
 import {
@@ -46,6 +47,7 @@ export default function RootLayout({ children }) {
         className={`flex flex-col min-h-screen justify-start content-center font-logo bg-bgprimary text-textprimary sunset-overlook`}
       >
         <Providers>
+          <PreviewHandler />
           {isProduction ? <View id="home" /> : null}
           <Navbar />
           <main

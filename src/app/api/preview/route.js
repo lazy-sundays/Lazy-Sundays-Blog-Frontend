@@ -1,5 +1,5 @@
-import { draftMode } from "next/headers";
 import { redirect } from "next/navigation";
+import { randomBytes } from "crypto";
 
 export async function GET(request) {
   // Parse query string parameters
@@ -14,14 +14,14 @@ export async function GET(request) {
     return new Response("Invalid token", { status: 401 });
   }
 
-  // Enable Draft Mode by setting the cookie
-  if (status === "published") {
-    (await draftMode()).disable();
-  } else {
-    (await draftMode()).enable();
-  }
+  // Generate unique window token for tab-specific preview
+  const windowToken = randomBytes(32).toString("hex");
 
-  // Redirect to the path from the fetched post
-  // We don't redirect to searchParams.slug as that might lead to open redirect vulnerabilities
-  redirect(url || "/");
+  // Create preview URL with embedded token
+  const previewUrl = new URL(url || "/", request.url);
+  previewUrl.searchParams.set("__preview_token", windowToken);
+  previewUrl.searchParams.set("__preview_status", status);
+
+  // Redirect to content with token (maintains Strapi compliance)
+  redirect(previewUrl.toString());
 }
