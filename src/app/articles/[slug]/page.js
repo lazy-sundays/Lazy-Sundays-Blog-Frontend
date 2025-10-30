@@ -1,17 +1,18 @@
 import { notFound } from "next/navigation";
-import { draftMode } from "next/headers";
 import { redis, isProduction } from "@/app/_lib/upstash-config";
 import { apiTags } from "@/app/_lib/api-tags";
+import { shouldFetchDraft } from "@/app/_lib/preview-utils";
 import ArticleClient from "./client";
 
 export async function generateMetadata(props, parent) {
   const params = await props.params;
-  // Check if Next.js draft mode is enabled
-  const { isEnabled: isDraftMode } = await draftMode();
+  const searchParams = await props.searchParams;
 
   // Build query parameters
   let queryParams = `filters[slug][$eqi]=${params.slug}&populate=*`;
-  if (isDraftMode) {
+
+  // Check for preview tokens in URL (for initial server-side rendering)
+  if (shouldFetchDraft(searchParams)) {
     queryParams += "&status=draft";
   }
 
@@ -60,13 +61,14 @@ export async function generateMetadata(props, parent) {
 
 export default async function Article(props0) {
   const params = await props0.params;
-  async function getArticleInfo() {
-    // Check if Next.js draft mode is enabled
-    const { isEnabled: isDraftMode } = await draftMode();
+  const searchParams = await props0.searchParams;
 
+  async function getArticleInfo() {
     // Build query parameters
     let queryParams = `filters[slug][$eqi]=${params.slug}&populate=*`;
-    if (isDraftMode) {
+
+    // Check for preview tokens in URL (for initial server-side rendering)
+    if (shouldFetchDraft(searchParams)) {
       queryParams += "&status=draft";
     }
 

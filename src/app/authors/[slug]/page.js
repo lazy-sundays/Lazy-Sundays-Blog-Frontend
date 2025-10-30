@@ -1,16 +1,17 @@
 import { notFound } from "next/navigation";
-import { draftMode } from "next/headers";
 import { apiTags } from "@/app/_lib/api-tags";
+import { shouldFetchDraft } from "@/app/_lib/preview-utils";
 import AuthorClient from "./client";
 
 export async function generateMetadata(props, parent) {
   const params = await props.params;
-  // Check if Next.js draft mode is enabled
-  const { isEnabled: isDraftMode } = await draftMode();
+  const searchParams = await props.searchParams;
 
   // Build query parameters
   let queryParams = `filters[slug][$eqi]=${params.slug}&populate=linkTree`;
-  if (isDraftMode) {
+
+  // Check for preview tokens in URL (for initial server-side rendering)
+  if (shouldFetchDraft(searchParams)) {
     queryParams += "&status=draft";
   }
 
@@ -52,13 +53,14 @@ export async function generateMetadata(props, parent) {
 
 export default async function Author(props) {
   const params = await props.params;
-  async function getAuthorInfo() {
-    // Check if Next.js draft mode is enabled
-    const { isEnabled: isDraftMode } = await draftMode();
+  const searchParams = await props.searchParams;
 
+  async function getAuthorInfo() {
     // Build query parameters
     let queryParams = `filters[slug][$eqi]=${params.slug}&populate=linkTree`;
-    if (isDraftMode) {
+
+    // Check for preview tokens in URL (for initial server-side rendering)
+    if (shouldFetchDraft(searchParams)) {
       queryParams += "&status=draft";
     }
 
