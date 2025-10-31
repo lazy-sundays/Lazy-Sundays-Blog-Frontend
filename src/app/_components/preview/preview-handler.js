@@ -12,7 +12,9 @@ import {
  * Handles window-specific preview tokens for tab isolation.
  * Should be included in the root layout to process all preview requests.
  */
-export default function PreviewHandler() {
+import { Suspense } from "react";
+
+function PreviewHandlerInner() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
@@ -41,4 +43,12 @@ export default function PreviewHandler() {
 
   // This component doesn't render anything visible
   return null;
+}
+
+export default function PreviewHandler() {
+  return (
+    <Suspense fallback={null}>
+      <PreviewHandlerInner />
+    </Suspense>
+  );
 }

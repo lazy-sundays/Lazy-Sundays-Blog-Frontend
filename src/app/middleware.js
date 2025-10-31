@@ -1,20 +1,25 @@
 import { NextResponse } from "next/server";
 
 export function middleware(request) {
+  const nonce = Buffer.from(crypto.randomUUID()).toString("base64");
   const cspHeader = `
-    default-src 'self';
+    default-src 'self'
     frame-ancestors '${process.env.STRAPI_URI_ROOT}';
-    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-    font-src 'self' https://fonts.gstatic.com;
-    img-src 'self' data: https:;
-    script-src 'self' 'unsafe-inline';
-`;
+    script-src 'self' 'nonce-${nonce}' 'unsafe-eval' 'unsafe-inline';
+    style-src 'self' 'nonce-${nonce}';
+    img-src 'self' blob: data:;
+    object-src 'none';
+    base-uri 'self';
+    form-action 'self';
+    upgrade-insecure-requests;
+  `;
   // Replace newline characters and spaces
   const contentSecurityPolicyHeaderValue = cspHeader
     .replace(/\s{2,}/g, " ")
     .trim();
 
   const requestHeaders = new Headers(request.headers);
+  requestHeaders.set("x-nonce", nonce);
 
   requestHeaders.set(
     "Content-Security-Policy",
