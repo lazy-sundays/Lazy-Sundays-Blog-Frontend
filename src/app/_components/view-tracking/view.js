@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { isPreviewMode } from "@/app/_lib/preview-utils";
 
 export default function ReportView({ id }) {
   useEffect(() => {
@@ -9,15 +10,13 @@ export default function ReportView({ id }) {
       return;
     }
 
-    // Skip API call in development
-    if (
-      process.env.NODE_ENV !== "production" &&
-      process.env.VERCEL_ENV !== "production"
-    ) {
-      console.log("ReportView: Skipping view increment in development");
+    // Skip incrementing views when in preview mode
+    if (isPreviewMode()) {
+      console.log("ReportView: Skipping view increment in preview mode");
       return;
     }
 
+    // Always make the request - the API route handles production checks
     fetch("/api/increment", {
       method: "POST",
       headers: {

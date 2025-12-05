@@ -8,7 +8,6 @@ import remarkEmoji from "remark-emoji";
 import rehypeRaw from "rehype-raw";
 import CodeBlock from "../../_components/common/code-block";
 import View from "../../_components/view-tracking/view";
-import { isProduction, redis } from "@/app/_lib/upstash-config";
 import ArticleHeader from "@/app/_components/articles/article-header";
 
 export default function ArticleClient({ articleInfo, views }) {
@@ -70,7 +69,7 @@ export default function ArticleClient({ articleInfo, views }) {
           </ReactMarkdown>
         </section>
       </>
-      {isProduction && redis ? <View id={`article${articleInfo.id}`} /> : null}
+      <View id={`article${articleInfo.id}`} />
     </article>
   );
 }
