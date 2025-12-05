@@ -4,7 +4,6 @@ import Navbar from "./_components/navigation/navbar";
 import View from "./_components/view-tracking/view";
 import PreviewHandler from "./_components/preview/preview-handler";
 import Providers from "./_theme/providers";
-import { isProduction } from "./_lib/upstash-config";
 import {
   bricoGro,
   firaCode,
@@ -48,7 +47,7 @@ export default function RootLayout({ children }) {
       >
         <Providers>
           <PreviewHandler />
-          {isProduction ? <View id="home" /> : null}
+          <View id="home" />
           <Navbar />
           <main
             id="pg-content"

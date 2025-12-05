@@ -61,7 +61,7 @@ export async function POST(req) {
     //if the cookie doesnt already exist, set it
     const cookieValue = viewedCookie
       ? {}
-      : { "Set-Cookie": `hasViewed=home; Max-Age=${60 * 60 * 24}` };
+      : { "Set-Cookie": `hasViewed=${id}; Max-Age=${60 * 60 * 24}` };
     return new NextResponse(null, {
       status: 202,
       headers: cookieValue,
