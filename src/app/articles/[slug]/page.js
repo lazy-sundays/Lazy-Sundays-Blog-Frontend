@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { redis, isProduction } from "@/app/_lib/upstash-config";
+import { redis } from "@/app/_lib/upstash-config";
 import { apiTags } from "@/app/_lib/api-tags";
 import { shouldFetchDraft } from "@/app/_lib/preview-utils";
 import ArticleClient from "./client";
@@ -96,7 +96,7 @@ export default async function Article(props0) {
   const articleInfo = articleList[0];
 
   let views = 1;
-  if (isProduction && redis) {
+  if (redis) {
     try {
       const redisViews = await redis.get(
         ["pageviews", "page", `article${articleInfo.id}`].join(":")

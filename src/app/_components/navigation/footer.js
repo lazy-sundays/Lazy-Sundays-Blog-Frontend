@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRss } from "@fortawesome/free-solid-svg-icons";
-import { redis, isProduction } from "@/app/_lib/upstash-config";
+import { redis } from "@/app/_lib/upstash-config";
 
 export default async function Footer() {
   let links = [
@@ -10,7 +10,7 @@ export default async function Footer() {
   ];
 
   let views = 1;
-  if (isProduction && redis) {
+  if (redis) {
     try {
       const redisViews = await redis.get(
         ["pageviews", "page", `home`].join(":")
