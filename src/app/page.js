@@ -60,13 +60,13 @@ export default async function Home() {
                       {((date) => {
                         return date.getFullYear() === new Date().getFullYear()
                           ? date.toLocaleDateString("en-US", {
-                              month: "2-digit",
-                              day: "2-digit",
+                              month: "numeric",
+                              day: "numeric",
                             })
                           : date.toLocaleDateString("en-US", {
-                              month: "2-digit",
-                              day: "2-digit",
-                              year: "2-digit",
+                              month: "numeric",
+                              day: "numeric",
+                              year: "numeric",
                             });
                       })(new Date(article.publishedAt))}
                     </span>
