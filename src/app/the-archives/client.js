@@ -6,7 +6,7 @@ import ArticleList from "../_components/the-archives/article-list";
 export default function TheArchivesClient({ params }) {
   // eslint-disable-line
   const [filters, setFilters] = useState({
-    sort: "publishedAt:desc",
+    sort: "createdAt:desc",
     search: "",
   });
 

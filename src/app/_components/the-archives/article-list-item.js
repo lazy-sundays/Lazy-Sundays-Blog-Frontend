@@ -20,7 +20,7 @@ export default function ArticleListItem({ article }) {
       )}
       <div className="flex flex-col sm:ml-2">
         <span className="text-xs text-accentsecondary">
-          {new Date(article.publishedAt).toLocaleDateString("en-US", {
+          {new Date(article.createdAt).toLocaleDateString("en-US", {
             month: "2-digit",
             day: "2-digit",
             year: "2-digit",

@@ -12,7 +12,7 @@ export default async function Home() {
   async function getRecentArticles() {
     const res = await fetch(
       process.env.STRAPI_URI_ROOT +
-        "/api/articles?sort=publishedAt:desc&fields=publishedAt,title,slug&populate[authors][fields]=name&pagination[page]=1&pagination[pageSize]=10",
+        "/api/articles?sort=createdAt:desc&fields=createdAt,title,slug&populate[authors][fields]=name&pagination[page]=1&pagination[pageSize]=10",
       {
         method: "GET",
         headers: {
@@ -21,13 +21,13 @@ export default async function Home() {
         next: {
           tags: [apiTags.mostRecentArticles],
         },
-      }
+      },
     );
 
     if (!res.ok) {
       // This will activate the closest `error.js` Error Boundary
       throw new Error(
-        `Failed to fetch recent article data. HTTP status code: ${res.status}`
+        `Failed to fetch recent article data. HTTP status code: ${res.status}`,
       );
     }
     return res.json();
@@ -60,15 +60,15 @@ export default async function Home() {
                       {((date) => {
                         return date.getFullYear() === new Date().getFullYear()
                           ? date.toLocaleDateString("en-US", {
-                              month: "numeric",
-                              day: "numeric",
+                              month: "2-digit",
+                              day: "2-digit",
                             })
                           : date.toLocaleDateString("en-US", {
-                              month: "numeric",
-                              day: "numeric",
-                              year: "numeric",
+                              month: "2-digit",
+                              day: "2-digit",
+                              year: "2-digit",
                             });
-                      })(new Date(article.publishedAt))}
+                      })(new Date(article.createdAt))}
                     </span>
                     <span className="text-xl font-semibold group-hover:underline group-hover:decoration-accentprimary group-hover:decoration-2">
                       {article.title}

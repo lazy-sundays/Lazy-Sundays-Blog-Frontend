@@ -6,8 +6,8 @@ export default function ArticleFiltersWidget({ filters, onFiltersChange }) {
   const [searchInput, setSearchInput] = useState(filters?.search || "");
 
   const sortOptions = [
-    { value: "publishedAt:desc", label: "Newest First" },
-    { value: "publishedAt:asc", label: "Oldest First" },
+    { value: "createdAt:desc", label: "Newest First" },
+    { value: "createdAt:asc", label: "Oldest First" },
   ];
 
   const handleSortChange = (event) => {
@@ -103,7 +103,7 @@ export default function ArticleFiltersWidget({ filters, onFiltersChange }) {
           </label>
           <select
             id="sort-select"
-            value={filters?.sort || "publishedAt:desc"}
+            value={filters?.sort || "createdAt:desc"}
             onChange={handleSortChange}
             className="px-4 py-4 rounded-md border border-textprimary/25 bg-bgprimary text-textprimary focus:outline-none focus:ring-2 focus:ring-accentprimary focus:border-transparent"
           >
