@@ -21,13 +21,13 @@ export default async function FeaturedArticle() {
         next: {
           tags: [apiTags.featuredArticle],
         },
-      }
+      },
     );
 
     if (!res.ok) {
       // This will activate the closest `error.js` Error Boundary
       throw new Error(
-        `Failed to fetch featured article data. HTTP status code: ${res.status}`
+        `Failed to fetch featured article data. HTTP status code: ${res.status}`,
       );
     }
     return res.json();
@@ -47,7 +47,7 @@ export default async function FeaturedArticle() {
         heroAttribution={articleInfo.heroAttribution}
         title={articleInfo.title}
         tagline={articleInfo.tagline}
-        publishedAt={articleInfo.publishedAt}
+        createdAt={articleInfo.createdAt}
         authors={articleInfo.authors}
         readTime={articleInfo.readTime}
       />

@@ -27,7 +27,7 @@ export async function generateMetadata(props, parent) {
       next: {
         tags: [apiTags.article + params.slug],
       },
-    }
+    },
   )
     .then((res) => res.json())
     .then((res) => res.data);
@@ -52,7 +52,7 @@ export async function generateMetadata(props, parent) {
       locale: "en_US",
       title: `${articleInfo.title} — the lazy sundays blog`,
       description: articleInfo.tagline,
-      publishedTime: articleInfo.publishedAt,
+      publishedTime: articleInfo.createdAt,
       authors: authors.map((author) => author.name),
       images: [articleInfo.hero, ...previousImages],
     },
@@ -79,13 +79,13 @@ export default async function Article(props0) {
         headers: {
           Authorization: "Bearer " + process.env.STRAPI_API_KEY,
         },
-      }
+      },
     );
 
     if (!res.ok) {
       // This will activate the closest `error.js` Error Boundary
       throw new Error(
-        `Failed to fetch article data. HTTP status code: ${res.status}`
+        `Failed to fetch article data. HTTP status code: ${res.status}`,
       );
     }
     return res.json();
@@ -99,7 +99,7 @@ export default async function Article(props0) {
   if (redis) {
     try {
       const redisViews = await redis.get(
-        ["pageviews", "page", `article${articleInfo.id}`].join(":")
+        ["pageviews", "page", `article${articleInfo.id}`].join(":"),
       );
       views = redisViews ?? 1;
     } catch (error) {

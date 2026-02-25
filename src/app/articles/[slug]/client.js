@@ -39,7 +39,7 @@ export default function ArticleClient({ articleInfo, views }) {
           heroAttribution={articleInfo.heroAttribution}
           title={articleInfo.title}
           tagline={articleInfo.tagline}
-          publishedAt={articleInfo.publishedAt}
+          createdAt={articleInfo.createdAt}
           authors={articleInfo.authors}
           readTime={articleInfo.readTime}
           views={views}

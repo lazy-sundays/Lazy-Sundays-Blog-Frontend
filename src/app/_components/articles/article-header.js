@@ -7,7 +7,7 @@ export default function ArticleHeader({
   hero,
   heroAltText,
   heroAttribution,
-  publishedAt,
+  createdAt,
   title,
   tagline,
   readTime,
@@ -62,7 +62,7 @@ export default function ArticleHeader({
             aria-hidden
           >
             <span className="italic">
-              {new Date(publishedAt).toLocaleDateString("en-US", {
+              {new Date(createdAt).toLocaleDateString("en-US", {
                 month: "short",
                 day: "numeric",
                 year: "numeric",

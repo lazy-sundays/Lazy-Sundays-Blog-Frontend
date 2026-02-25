@@ -6,13 +6,13 @@ export async function GET(req) {
   const { searchParams } = new URL(req.url);
   const page = searchParams.get("page");
   const pageSize = searchParams.get("pageSize");
-  const sort = searchParams.get("sort") || "publishedAt:desc";
+  const sort = searchParams.get("sort") || "createdAt:desc";
   const search = searchParams.get("search");
 
   // Build query parameters using URLSearchParams for proper encoding
   const params = new URLSearchParams({
     sort: sort,
-    fields: "publishedAt,title,slug,tagline,hero,heroAltText,readTime",
+    fields: "createdAt,title,slug,tagline,hero,heroAltText,readTime",
     "populate[0]": "authors",
     "populate[1]": "tags",
     "pagination[page]": page,

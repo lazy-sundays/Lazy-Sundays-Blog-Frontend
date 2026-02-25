@@ -8,7 +8,7 @@ export async function GET() {
   // only grab published articles
   for (let i = 1; i <= totalArticlePgs; i++) {
     const pageArticles = await fetch(
-      `${process.env.STRAPI_URI_ROOT}/api/articles?sort=publishedAt:desc&fields=publishedAt,title,slug,tagline,hero,heroAltText&populate[authors][fields]=slug,name&pagination[page]=${i}&pagination[pageSize]=25`,
+      `${process.env.STRAPI_URI_ROOT}/api/articles?sort=createdAt:desc&fields=createdAt,title,slug,tagline,hero,heroAltText&populate[authors][fields]=slug,name&pagination[page]=${i}&pagination[pageSize]=25`,
       {
         method: "GET",
         headers: {
@@ -17,7 +17,7 @@ export async function GET() {
         next: {
           tags: [apiTags.rssFeed],
         },
-      }
+      },
     )
       .then((res) => res.json())
       .then((res) => {
@@ -45,7 +45,7 @@ function generateRSSXML(articles) {
   const rssItems = articles
     .map((article) => {
       const articleUrl = `${siteUrl}/articles/${article.slug}`;
-      const publishedDate = new Date(article.publishedAt).toUTCString();
+      const publishedDate = new Date(article.createdAt).toUTCString();
       const authors =
         article.authors?.map((author) => author.name).join(", ") ||
         "Lazy Sundays";
